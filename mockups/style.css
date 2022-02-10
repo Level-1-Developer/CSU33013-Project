@@ -1,0 +1,252 @@
+/*
+ *  Design mockup style sheet for Dell's Action Item Manager
+ *  Author: Lydia MacBride
+ *
+ *  ✨ CSS CODE STYLE GUIDE ✨
+ *  - Abstract commonly used values to variables
+ *  - Parameter order: Position, padding/margin, color, font properties
+ *      - LIST POSITION PARAMETERS IN ORDER OF PARAMETERS FOR MARGIN/PADDING PROPERTIES
+ *      - That is: Top, Right, Bottom, Left
+ *  - I am probably a hypocrite with these! If you find me breaking any of them please
+ *    notify me to let me know how cringe I am.
+ *
+ *  TODO: Skip to content button for people who navigate by kb
+ *  TODO: Expand colour palette of choice (BUT ENSURE HIGH CONTRAST!)
+ *  TODO: Ability to select multiple messages
+ *  TODO: Fix slight right offset on dropdown-content
+ *  TODO: On click, swap the sort mode
+ *  TODO: Check alignments of navbar elements
+ *  TODO: The search field scaling is being weird, look for an alternative
+ *  TODO: Monospace font for ID
+ */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| VARIABLES |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+:root {
+    /* Temporary high contrast and AA compliant colours */
+    --scorpion: #6C6062;
+    --astra: #F3EAB8;
+
+    --dark-blue: #1303CF;
+    --clam-shell: #D8B7AF;
+
+    --cerise-red: #D42F61;
+    --moon-glow: #FDFEDC;
+
+    --daisy-bush: #4E2093;
+    --fuego: #C1DE23;
+
+    --cocoa-brown: #2C1B1C;
+    --mahogany: #E25858;
+
+    /* UI Element Variables */
+    --nav-bg-color: var(--dark-blue);
+    --nav-text-color: var(--clam-shell);
+    --body-bg-color: var(--nav-text-color);
+    --body-text-color: var(--nav-bg-color);
+    
+    --border-size: 0.2em;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| MAIN |~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~ */
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.elm-l {
+    float: left;
+}
+
+.elm-r {
+    float: right;
+}
+
+input::placeholder {
+    font-size: 1.5em;
+}
+
+input[type=text] {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: -0.1em 0;
+    font-size: 1em;
+    width: 20em;
+    height: 2.2em;
+    color: var(--body-text-color);
+    background-color: var(--body-bg-color);
+    outline: none;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+    box-sizing: border-box;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    width: 10em;
+    margin: -0.1em 0.4em;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 10em;
+    padding: 0;
+    background-color: var(--body-bg-color);
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown p {
+    margin: 0 var(--border-size);
+}
+
+/* ~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~| TEXT |~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~ */
+* {
+    font-family: Bahnschrift, Helvitca, Ariel, sans-serif;
+}
+
+h1 {
+    color: var(--body-text-color);
+}
+
+h2 {
+    color: var(--body-text-color);
+}
+
+p {
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--body-text-color);
+}
+
+span {
+    font-size: 1.5em;
+    color: var(--body-text-color);
+}
+
+a {
+    color: var(--body-text-color);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| NAVBAR |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+#nav {
+    position: sticky;
+    top: 0;
+    height: 5em;
+    width: 100%;
+    padding: 0.8em 0;
+    background-color: var(--nav-bg-color);
+    z-index: 100;
+}
+
+#nav h1 {
+    padding: 0 0.8em;
+    color: var(--nav-text-color);
+}
+
+#nav-burger {
+    margin: 1.5em 1.8em;
+}
+
+#nav-burger div {
+    width: 2em;
+    height: 0.4em;
+    margin: 0.4em 0;
+    background-color: var(--nav-text-color);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| CONTENT |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+#main {
+    top: 0;
+    height: 100%;
+    padding: 0.8em 0;
+    background-color: var(--body-bg-color);
+}
+
+#content {
+    padding: 0 1.8em;
+}
+
+.filter {
+    height: 2.2em;
+    margin: 0.8em 0;
+    padding: 0;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| MESSAGE |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+.msg {
+    height: 2.2em;
+    margin: 0.8em 0;
+    padding: 0;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+}
+
+.msg p {
+    margin: 0;
+    padding: var(--border-size);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| ACTION |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+.act {
+    align-items: center;
+    height: 2.2em;
+    margin: 0.8em 0;
+    padding: 0;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+}
+
+.act-id {
+    float: left;
+    height: 100%;
+    width: 21%;
+    margin: -0.2em -0.2em;
+    border-top: var(--border-size) solid var(--body-text-color);
+}
+
+.act-stat {
+    float: left;
+    height: 100%;
+    width: 11%;
+    margin: -0.2em -0.11em;
+    text-align: center;
+    border: var(--border-size) solid var(--body-text-color);
+}
+
+.act-camp {
+    float: left;
+    border: none;
+}
+
+.act-time {
+    float: right;
+    height: 100%;
+    width: 6em;
+    margin: -0.2em 0.1em;
+    border-top: var(--border-size) solid var(--body-text-color);
+}
+
+.act-nat {
+    float: right;
+    height: 100%;
+    width: 4em;
+    margin: -0.2em 0.1em;
+    text-align: center;
+    border: var(--border-size) solid var(--body-text-color);
+}
+
+.act p {
+    margin: 0;
+    padding: var(--border-size);
+}
