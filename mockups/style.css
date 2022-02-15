@@ -4,20 +4,19 @@
  *
  *  ✨ CSS CODE STYLE GUIDE ✨
  *  - Abstract commonly used values to variables
- *  - Parameter order: Position, padding/margin, color, font properties
+ *  - Parameter order: display mode, position, padding/margin, border, color, font properties, z-index
  *      - LIST POSITION PARAMETERS IN ORDER OF PARAMETERS FOR MARGIN/PADDING PROPERTIES
  *      - That is: Top, Right, Bottom, Left
  *  - I am probably a hypocrite with these! If you find me breaking any of them please
  *    notify me to let me know how cringe I am.
  *
- *  TODO: Skip to content button for people who navigate by kb
  *  TODO: Expand colour palette of choice (BUT ENSURE HIGH CONTRAST!)
  *  TODO: Ability to select multiple messages
- *  TODO: Fix slight right offset on dropdown-content
  *  TODO: On click, swap the sort mode
  *  TODO: Check alignments of navbar elements
  *  TODO: The search field scaling is being weird, look for an alternative
  *  TODO: Monospace font for ID
+ *  TODO: Make drop down menus intractable via keyboard only
  */
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| VARIABLES |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -48,6 +47,10 @@
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| MAIN |~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~ */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     position: absolute;
     width: 100%;
@@ -95,11 +98,13 @@ input[type=text] {
 .dropdown-content {
     display: none;
     position: absolute;
+    left: calc(-1 * var(--border-size));  /* This is to rectify the offset caused by the borders */
     width: 10em;
     padding: 0;
     background-color: var(--body-bg-color);
     border: var(--border-size) solid var(--body-text-color);
     box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+    z-index: 1;
 }
 
 .dropdown:hover .dropdown-content {
@@ -108,6 +113,11 @@ input[type=text] {
 
 .dropdown p {
     margin: 0 var(--border-size);
+}
+
+/* 🔥 Greets to anvar for this solution 🔥 */
+.dropdown-content p:hover {
+    box-shadow: inset 0 -2px 0 var(--body-text-color), inset 0 -3px 0 var(--body-text-color)
 }
 
 /* ~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~| TEXT |~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -135,12 +145,15 @@ span {
 }
 
 a {
+    font-size: 1.5em;
+    text-decoration: none;
     color: var(--body-text-color);
+    box-shadow: inset 0 -2px 0 var(--body-text-color), inset 0 -3px 0 var(--body-text-color)
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| NAVBAR |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #nav {
-    position: sticky;
+    position: relative;
     top: 0;
     height: 5em;
     width: 100%;
@@ -164,6 +177,22 @@ a {
     margin: 0.4em 0;
     background-color: var(--nav-text-color);
 }
+
+#skip-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 var(--border-size);
+    color: var(--nav-text-color);
+    box-shadow: inset 0 -2px 0 var(--nav-text-color), inset 0 -3px 0 var(--nav-text-color);
+    transform: translateY(-200%);
+    transition: transform 200ms ease-in;
+}
+
+#skip-nav:focus {
+    transform: translateY(0);
+}
+
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| CONTENT |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 #main {
