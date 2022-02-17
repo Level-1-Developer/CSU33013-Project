@@ -1,3 +1,4 @@
+<!-- Author: Lydia MacBride -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,12 @@
     <title>MOCKUP - Action Items</title>
 </head>
 <body>
+    <!-- Navbar -->
     <div id="nav">
-        <div class="elm-l"><h1>Mockup ✨</h1></div>
+        <!-- Skip to content button for ppl navigating by keyboard -->
+        <a href="#content" id="skip-nav">Skip Navigation</a>
+
+        <div class="elm-l"><h1>Dell Action Items Dashboard ✨</h1></div>
         <div class="elm-r">
             <div id="nav-burger">
                 <div></div>
@@ -16,26 +21,81 @@
             </div>
         </div>
     </div>
+
     <div id="main">
         <div id="content">
             <h1>Action Items</h1>
 
             <!-- Fields to select sort parameters -->
             <div class="filter">
-                <div class="elm-l"><p>Sort by</p></div>
-                <div class="elm-l">
-                    <div class="dropdown">
-                        <p>Time</p>
-                        <div class="dropdown-content">
-                            <p>ID</p>
-                            <p>Unread</p>
+                <div class="filter-row">
+                    <div class="filter-elm">
+                        <div class="filter-label"><p>Time Range</p></div>
+                        <div class="elm-r">
+                            <div class="dropdown">
+                                <div class="dropdown-current">
+                                    <p>All</p>
+                                </div>
+                                <div class="dropdown-content">
+                                    <p>This Month</p>
+                                    <p>This Year</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="filter-elm">
+                        <div class="filter-label"><p>Campaign</p></div>
+                        <div class="elm-r">
+                            <div class="dropdown">
+                                <div class="dropdown-current">
+                                    <p>None</p>
+                                </div>
+                                <div class="dropdown-content">
+                                    <p>New Years</p>
+                                    <p>Black Friday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="elm-r">
+                        <label class="search">
+                            <input type="text" placeholder="Search...">
+                        </label>
+                    </div>
                 </div>
-                <div class="elm-r">
-                    <label class="search">
-                        <input type="text" placeholder="Search...">
-                    </label>
+                <div class="filter-row">
+                    <div class="filter-elm">
+                        <div class="filter-label"><p>Forward Status</p></div>
+                        <div class="elm-r">
+                            <div class="dropdown">
+                                <div class="dropdown-current">
+                                    <p>All</p>
+                                </div>
+                                <div class="dropdown-content">
+                                    <p>Completed</p>
+                                    <p>Pending</p>
+                                    <p>Abandoned</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-elm">
+                        <div class="filter-label"><p>Completed At</p></div>
+                        <div class="elm-r">
+                            <div class="dropdown">
+                                <div class="dropdown-current">
+                                    <p>None</p>
+                                </div>
+                                <div class="dropdown-content">
+                                    <p>New Years</p>
+                                    <p>Black Friday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -3,6 +3,7 @@
  *  Author: Lydia MacBride
  *
  *  ✨ CSS CODE STYLE GUIDE ✨
+ *  - Use rem as unit when possible. Avoid em
  *  - Abstract commonly used values to variables
  *  - Parameter order: display mode, position, padding/margin, border, color, font properties, z-index
  *      - LIST POSITION PARAMETERS IN ORDER OF PARAMETERS FOR MARGIN/PADDING PROPERTIES
@@ -13,7 +14,6 @@
  *  TODO: Expand colour palette of choice (BUT ENSURE HIGH CONTRAST!)
  *  TODO: Ability to select multiple messages
  *  TODO: On click, swap the sort mode
- *  TODO: Check alignments of navbar elements
  *  TODO: The search field scaling is being weird, look for an alternative
  *  TODO: Monospace font for ID
  *  TODO: Make drop down menus intractable via keyboard only
@@ -43,12 +43,13 @@
     --body-bg-color: var(--nav-text-color);
     --body-text-color: var(--nav-bg-color);
     
-    --border-size: 0.2em;
+    --border-size: 0.2rem;
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| MAIN |~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~ */
 html {
     scroll-behavior: smooth;
+    font-size: 1rem;
 }
 
 body {
@@ -67,57 +68,23 @@ body {
 }
 
 input::placeholder {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 input[type=text] {
     display: inline-block;
     position: relative;
     padding: 0;
-    margin: -0.1em 0;
-    font-size: 1em;
-    width: 20em;
-    height: 2.2em;
+    margin: -0.1rem 0;
+    font-size: 1rem;
+    width: 20rem;
+    height: 2.2rem;
     color: var(--body-text-color);
     background-color: var(--body-bg-color);
     outline: none;
     border: var(--border-size) solid var(--body-text-color);
     box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
     box-sizing: border-box;
-}
-
-.dropdown {
-    display: inline-block;
-    position: relative;
-    width: 10em;
-    margin: -0.1em 0.4em;
-    border: var(--border-size) solid var(--body-text-color);
-    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    left: calc(-1 * var(--border-size));  /* This is to rectify the offset caused by the borders */
-    width: 10em;
-    padding: 0;
-    background-color: var(--body-bg-color);
-    border: var(--border-size) solid var(--body-text-color);
-    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
-    z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown p {
-    margin: 0 var(--border-size);
-}
-
-/* 🔥 Greets to anvar for this solution 🔥 */
-.dropdown-content p:hover {
-    box-shadow: inset 0 -2px 0 var(--body-text-color), inset 0 -3px 0 var(--body-text-color)
 }
 
 /* ~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~| TEXT |~~~~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -135,17 +102,17 @@ h2 {
 
 p {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     color: var(--body-text-color);
 }
 
 span {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     color: var(--body-text-color);
 }
 
 a {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     text-decoration: none;
     color: var(--body-text-color);
     box-shadow: inset 0 -2px 0 var(--body-text-color), inset 0 -3px 0 var(--body-text-color)
@@ -155,26 +122,26 @@ a {
 #nav {
     position: relative;
     top: 0;
-    height: 5em;
+    height: 5rem;
     width: 100%;
-    padding: 0.8em 0;
+    padding: 0.8rem 0;
     background-color: var(--nav-bg-color);
     z-index: 100;
 }
 
 #nav h1 {
-    padding: 0 0.8em;
+    padding: 0 1.6rem;
     color: var(--nav-text-color);
 }
 
 #nav-burger {
-    margin: 1.5em 1.8em;
+    margin: 1.5rem 1.8rem;
 }
 
 #nav-burger div {
-    width: 2em;
-    height: 0.4em;
-    margin: 0.4em 0;
+    width: 2rem;
+    height: 0.4rem;
+    margin: 0.4rem 0;
     background-color: var(--nav-text-color);
 }
 
@@ -198,24 +165,135 @@ a {
 #main {
     top: 0;
     height: 100%;
-    padding: 0.8em 0;
+    padding: 0.8rem 0;
     background-color: var(--body-bg-color);
 }
 
 #content {
-    padding: 0 1.8em;
+    position: relative;
+    height: 100%;
+    padding: 0 1.8rem;
 }
 
 .filter {
-    height: 2.2em;
-    margin: 0.8em 0;
+    position: relative;
     padding: 0;
+    margin-bottom: 2rem;
+}
+
+.filter-row {
+    position: relative;
+    height: 2.2rem;
+    margin: 0.8rem 0;
+}
+
+.filter-elm {
+    position: relative;
+    float: left;
+    width: 24rem;
+    padding: 0 2rem 0 0;
+}
+
+.filter-label {
+    display: inline-block;
+    position: relative;
+    float: left;
+    width: 14rem;
+    border: var(--border-size) solid var(--body-text-color);
+    border-right: none;  /* This is cheating imo */
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+    box-sizing: border-box;
+}
+
+.dropdown {
+    position: relative;
+    width: 10rem;
+    height: 2.2rem;
+    box-sizing: border-box;
+}
+
+.dropdown-current {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    margin: -0.2rem 0;
+    width: 100%;
+    padding: 0;
+    background-color: var(--body-bg-color);
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown p {
+    margin: 0 var(--border-size);
+}
+
+/* 🔥 Greets to anvar for this solution 🔥 */
+.dropdown-content p:hover {
+    box-shadow: inset 0 -2px 0 var(--body-text-color), inset 0 -3px 0 var(--body-text-color)
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| General |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+#general {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 70%;
+    margin-right: 100rem;
+
+}
+
+#gen-totals {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 35%;
+}
+
+#gen-vis-sec {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 55%;
+}
+
+.gen-total {
+    justify-content: space-between;
+    padding: 0.8rem;
+    width: 100%;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+}
+
+.gen-vis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| MESSAGE |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 .msg {
-    height: 2.2em;
-    margin: 0.8em 0;
+    height: 2.2rem;
+    margin: 0.8rem 0;
     padding: 0;
     border: var(--border-size) solid var(--body-text-color);
     box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
@@ -229,8 +307,8 @@ a {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| ACTION |~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 .act {
     align-items: center;
-    height: 2.2em;
-    margin: 0.8em 0;
+    height: 2.2rem;
+    margin: 0.8rem 0;
     padding: 0;
     border: var(--border-size) solid var(--body-text-color);
     box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
@@ -240,15 +318,17 @@ a {
     float: left;
     height: 100%;
     width: 21%;
-    margin: -0.2em -0.2em;
+    margin: -0.2rem -0.2rem;
     border-top: var(--border-size) solid var(--body-text-color);
+    text-align: justify-all;
+    text-justify: inter-character;
 }
 
 .act-stat {
     float: left;
-    height: 100%;
+    height: 101%;
     width: 11%;
-    margin: -0.2em -0.11em;
+    margin: -0.2rem -0.11rem;
     text-align: center;
     border: var(--border-size) solid var(--body-text-color);
 }
@@ -261,16 +341,16 @@ a {
 .act-time {
     float: right;
     height: 100%;
-    width: 6em;
-    margin: -0.2em 0.1em;
+    width: 6rem;
+    margin: -0.2rem 0.1rem;
     border-top: var(--border-size) solid var(--body-text-color);
 }
 
 .act-nat {
     float: right;
-    height: 100%;
-    width: 4em;
-    margin: -0.2em 0.1em;
+    height: 101%;
+    width: 4rem;
+    margin: -0.2rem 0.1rem;
     text-align: center;
     border: var(--border-size) solid var(--body-text-color);
 }
@@ -279,3 +359,59 @@ a {
     margin: 0;
     padding: var(--border-size);
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| BATCH FORWARD |~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~ */
+.batf {
+    align-items: center;
+    height: 2.2rem;
+    margin: 0.8rem 0;
+    padding: 0;
+    border: var(--border-size) solid var(--body-text-color);
+    box-shadow: var(--border-size) var(--border-size) var(--body-text-color);
+}
+
+.batf-name {
+    float: left;
+    height: 100%;
+    width: 14.4rem;
+    margin: -0.2rem -0.2rem;
+    border-top: var(--border-size) solid var(--body-text-color);
+}
+
+.batf-range {
+    float: left;
+    height: 101%;
+    width: 11%;
+    margin: -0.2rem -0.11rem;
+    text-align: center;
+    border: var(--border-size) solid var(--body-text-color);
+}
+
+.batf-camp {
+    float: left;
+    border: none;
+}
+
+.batf-time {
+    float: right;
+    height: 100%;
+    width: 6rem;
+    margin: -0.2rem 0.1rem;
+    border-top: var(--border-size) solid var(--body-text-color);
+}
+
+.batf-stat {
+    float: right;
+    height: 101%;
+    width: 10rem;
+    margin: -0.2rem 0.1rem;
+    text-align: center;
+    border: var(--border-size) solid var(--body-text-color);
+}
+
+.batf p {
+    margin: 0;
+    padding: var(--border-size);
+}
+
+/* Polyamory is based as hell */

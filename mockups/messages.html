@@ -1,3 +1,4 @@
+<!-- Author: Lydia MacBride -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,124 +7,135 @@
     <title>MOCKUP - Messages</title>
 </head>
 <body>
-<div id="nav">
-    <div class="elm-l"><h1>Mockup ✨</h1></div>
-    <div class="elm-r">
-        <div id="nav-burger">
-            <div></div>
-            <div></div>
-            <div></div>
+    <!-- Navbar -->
+    <div id="nav">
+        <!-- Skip to content button for ppl navigating by keyboard -->
+        <a href="#content" id="skip-nav">Skip Navigation</a>
+
+        <div class="elm-l"><h1>Dell Action Items Dashboard ✨</h1></div>
+        <div class="elm-r">
+            <div id="nav-burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </div>
-</div>
-<div id="main">
-    <div id="content">
-        <h1>Inbox</h1>
+    <div id="main">
+        <div id="content">
+            <h1>Inbox</h1>
 
-        <!-- Fields to select sort parameters -->
-        <div class="filter">
-            <div class="elm-l"><p>Sort by</p></div>
-            <div class="elm-l">
-                <div class="dropdown">
-                    <p>Time</p>
-                    <div class="dropdown-content">
-                        <p>ID</p>
-                        <p>Unread</p>
+            <!-- Fields to select sort parameters -->
+            <div class="filter">
+                <div class="filter-row">
+                    <div class="filter-elm">
+                        <div class="filter-label"><p>Time Range</p></div>
+                        <div class="elm-r">
+                            <div class="dropdown">
+                                <div class="dropdown-current">
+                                    <p>All</p>
+                                </div>
+                                <div class="dropdown-content">
+                                    <p>This Month</p>
+                                    <p>This Year</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="elm-r">
+                        <label class="search">
+                            <input type="text" placeholder="Search...">
+                        </label>
                     </div>
                 </div>
             </div>
-            <div class="elm-r">
-                <label class="search">
-                    <input type="text" placeholder="Search...">
-                </label>
+
+            <!-- Messages -->
+            <div class="msg">
+                <div class="elm-l"><p>Hello World!</p></div>
+                <div class="elm-l"><p>🆕</p></div>
+                <div class="elm-l"><p>🚩</p></div>
+                <div class="elm-r"><p>14:53</p></div>
+                <div class="elm-r"><p></p></div>
             </div>
-        </div>
 
-        <!-- Messages -->
-        <div class="msg">
-            <div class="elm-l"><p>Hello World!</p></div>
-            <div class="elm-l"><p>🆕</p></div>
-            <div class="elm-l"><p>🚩</p></div>
-            <div class="elm-r"><p>14:53</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>This message is unread</p></div>
+                <div class="elm-l"><p>🆕</p></div>
+                <div class="elm-r"><p>9 Feb</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>This message is unread</p></div>
-            <div class="elm-l"><p>🆕</p></div>
-            <div class="elm-r"><p>9 Feb</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>This message is read</p></div>
+                <div class="elm-r"><p>2 Feb</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>This message is read</p></div>
-            <div class="elm-r"><p>2 Feb</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>This message is urgent</p></div>
+                <div class="elm-l"><p>🚩</p></div>
+                <div class="elm-r"><p>20 Jan</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>This message is urgent</p></div>
-            <div class="elm-l"><p>🚩</p></div>
-            <div class="elm-r"><p>20 Jan</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Is aobhinn liom mo mná chéile</p></div>
+                <div class="elm-l"><p>🆕</p></div>
+                <div class="elm-r"><p>19 Jan</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Is aobhinn liom mo mná chéile</p></div>
-            <div class="elm-l"><p>🆕</p></div>
-            <div class="elm-r"><p>19 Jan</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
-        </div>
+            <div class="msg">
+                <div class="elm-l"><p>Filler</p></div>
+                <div class="elm-r"><p>20 Dec</p></div>
+                <div class="elm-r"><p></p></div>
+            </div>
 
-        <div class="msg">
-            <div class="elm-l"><p>Filler</p></div>
-            <div class="elm-r"><p>20 Dec</p></div>
-            <div class="elm-r"><p></p></div>
         </div>
-
     </div>
-</div>
 </body>
 </html>
