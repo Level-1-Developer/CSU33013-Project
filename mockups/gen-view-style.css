@@ -1,0 +1,214 @@
+/*
+author: Eimear Ryan
+ */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    --white: #FFFFFF;
+    --dell-blue: #0085C3;
+    --dark-grey: #404040;
+    --dell-grey: #AAAAAA;
+    --black: #000000;
+
+    --blue1: #d0efff;
+    --blue2: #2a9df4;
+    --blue3: #187bcd;
+    --blue4: #1167b1;
+
+}
+*{
+    font-family: 'Trebuchet MS';
+}
+
+header{
+    background-color: var(--dell-blue);
+}
+
+h1{
+    background-color: var(--white);
+}
+
+p{
+    text-decoration: none;
+    text-align: center;
+    font-family: "Trebuchet MS";
+    font-size: 1.5rem;
+}
+
+li{
+    list-style:none;
+}
+
+a{
+    color: var(--white);
+    text-decoration: none;
+}
+
+.title{
+    text-align: center;
+    font-size: 2rem;
+    color: var(--dark-grey);
+    font-family: "Trebuchet MS";
+    font-weight: lighter;
+    padding: 1rem;
+}
+
+.general {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    height: 70%;
+    margin-right: 100rem;
+    background-color: var(--white);
+
+}
+
+.gen-totals {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+}
+
+.gen-vis-sec {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 55%;
+}
+
+
+.gen-total1{
+    background-color: var(--blue1);
+    padding: 1rem;
+    height: 8rem;
+    width: 100%;
+    margin-left: 1rem;
+
+}
+.gen-total2{
+    background-color: var(--blue2);
+    padding: 1rem;
+    height: 8rem;
+    width: 100%;
+    margin-left: 1rem;
+}
+.gen-total3{
+    background-color: var(--blue3);
+    padding: 1rem;
+    height: 8rem;
+    width: 100%;
+    margin-left: 1rem;
+}
+.gen-total4{
+    background-color: var(--blue4);
+    padding: 1rem;
+    height: 8rem;
+    width: 100%;
+    margin-left: 1rem;
+}
+
+
+.gen-vis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+    margin-top: 19rem;
+    margin-right: 2rem;
+    border: 0.1rem solid var(--dark-grey);
+
+}
+
+.navbar{
+    min-height: 6.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+
+.nav-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3.75rem;
+    z-index: 1;
+
+}
+
+.logo-image img{
+    margin-left: 1rem;
+    margin-right: auto;
+    height: 2rem;
+}
+
+.nav-link{
+    transition: 0.7s ease;
+}
+
+.nav-link:hover{
+    color: var(--dark-grey);
+}
+
+.hamburger{
+    display: none;
+    cursor: pointer;
+}
+
+.bar{
+    display: block;
+    width: 1.563rem;
+    height: 0.188rem;
+    margin: 0.313rem auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+
+}
+
+@media(max-width:48rem){
+    .hamburger{
+        display:block;
+    }
+
+    .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1){
+        transform: translateY(0.5rem) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-0.5rem) rotate(-45deg);
+    }
+
+    .nav-menu{
+        position:fixed;
+        left: -100%;
+        top: 4.375rem;
+        gap: 0;
+        flex-direction: column;
+        background-color: #3287c1;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-item{
+        margin: 1rem 0;
+
+    }
+
+    .nav-menu.active{
+        left: 0;
+    }
+}
