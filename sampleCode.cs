@@ -16,7 +16,7 @@ connection.Open();
 System.Console.WriteLine("State: " + connection.State.ToString());
 
 // get the query from the relevant text file. use if statements to choose file
-string query = System.IO.File.ReadAllText(@"C:\Users\Public\TestFolder\sqlQuery1.txt");`
+string query = System.IO.File.ReadAllText(@"C:\Users\Public\TestFolder\selectNameTest.sql");
 
 // create odbc command
 OdbcCommand command = new OdbcCommand(query, connection);
