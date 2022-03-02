@@ -40,5 +40,5 @@ while(reader.Read() == true)
 reader.Close();
 connection.Close();
 
-//command to compile: csc /out:run.exe /r:Microsoft.Data.Odbc.dll TestDB.cs
+//command to compile: csc /out:run.exe /r:Microsoft.Data.Odbc.dll sampleCode.cs
 
