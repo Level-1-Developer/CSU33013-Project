@@ -1,0 +1,120 @@
+<!-- Author: Lydia MacBride -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <title>Messages</title>
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <a href="https://www.dell.com">
+            <div class="logo-image">
+                <img src="logo-dell-technologies.svg" alt="Dell Logo">
+            </div>
+        </a>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="general-view.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="action-items.html" class="nav-link">Action Items</a>
+            </li>
+            <li class="nav-item">
+                <a href="messages.html" class="nav-link">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a href=# class="nav-link">Batch Forwards</a>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <div id="main">
+        <div id="content">
+            <h1 class="title">Inbox</h1>
+        </div>
+    </div>
+
+    <ul class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Filter</button>
+        <ul>
+            <div id="myDropdown" class="dropdown-content">
+                <li><a href="#time range">Time Range</a></li>
+                <li><a href="#status">Status</a></li>
+                <li><a href="#campaign">Campaign</a></li>
+                <li><a href="#sent at">Sent at</a></li>
+            </div>
+        </ul>
+    </ul>
+
+    <!-- Messages -->
+
+    <div class="msg">
+        <div class="msg-flag"></div>
+        <div class="msg-contents"><p>Hello World!</p></div>
+        <div class="msg-time"><p>14:53</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-contents"><p class="msg-stat">This message is unread</p></div>
+        <div class="msg-time"><p>9 Feb</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-contents"><p>This message is read</p></div>
+        <div class="msg-time"><p>9 Feb</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-flag"></div>
+        <div class="msg-contents"><p>This message is urgent</p></div>
+        <div class="msg-time"><p>20 Jan</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
+        <div class="msg-time"><p>20 Jan</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
+        <div class="msg-time"><p>20 Jan</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
+        <div class="msg-time"><p>20 Jan</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
+        <div class="msg-time"><p>20 Jan</p></div>
+    </div>
+
+    <div class="msg">
+        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
+        <div class="msg-time"><p>20 Jan</p></div>
+    </div>
+
+
+    </div>
+
+</header>
+<script src="filterMenu.js"></script>
+<script src="navMenu.js"></script>
+</body>
+</html>
