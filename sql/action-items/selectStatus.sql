@@ -1,3 +1,3 @@
 SELECT *
 FROM action_items
-where status = @p1;
+WHERE status = @p1;
