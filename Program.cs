@@ -8,12 +8,10 @@ namespace PGDemo // Note: actual namespace depends on the project name.
         static async Task Main(string[] args)
         {
             var connString = "Host=localhost;Username=postgres;Password=Helloworld;Database=postgres";
-
             await using var conn = new NpgsqlConnection(connString);
             await conn.OpenAsync();
-            
+
             //below code needs an existing table/relation called data (can be changed) to run
-            
             /* Insert some data
             await using (var cmd = new NpgsqlCommand("INSERT INTO data (some_field) VALUES (@p)", conn))
             {

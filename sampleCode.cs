@@ -1,4 +1,4 @@
-using Microsoft.Data.Odbc;
+using System.Data.Odbc;
 
 //https://wiki.postgresql.org/wiki/Using_Microsoft_.NET_with_the_PostgreSQL_Database_Server_via_ODBC
 
