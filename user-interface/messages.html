@@ -1,16 +1,12 @@
-<!-- Author: Lydia MacBride -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-    <title>Messages</title>
+    <link rel="stylesheet" href="messages-style.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <title>Messages</title>
 </head>
 <body>
 
@@ -33,7 +29,7 @@
                 <a href="messages.html" class="nav-link">Messages</a>
             </li>
             <li class="nav-item">
-                <a href=# class="nav-link">Batch Forwards</a>
+                <a href="batch-forwards.html" class="nav-link">Batch Forwards</a>
             </li>
         </ul>
         <div class="hamburger">
@@ -45,76 +41,64 @@
 
     <div id="main">
         <div id="content">
-            <h1 class="title">Inbox</h1>
+            <h1 class="title">Messages</h1>
         </div>
     </div>
 
-    <ul class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Filter</button>
-        <ul>
-            <div id="myDropdown" class="dropdown-content">
-                <li><a href="#time range">Time Range</a></li>
-                <li><a href="#status">Status</a></li>
-                <li><a href="#campaign">Campaign</a></li>
-                <li><a href="#sent at">Sent at</a></li>
-            </div>
+<filter>
+    <div class="drop-btn">
+        Filter
+    </div>
+    <div class="tooltip"></div>
+    <div class="wrapper">
+        <ul class="filter-bar">
+            <input type="text" placeholder="Search Target, Product Name, Product ID..." class="input"
+                   onkeyup="filterFunction()">
+            <li class="time_range-item"><a href="#">Time Range</a></li>
+            <li class="status-item"><a href="#">Status</a></li>
+            <li class="campaign-item"><a href="#">Campaign</a></li>
+            <li class="sent_at_time-item"><a href="#">Sent time</a></li>
         </ul>
-    </ul>
+
+        <ul class="time_range-drop">
+            <li class="arrow back-time_range-btn">Time Range</li>
+            <li><a href="#">Today</a></li>
+            <li><a href="#">This Week</a></li>
+            <li><a href="#">This Month</a></li>
+        </ul>
+
+        <ul class="status-drop">
+            <li class="arrow back-status-btn">Status</li>
+            <li><a href="#">Dispatched</a></li>
+            <li><a href="#">In progress</a></li>
+        </ul>
+
+        <ul class="campaign-drop">
+            <li class="arrow back-campaign-btn">Campaign</li>
+            <li><a href="#">Saved cart</a></li>
+            <li><a href="#">Abandoned cart</a></li>
+        </ul>
+
+    <ul class="sent_at_time-drop">
+            <li class="arrow back-sent_at_time-btn">Sent Time</li>
+            <li><a href="#">Today</a></li>
+            <li><a href="#">Yesterday</a></li>
+            <li><a href="#">This week</a></li>
+            <li><a href="#">This month</a></li>
+            <li><a href="#">This year</a></li>
+        </ul>
+
+
+  </div>
+  </filter>
 
     <!-- Messages -->
-
-    <div class="msg">
-        <div class="msg-flag"></div>
-        <div class="msg-contents"><p>Hello World!</p></div>
-        <div class="msg-time"><p>14:53</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-contents"><p class="msg-stat">This message is unread</p></div>
-        <div class="msg-time"><p>9 Feb</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-contents"><p>This message is read</p></div>
-        <div class="msg-time"><p>9 Feb</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-flag"></div>
-        <div class="msg-contents"><p>This message is urgent</p></div>
-        <div class="msg-time"><p>20 Jan</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
-        <div class="msg-time"><p>20 Jan</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
-        <div class="msg-time"><p>20 Jan</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
-        <div class="msg-time"><p>20 Jan</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
-        <div class="msg-time"><p>20 Jan</p></div>
-    </div>
-
-    <div class="msg">
-        <div class="msg-contents"><p class="msg-stat">Filler</p></div>
-        <div class="msg-time"><p>20 Jan</p></div>
-    </div>
-
-
-    </div>
+ <div id="tablediv"></div>
 
 </header>
-<script src="filterMenu.js"></script>
 <script src="navMenu.js"></script>
+<script src="messages-filter.js"></script>
+<script src="MessageElements.js"></script>
+<script src="MessageTable.js"></script>
 </body>
 </html>

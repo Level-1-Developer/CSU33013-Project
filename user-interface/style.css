@@ -5,9 +5,7 @@ author: Eimear Ryan
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
     font-family: 'Roboto', sans-serif;
-
 }
 
 
@@ -153,10 +151,15 @@ li{
 }
 
 /*============== Filter Button ================*/
-.dropbtn {
-    background-color: #ddd;
+filter{
+    position: relative;
+
+}
+
+filter .drop-btn {
+    background-color: #afafaf;
     color: #404040;
-    width: 5rem;
+    width: 6rem;
     padding: 0.3rem;
     margin-left: 0.5rem;
     font-size: 1.2rem;
@@ -165,211 +168,136 @@ li{
     font-weight: 100;
 }
 
-.dropbtn:hover, .dropbtn:focus {
+drop-btn:hover, .drop-btn:focus {
     background-color: #bebebe;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-    list-style: none;
+.input{
+    font-size: 0.8rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 0.1rem solid #ddd;
 }
 
-.dropdown-content {
+.input:focus{
+    outline: 0.1rem solid #c5c5c5;
+}
+
+filter .tooltip{
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    height: 15px;
+    width: 15px;
+    background: #242526;;
+    transform: rotate(45deg);
+    display: none;
+}
+
+filter .tooltip.show{
+    display: block;
+}
+filter .wrapper{
     display: none;
     position: absolute;
     background-color: #f6f6f6;
-    min-width: 230px;
+    min-width: 18rem;
     overflow: auto;
     border: 1px solid #ddd;
     z-index: 1;
     font-weight: 100;
+    transition: all 0.3s ease;
 }
-
-
-.dropdown-content a {
+filter .wrapper.show{
+    display: flex;
+}
+.wrapper ul{
+    width: 18rem;
+    list-style: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+.wrapper ul li{
+    line-height: 55px;
+}
+.wrapper ul li a{
+    position: relative;
     color: black;
-    padding: 12px 16px;
+    padding: 0 10px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
     text-decoration: none;
-    display: block;
+}
+.wrapper ul li:hover a{
+    background: #ddd;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+ul li a i{
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    pointer-events: none;
+}
 
-.show {display: block;}
 
-/* author: Lydia */
-/*=============== General View ================*/
+.wrapper .arrow{
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #2b2f36;
+    cursor: pointer;
+}
 
 .gen-totals {
     margin-top: 4rem;
     display: flex;
-    flex-direction: column;
-    width: 35%;
-}
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 
-.gen-vis-sec {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 55%;
 }
 
 
 .gen-total1{
-    background-color: #d0efff;
+    background-color: #e7e7e7;
     padding: 1rem;
-    height: 8rem;
+    height: 90%;
     width: 100%;
-    margin-left: 1rem;
+    margin-right: 2rem;
+    box-shadow: 1rem 1rem 0.5rem lightblue;
+    border: 0.1rem solid #969393;
 
 }
 .gen-total2{
-    background-color: #2a9df4;
+    background-color: #e7e7e7;
     padding: 1rem;
-    height: 8rem;
+    height: 90%;
     width: 100%;
-    margin-left: 1rem;
+    margin-right: 2rem;
+    box-shadow: 1rem 1rem 0.5rem lightblue;
+    border: 0.1rem solid #969393;
+
 }
 .gen-total3{
-    background-color: #187bcd;
+    background-color: #e7e7e7;
     padding: 1rem;
-    height: 8rem;
+    height: 90%;
     width: 100%;
-    margin-left: 1rem;
-}
-.gen-total4{
-    background-color:  #1167b1;
-    padding: 1rem;
-    height: 8rem;
-    width: 100%;
-    margin-left: 1rem;
+    box-shadow: 1rem 1rem 0.5rem lightblue;
+    border: 0.1rem solid #969393;
+
 }
 
-
-.gen-vis {
+.graph-box{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 40%;
-    margin-top: 19rem;
-    margin-right: 2rem;
-    border: 0.1rem solid #404040;
-
-}
-
-/*============== Action Items ==============*/
-.act {
-    align-items: center;
-    height: 2.2rem;
-    margin: 0.5rem;
-    padding: 0;
-    border: 0.1rem solid #ddd;
-    font-weight: 100;
-}
-
-.act-id {
-    float: left;
-    height: 100%;
-    width: 20%;
-    margin: -0.1rem -0.1rem;
-    border-top: 0.1rem solid #ddd;
-    text-align: justify-all;
-    text-justify: inter-character;
-}
-
-.act-stat {
-    float: left;
-    height: 2.2rem;
-    width: 11%;
-    margin: -0.1rem -0.1rem;
     text-align: center;
-    border: 0.1rem solid #ddd;
-}
-
-.act-camp {
-    float: left;
-    border: none;
-}
-
-.act-time {
-    float: right;
-    height: 100%;
-    width: 6rem;
-    margin: -0.1rem 0.1rem;
-    border-top: 0.1rem solid #ddd;
-}
-
-.act-nat {
-    float: right;
-    height: 2.2rem;
-    width: 4rem;
-    margin: -0.1rem 0.1rem;
-    text-align: center;
-    border: 0.1rem solid #ddd;
-}
-
-.act p {
-    margin: 0;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    height: 55%;
+    background-color: white;
     font-size: 1rem;
-    padding: 0.2rem;
 }
-
-/*============ MESSAGES ===========*/
-.msg {
-    align-items: center;
-    height: 2.2rem;
-    margin: 0.5rem;
-    padding: 0;
-    border: 0.1rem solid #ddd;
-    font-weight: 100;
-}
-
-.msg-contents {
-    float: left;
-    height: 100%;
-    width: 20%;
-    margin: -0.1rem -0.1rem;
-    border-top: 0.1rem solid #ddd;
-    text-align: justify-all;
-    text-justify: inter-character;
-    white-space: nowrap;
-
-}
-
-.msg-flag {
-    float: left;
-    width: 0;
-    height: 0;
-    border-top: 6px solid transparent;
-    border-left: 12px solid red;
-    border-bottom: 6px solid transparent;
-    margin-top: 0.55rem;
-    margin-right: 0.25rem;
-
-}
-
-.msg-stat{
-    font-weight: 400;
-}
-
-.msg-time {
-    float: right;
-    text-align: right;
-    height: 100%;
-    margin: -0.1rem 0.1rem;
-    border-top: 0.1rem solid #ddd;
-}
-
-.msg p {
-    margin: 0;
-    font-size: 1rem;
-    padding: 0.2rem;
-
-}
-
-
 
 

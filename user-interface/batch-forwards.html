@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="batch-forwards-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <title>Batch Forwards</title>
+</head>
+<body>
+<header>
+
+    <nav class="navbar">
+        <a href="https://www.dell.com">
+            <div class="logo-image">
+                <img src="logo-dell-technologies.svg" alt="Dell Logo">
+            </div>
+        </a>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="general-view.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="action-items.html" class="nav-link">Action Items</a>
+            </li>
+            <li class="nav-item">
+                <a href="messages.html" class="nav-link">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a href="batch-forwards.html" class="nav-link">Batch Forwards</a>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+
+
+    <div id="main">
+        <div id="content">
+            <h1 class="title">Batch Forwards</h1>
+        </div>
+    </div>
+
+    <filter>
+        <div class="drop-btn">
+            Filter
+        </div>
+        <div class="tooltip"></div>
+        <div class="wrapper">
+            <ul class="filter-bar">
+                <input type="text" placeholder="Search Batch File Name" class="input"
+                       onkeyup="filterFunction()">
+                <li class="campaign-item"><a href="#">Campaign</a></li>
+                <li class="forward_status-item"><a href="#">Forward Status</a></li>
+                <li class="completed_at_time-item"><a href="#">Completed At</a></li>
+
+            </ul>
+
+
+            <ul class="campaign-drop">
+                <li class="arrow back-campaign-btn">Campaign</li>
+                <li><a href="#">Saved Cart</a></li>
+                <li><a href="#">Abandoned Cart</a></li>
+            </ul>
+
+            <ul class="forward_status-drop">
+                <li class="arrow back-forward_status-btn">Forward Status</li>
+                <li><a href="#">Sent</a></li>
+            </ul>
+
+            <ul class="completed_at_time-drop">
+                <li class="arrow back-completed_at_time-btn">Completed At</li>
+                <li><a href="#">Today</a></li>
+                <li><a href="#">Yesterday</a></li>
+                <li><a href="#">This week</a></li>
+                <li><a href="#">This month</a></li>
+                <li><a href="#">This year</a></li>
+            </ul>
+
+
+        </div>
+    </filter>
+
+    <!-- Batch Forwards Table-->
+    <div id="tablediv"></div>
+
+</header>
+
+<script src="navMenu.js"></script>
+<script src="batch-forwards-filter.js"></script>
+<script src="BatchForwardsElements.js"></script>
+<script src="BatchForwardsTable.js"></script>
+</body>
+</html>

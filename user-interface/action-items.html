@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="action-items-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <title>General View</title>
+    <title>Action Items</title>
 </head>
 <body>
 <header>
@@ -29,7 +29,7 @@
                 <a href="messages.html" class="nav-link">Messages</a>
             </li>
             <li class="nav-item">
-                <a href=# class="nav-link">Batch Forwards</a>
+                <a href="batch-forwards.html" class="nav-link">Batch Forwards</a>
             </li>
         </ul>
         <div class="hamburger">
@@ -47,126 +47,72 @@
         </div>
     </div>
 
-    <ul class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Filter</button>
-
-        <ul id="myDropdown" class="dropdown-content">
-            <li><a href="#time range">Time Range</a></li>
-            <li><a href="#status">Status</a></li>
-            <li><a href="#campaign">Campaign</a></li>
-            <li><a href="#country">Country</a></li>
-            <li><a href="#language">Language</a></li>
-            <li><a href="#customerset">Customerset</a></li>
+<filter>
+    <div class="drop-btn">
+        Filter
+    </div>
+    <div class="tooltip"></div>
+    <div class="wrapper">
+        <ul class="filter-bar">
+            <input type="text" placeholder="Search Target, Product Name, Product ID..." class="input"
+                   onkeyup="filterFunction()">
+            <li class="time_range-item"><a href="#">Time Range</a></li>
+            <li class="status-item"><a href="#">Status</a></li>
+            <li class="campaign-item"><a href="#">Campaign</a></li>
+            <li class="country-item"><a href="#">Country</a></li>
+            <li class="language-item"><a href="#">Language</a></li>
+            <li class="customerset-item"><a href="#">Customerset</a></li>
         </ul>
-    </ul>
 
-    <!-- Action Items -->
-    <div class="act">
-        <div class="act-id"><p>5823476060709528666</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Black Friday</p></div>
-        <div class="act-time"><p>14:53</p></div>
-        <div class="act-nat"><p>IE</p></div>
-    </div>
 
-    <div class="act">
-        <div class="act-id"><p>1646248194566726510</p></div>
-        <div class="act-stat"><p>Pending</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Feb 2</p></div>
-        <div class="act-nat"><p>IE</p></div>
-    </div>
+        <ul class="time_range-drop">
+            <li class="arrow back-time_range-btn">Time Range</li>
+            <li><a href="#">Today</a></li>
+            <li><a href="#">This Week</a></li>
+            <li><a href="#">This Month</a></li>
+        </ul>
 
-    <div class="act">
-        <div class="act-id"><p>6486162694319671771</p></div>
-        <div class="act-stat"><p>Expired</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Feb 1</p></div>
-        <div class="act-nat"><p>DE</p></div>
-    </div>
+        <ul class="status-drop">
+            <li class="arrow back-status-btn">Status</li>
+            <li><a href="#">Converted</a></li>
+            <li><a href="#">Purchased</a></li>
+        </ul>
 
-    <div class="act">
-        <div class="act-id"><p>3774684539436241136</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Jan 24</p></div>
-        <div class="act-nat"><p>UK</p></div>
-    </div>
+        <ul class="campaign-drop">
+            <li class="arrow back-campaign-btn">Campaign</li>
+            <li><a href="#">Saved Cart</a></li>
+            <li><a href="#">Abandoned Cart</a></li>
+        </ul>
 
-    <div class="act">
-        <div class="act-id"><p>9337940697041626516</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Jan 3</p></div>
-        <div class="act-nat"><p>US</p></div>
-    </div>
+        <ul class="country-drop">
+            <li class="arrow back-country-btn">Country</li>
+            <input type="text" placeholder="Enter country" class="input"
+                   onkeyup="filterFunction()">
+        </ul>
 
-    <div class="act">
-        <div class="act-id"><p>2680528928263673578</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Dec 30</p></div>
-        <div class="act-nat"><p>IE</p></div>
-    </div>
+        <ul class="language-drop">
+            <li class="arrow back-language-btn">Language</li>
+            <input type="text" placeholder="Enter language" class="input"
+                   onkeyup="filterFunction()">
+        </ul>
 
-    <div class="act">
-        <div class="act-id"><p>Placeholder</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Nov 11</p></div>
-        <div class="act-nat"><p>WW</p></div>
-    </div>
+        <ul class="customerset-drop">
+            <li class="arrow back-customerset-btn">Customerset</li>
+            <input type="text" placeholder="Enter customerset" class="input"
+                   onkeyup="filterFunction()">
+        </ul>
 
-    <div class="act">
-        <div class="act-id"><p>Placeholder</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Nov 11</p></div>
-        <div class="act-nat"><p>WW</p></div>
     </div>
+    </filter>
 
-    <div class="act">
-        <div class="act-id"><p>Placeholder</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Nov 11</p></div>
-        <div class="act-nat"><p>WW</p></div>
-    </div>
-
-    <div class="act">
-        <div class="act-id"><p>Placeholder</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Nov 11</p></div>
-        <div class="act-nat"><p>WW</p></div>
-    </div>
-
-    <div class="act">
-        <div class="act-id"><p>Placeholder</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Nov 11</p></div>
-        <div class="act-nat"><p>WW</p></div>
-    </div>
-
-    <div class="act">
-        <div class="act-id"><p>Placeholder</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Nov 11</p></div>
-        <div class="act-nat"><p>WW</p></div>
-    </div>
-
-    <div class="act">
-        <div class="act-id"><p>Placeholder</p></div>
-        <div class="act-stat"><p>Completed</p></div>
-        <div class="act-camp"><p>Example Event</p></div>
-        <div class="act-time"><p>Nov 11</p></div>
-        <div class="act-nat"><p>WW</p></div>
-    </div>
+    <!-- Action Items Table-->
+    <div id="tablediv"></div>
 
 </header>
-<script src="filterMenu.js"></script>
+
 <script src="navMenu.js"></script>
+<script src="action-items-filter.js"></script>
+<script src="ActionElements.js"></script>
+<script src="ActionTable.js"></script>
 </body>
 </html>

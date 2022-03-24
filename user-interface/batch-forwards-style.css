@@ -1,0 +1,45 @@
+/*============== Batch Forwards ==============*/
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.2rem;
+    height: 2.2rem;
+    padding: 0;
+    border: 0.1rem solid #ddd;
+    font-weight: 100;
+    color: black;
+    justify-content: center;
+}
+
+th
+{
+    height: 2.2rem;
+    border: 0.1rem solid #ddd;
+    background-color: #ddd;
+    font-weight: bolder;
+    color: black;
+    overflow: hidden;
+    font-size: 1rem;
+    padding: 0.2rem;
+    text-align: left;
+
+}
+
+td
+{
+    height: 2.2rem;
+    border: 0.1rem solid #ddd;
+    font-weight: 100;
+    color: black;
+    overflow: hidden;
+    font-size: 1rem;
+    padding: 0.2rem;
+    text-align: left;
+}
+
+.wrapper ul.campaign-drop,
+.wrapper ul.forward_status-drop,
+.wrapper ul.completed_at_time-drop{
+    display: none;
+}
