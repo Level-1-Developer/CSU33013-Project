@@ -51,6 +51,9 @@
         <div class="drop-btn">
             Filter
         </div>
+
+        <button onClick="window.location.reload();">Remove Filters</button>
+        
         <div class="tooltip"></div>
         <div class="wrapper">
             <ul class="filter-bar">
@@ -65,13 +68,14 @@
 
             <ul class="campaign-drop">
                 <li class="arrow back-campaign-btn">Campaign</li>
-                <li><a href="#">Saved Cart</a></li>
-                <li><a href="#">Abandoned Cart</a></li>
+                <li><a onclick="saved()">Saved Cart</a></li>
+                <li><a onclick="abandoned()">Abandoned Cart</a></li>
             </ul>
 
             <ul class="forward_status-drop">
                 <li class="arrow back-forward_status-btn">Forward Status</li>
-                <li><a href="#">Sent</a></li>
+                <li><a onclick="forwarded()">Forwarded</a></li>
+                <li><a onclick="waiting()">Waiting</a></li>
             </ul>
 
             <ul class="completed_at_time-drop">
@@ -88,7 +92,7 @@
     </filter>
 
     <!-- Batch Forwards Table-->
-    <div id="tablediv"></div>
+    <div id="table"></div>
 
 </header>
 

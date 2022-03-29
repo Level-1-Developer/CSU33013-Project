@@ -150,6 +150,12 @@ li{
     }
 }
 
+button{
+    position: relative;
+    margin-left: 0.5rem;
+}
+
+
 /*============== Filter Button ================*/
 filter{
     position: relative;
@@ -168,7 +174,7 @@ filter .drop-btn {
     font-weight: 100;
 }
 
-drop-btn:hover, .drop-btn:focus {
+.drop-btn:hover, .drop-btn:focus {
     background-color: #bebebe;
 }
 

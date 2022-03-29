@@ -49,11 +49,14 @@
     <div class="drop-btn">
         Filter
     </div>
+
+      <button onClick="window.location.reload();">Remove Filters</button>
+
     <div class="tooltip"></div>
     <div class="wrapper">
         <ul class="filter-bar">
             <input type="text" placeholder="Search Target, Product Name, Product ID..." class="input"
-                   onkeyup="filterFunction()">
+                   oninput='mainSearch(this)'>
             <li class="time_range-item"><a href="#">Time Range</a></li>
             <li class="status-item"><a href="#">Status</a></li>
             <li class="campaign-item"><a href="#">Campaign</a></li>
@@ -69,14 +72,14 @@
 
         <ul class="status-drop">
             <li class="arrow back-status-btn">Status</li>
-            <li><a href="#">Dispatched</a></li>
-            <li><a href="#">In progress</a></li>
+            <li><a onclick="dispatchedStatus()">Dispatched</a></li>
+            <li><a onclick="progressStatus()">In progress</a></li>
         </ul>
 
         <ul class="campaign-drop">
             <li class="arrow back-campaign-btn">Campaign</li>
-            <li><a href="#">Saved cart</a></li>
-            <li><a href="#">Abandoned cart</a></li>
+           <li><a onclick="saved()">Saved Cart</a></li>
+           <li><a onclick="abandoned()">Abandoned Cart</a></li>
         </ul>
 
     <ul class="sent_at_time-drop">
@@ -93,7 +96,7 @@
   </filter>
 
     <!-- Messages -->
- <div id="tablediv"></div>
+ <div id="table"></div>
 
 </header>
 <script src="navMenu.js"></script>

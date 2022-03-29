@@ -29,8 +29,6 @@ const country_btn = document.querySelector(".back-country-btn");
 const language_btn = document.querySelector(".back-language-btn");
 const customerset_btn = document.querySelector(".back-customerset-btn");
 
-
-
 drop_btn.onclick = (()=>{
     menu_wrapper.classList.toggle("show");
     tooltip.classList.toggle("show");
@@ -113,4 +111,161 @@ customerset_btn.onclick = (()=>{
 });
 
 
+function mainSearch(field) {
+    const filter = field.value.toUpperCase();
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td, ts;
+    if (filter.length > 0) {
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].querySelector("td:nth-child(1)");
+            ts = tr[i].querySelector("td:nth-child(2)");
+            if (td) {
+                txtValue = td.textContent || td.innerText ||
+                    ts.textContent || ts.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
+function convertedStatus(){
+    const filter = "CONVERTED";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
 
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(3)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function purchasedStatus(){
+    const filter = "PURCHASED";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(3)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function saved(){
+    const filter = "SAVED-CART";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(4)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function abandoned(){
+    const filter = "ABANDONED-CART";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(4)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
+
+function countrySearch(field) {
+    const filter = field.value.toUpperCase();
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+    if (filter.length > 0) {
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].querySelector("td:nth-child(6)");
+            if (td) {
+                txtValue = td.textContent || td.innerText ;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
+
+function languageSearch(field) {
+    const filter = field.value.toUpperCase();
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+    if (filter.length > 0) {
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].querySelector("td:nth-child(7)");
+            if (td) {
+                txtValue = td.textContent || td.innerText ;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
+
+function customersetSearch(field) {
+    const filter = field.value.toUpperCase();
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+    if (filter.length > 0) {
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].querySelector("td:nth-child(8)");
+            if (td) {
+                txtValue = td.textContent || td.innerText ;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}

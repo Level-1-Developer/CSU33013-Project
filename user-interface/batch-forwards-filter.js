@@ -59,7 +59,81 @@ completed_at_time_btn.onclick = (()=>{
     completed_at_time_drop.style.display = "none";
 });
 
+function saved(){
+    var filter = "SAVED-CART";
+    var table = document.querySelector('table');
+    var tr = table.querySelectorAll('tr');
+    var i, txtValue, td;
 
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(2)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function abandoned(){
+    var filter = "ABANDONED-CART";
+    var table = document.querySelector('table');
+    var tr = table.querySelectorAll('tr');
+    var i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(2)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function forwarded(){
+    var filter = "FORWARDED";
+    var table = document.querySelector('table');
+    var tr = table.querySelectorAll('tr');
+    var i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(3)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function waiting(){
+    var filter = "WAITING";
+    var table = document.querySelector('table');
+    var tr = table.querySelectorAll('tr');
+    var i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(3)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
 
 
 

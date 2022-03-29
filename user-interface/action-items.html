@@ -51,11 +51,14 @@
     <div class="drop-btn">
         Filter
     </div>
+
+    <button onClick="window.location.reload();">Remove Filters</button>
+
     <div class="tooltip"></div>
     <div class="wrapper">
         <ul class="filter-bar">
-            <input type="text" placeholder="Search Target, Product Name, Product ID..." class="input"
-                   onkeyup="filterFunction()">
+            <input type="text" placeholder="Search Target, Product Name, Product ID..."
+                   class="input" oninput='mainSearch(this)'>
             <li class="time_range-item"><a href="#">Time Range</a></li>
             <li class="status-item"><a href="#">Status</a></li>
             <li class="campaign-item"><a href="#">Campaign</a></li>
@@ -74,39 +77,40 @@
 
         <ul class="status-drop">
             <li class="arrow back-status-btn">Status</li>
-            <li><a href="#">Converted</a></li>
-            <li><a href="#">Purchased</a></li>
+            <li><a onclick="convertedStatus()">Converted</a></li>
+            <li><a onclick="purchasedStatus()">Purchased</a></li>
         </ul>
 
         <ul class="campaign-drop">
             <li class="arrow back-campaign-btn">Campaign</li>
-            <li><a href="#">Saved Cart</a></li>
-            <li><a href="#">Abandoned Cart</a></li>
+            <li><a onclick="saved()">Saved Cart</a></li>
+            <li><a onclick="abandoned()">Abandoned Cart</a></li>
         </ul>
 
         <ul class="country-drop">
             <li class="arrow back-country-btn">Country</li>
-            <input type="text" placeholder="Enter country" class="input"
-                   onkeyup="filterFunction()">
+            <input type='text' id='searchCountryField' class="input"
+                   placeholder="Enter country"
+                   oninput='countrySearch(this)'>
         </ul>
 
         <ul class="language-drop">
             <li class="arrow back-language-btn">Language</li>
             <input type="text" placeholder="Enter language" class="input"
-                   onkeyup="filterFunction()">
+                   oninput='languageSearch(this)'>
         </ul>
 
         <ul class="customerset-drop">
             <li class="arrow back-customerset-btn">Customerset</li>
             <input type="text" placeholder="Enter customerset" class="input"
-                   onkeyup="filterFunction()">
+                   oninput='customersetSearch(this)'>
         </ul>
 
     </div>
     </filter>
 
     <!-- Action Items Table-->
-    <div id="tablediv"></div>
+    <div id="table"></div>
 
 </header>
 

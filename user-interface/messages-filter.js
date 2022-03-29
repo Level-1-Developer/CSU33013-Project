@@ -78,6 +78,101 @@ sent_at_time_btn.onclick = (()=>{
     sent_at_time_drop.style.display = "none";
 });
 
+function mainSearch(field) {
+    const filter = field.value.toUpperCase();
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+    if (filter.length > 0) {
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].querySelector("td:nth-child(1)");
+            if (td) {
+                txtValue = td.textContent || td.innerText
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+}
+function dispatchedStatus(){
+    const filter = "DISPATCHED";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(2)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function progressStatus(){
+    const filter = "IN_PROGRESS";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(2)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function saved(){
+    const filter = "SAVED-CART";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(3)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function abandoned(){
+    const filter = "ABANDONED-CART";
+    const table = document.querySelector('table');
+    const tr = table.querySelectorAll('tr');
+    let i, txtValue, td;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelector("td:nth-child(3)");
+        if (td) {
+            txtValue = td.textContent || td.innerText ;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
 
 
 

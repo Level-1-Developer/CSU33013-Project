@@ -24,7 +24,7 @@ function createActionTable() {
 
     }
 
-    document.getElementById("tablediv").appendChild(table);
+    document.getElementById("table").appendChild(table);
 }
 
 

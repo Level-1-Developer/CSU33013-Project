@@ -38,6 +38,10 @@ td
     text-align: left;
 }
 
+tr:hover{
+    background-color: #c5c5c5;
+}
+
 .wrapper ul.campaign-drop,
 .wrapper ul.forward_status-drop,
 .wrapper ul.completed_at_time-drop{
