@@ -3,6 +3,7 @@
 *.user
 *.sln.docstates
 *.env
+*.idea
 
 # Build results
 [Dd]ebug/
