@@ -5,7 +5,7 @@
 
  
 ### A brief description of the existing action items system
-<p align="justify">The action items system supports marketing campaigns that allow Dell to reengage customers who have abandoned their carts through email. A series of microservices across Cart & Personalization communicates with each other through HTTP as well as AMQP to allow for the events to be processed accordingly. Events are stored in a Postgres database to allow persistence of up to four weeks. Currently management and visibility of the events are cumbersome and not efficient. For example, to see how many customers would receive abandoned cart emails that contain a specific product, require an engineer to write dedicated queries in the production database which is not practical.</p>
+<p align="justify">The action items system supports marketing campaigns that allow Dell to reengage customers who have abandoned their carts through email. A series of microservices across Cart & Personalization communicates with each other through HTTP as well as AMQP to allow for the events to be processed accordingly. Events are stored in a Postgres database to allow persistence of up to four weeks. Currently management and visibility of the events are cumbersome and not efficient. For example, to see how many customers would receive abandoned cart emails that contain a specific product, this would require an engineer to write dedicated queries in the production database which is not practical.</p>
 <br>
 
 ![image](https://user-images.githubusercontent.com/34750736/161156525-6726ab50-8aad-4072-97fd-49ecd4274759.png)
