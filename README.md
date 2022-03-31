@@ -1,6 +1,6 @@
 # Action Items Dashboard (in partnership with Dell)
 
-<p align="left">Welcome to Group 35's project for the module Software Engineering Project at Trinity College Dublin. We are working with Dell to make an Action Items Dashboard. This Dashboard will provide Dell employees a web-based UI with supporting APIs on top of the existing database that allows for management of the action items events data.
+<p align="justify">Welcome to Group 35's project for the module Software Engineering Project at Trinity College Dublin. We are working with Dell to make an Action Items Dashboard. This Dashboard will provide Dell employees a web-based UI with supporting APIs on top of the existing database that allows for management of the action items events data.
 <img width="300" alt="image" align="right" src="https://user-images.githubusercontent.com/34750736/161159178-300b01e9-6897-4925-ab84-13dfee90bac0.png">
 
  
