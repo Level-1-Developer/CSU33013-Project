@@ -24,7 +24,7 @@
 <p align=justify>You can install .NET 6.0 on <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">Microsoft's .NET downloads page</a>. You can confirm that you have it by running "dotnet --version" in your command prompt - you should see version 6.0 displayed.</p>
 
 #### PostgreSQL
-<p align=justify>You can install PostgreSQL for Windows on the <a href="https://www.postgresql.org/download/windows/"> PostgreSQL Windows installer downloads page</a>. Keep a record of the details used for the hostname, username, password, and database name as they will be needed. </p>
+<p align=justify>You can install PostgreSQL for Windows on the <a href="https://www.postgresql.org/download/windows/"> PostgreSQL Windows installer downloads page</a>. Keep a record of the details used for the hostname, username, password, and database name as they will be needed. To confirm that it is running, you can press the windows key + R, and search "services.msc", and check if PostgreSQL is running or not.</p>
 
 
 ## How to run the project
