@@ -21,7 +21,7 @@
 <p align=justify>You can install Visual Studio 2022 on <a href="https://visualstudio.microsoft.com/vs/">Microsoft's Visual Studio downloads page</a>. You need Visual Studio 2022 as you will be using .NET 6.0 which is only compatible on Visual Studio 2022. Make sure to install the '.NET Desktop Development' Workload when installing.</p>
 
 #### .NET 6.0
-<p align=justify>You can install .NET 6.0 on <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">Microsoft's .NET downloads page</a>. You can confirm that you have it by running `dotnet --version` in your command prompt - you should see version 6.0 displayed.</p>
+<p align=justify>You can install .NET 6.0 on <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">Microsoft's .NET downloads page</a>. You can confirm that you have it by running "dotnet --version" in your command prompt - you should see version 6.0 displayed.</p>
 
 #### PostgreSQL
 <p align=justify>You can install PostgreSQL for Windows on the <a href="https://www.postgresql.org/download/windows/"> PostgreSQL Windows installer downloads page</a>. Keep a record of the details used for the hostname, username, password, and database name as they will be needed. </p>
