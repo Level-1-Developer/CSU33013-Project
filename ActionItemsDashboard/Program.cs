@@ -51,8 +51,16 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             await using (var createMessageTable = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS postgres.actionitemsdata.messages (ID varchar(100) PRIMARY KEY, batch_id varchar(100) NOT NULL, subject varchar(500) NOT NULL, body varchar(500) NOT NULL, campaign varchar(300) NOT NULL, delivery_method varchar(200) NOT NULL, created_at timestamp NOT NULL, sent_at timestamp NOT NULL, status varchar(200) NOT NULL, action_item_id int NOT NULL, target varchar(500) NOT NULL, FOREIGN KEY(batch_id) REFERENCES postgres.actionitemsdata.batches (ID)); ", conn))
             await createMessageTable.ExecuteNonQueryAsync();
 
+            //Creating external ID table
+            await using (var createExternalIDTable = new NpgsqlCommand("CREATE TABLE IF NOT EXISTS postgres.actionitemsdata.externalID (ID varchar(100) PRIMARY KEY, action_items_id int NOT NULL, external_id varchar(100) NOT NULL, created_at timestamp NOT NULL, FOREIGN KEY(action_items_id) REFERENCES postgres.actionitemsdata.actionitems (ID)); ", conn))
+            await createExternalIDTable.ExecuteNonQueryAsync();
+
 
             //4. Clear the tables in the schema.
+
+            //Clearing external ID table
+            await using (var clearexternalIDTable = new NpgsqlCommand("DELETE FROM postgres.actionitemsdata.externalID;", conn))
+            await clearexternalIDTable.ExecuteNonQueryAsync();
 
             //Clearing action items table
             await using (var clearActionItemsTable = new NpgsqlCommand("DELETE FROM postgres.actionitemsdata.actionitems;", conn))
@@ -66,6 +74,10 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             await using (var clearBatchFileTable = new NpgsqlCommand("DELETE FROM postgres.actionitemsdata.batchfiles;", conn))
             await clearBatchFileTable.ExecuteNonQueryAsync();
 
+            //Clearing message table
+            await using (var clearMessageTable = new NpgsqlCommand("DELETE FROM postgres.actionitemsdata.messages;", conn))
+            await clearMessageTable.ExecuteNonQueryAsync();
+
             //Clearing batch table
             await using (var clearBatchTable = new NpgsqlCommand("DELETE FROM postgres.actionitemsdata.batches;", conn))
             await clearBatchTable.ExecuteNonQueryAsync();
@@ -74,10 +86,6 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             await using (var clearBatchForwardTable = new NpgsqlCommand("DELETE FROM postgres.actionitemsdata.batchforwards;", conn))
             await clearBatchForwardTable.ExecuteNonQueryAsync();
 
-
-            //Clearing message table
-            await using (var clearMessageTable = new NpgsqlCommand("DELETE FROM postgres.actionitemsdata.messages;", conn))
-            await clearMessageTable.ExecuteNonQueryAsync();
 
             //5. Insert the sample data into the tables.
 
@@ -132,9 +140,19 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
                                                                                                                         "('0001141e-2253-4ce5-8a0b-c7c14e593d7f', '0071d61f-81d0-4505-8a60-2d574d0ad51b', 'Email|~|First Name|~|Last name|~|Saved Cart ID|~|Item Id|~|Item Type|~|Item title|~|Item Adjusted Total Price|~|Cat 1 Name|~|Cat 2 Name|~|Cat 3 Name|~|ISO Country Code|~|Currency Code|~|Customer Set|~|Language Code|~|Created Time|~|Last Update Time|~|Cart Type|~|Saved Cart Name|~|Marketable flag|~|Product destination|~|Destination order|~|Product type|~|Item image|~|Item URL|~|Rating|~|Number of reviews', 'johndoe@dell.com|~|...', 'saved-cart', 'BatchDelivery', '2022-02-23 00:51:24', '2022-02-23 07:00:01', 'Dispatched', 18355685, 'johndoe@dell.com')", conn))
             await insertMessageData.ExecuteNonQueryAsync();
 
+            //Inserting sample data into external ID table.
+            await using (var insertMessageData = new NpgsqlCommand("INSERT INTO postgres.actionitemsdata.externalID VALUES (4574318, 17981491, '631eeeef-fb06-4894-a5df-00eb26d63984', '2022-01-24 04:00:31')," +
+                                                                                                                        "(4574319, 17981492, '38004c5e-4bb1-46d9-8a84-401c62476499', '2022-01-24 04:00:48')," +
+                                                                                                                       "(4574320, 17981493, 'df671c77-f6a4-4470-9975-057c390287b6', '2022-01-24 04:00:50')," +
+                                                                                                                        "(4574321, 17981494, '49a7f987-1ee2-4c0d-b6bc-a43a1e0b1714', '2022-01-24 04:00:53')," +
+                                                                                                                        "(4574322, 17981495, '6fff3862-b960-496a-9661-d3abed37ea5f', '2022-01-24 04:00:53')", conn))
+            await insertMessageData.ExecuteNonQueryAsync();
 
 
-            //Pull data from the postgres database.
+
+            //6. Pull data from the postgres database.
+
+            //Pull data from action items table into list of ActionItem
             await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems", conn))
             await using (var reader = await cmd.ExecuteReaderAsync())
             {
@@ -165,6 +183,11 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             }
 
 
+            //Pull data from batch forward table into list of BatchForward and other remaining objects (TODO)
+
+
+
+            //7. Transfer list of ActionItem, list of BranchForward etc to the frontend (TODO)
         }
     }
 
