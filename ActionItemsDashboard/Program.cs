@@ -141,12 +141,12 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             await insertMessageData.ExecuteNonQueryAsync();
 
             //Inserting sample data into external ID table.
-            await using (var insertMessageData = new NpgsqlCommand("INSERT INTO postgres.actionitemsdata.externalID VALUES (4574318, 17981491, '631eeeef-fb06-4894-a5df-00eb26d63984', '2022-01-24 04:00:31')," +
+            await using (var insertExternalIDData = new NpgsqlCommand("INSERT INTO postgres.actionitemsdata.externalID VALUES (4574318, 17981491, '631eeeef-fb06-4894-a5df-00eb26d63984', '2022-01-24 04:00:31')," +
                                                                                                                         "(4574319, 17981492, '38004c5e-4bb1-46d9-8a84-401c62476499', '2022-01-24 04:00:48')," +
                                                                                                                        "(4574320, 17981493, 'df671c77-f6a4-4470-9975-057c390287b6', '2022-01-24 04:00:50')," +
                                                                                                                         "(4574321, 17981494, '49a7f987-1ee2-4c0d-b6bc-a43a1e0b1714', '2022-01-24 04:00:53')," +
                                                                                                                         "(4574322, 17981495, '6fff3862-b960-496a-9661-d3abed37ea5f', '2022-01-24 04:00:53')", conn))
-            await insertMessageData.ExecuteNonQueryAsync();
+            await insertExternalIDData.ExecuteNonQueryAsync();
 
 
 
