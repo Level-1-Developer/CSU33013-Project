@@ -5,7 +5,7 @@
 
  
 ### A brief description of the existing action items system
-<p align="justify">The action items system supports marketing campaigns that allow Dell to reengage customers who have abandoned their carts through email. A series of microservices across Cart & Personalization communicates with each other through HTTP as well as AMQP to allow for the events to be processed accordingly. Events are stored in a Postgres database to allow persistence of up to four weeks. Currently management and visibility of the events are cumbersome and not efficient. For example, to see how many customers would receive abandoned cart emails that contain a specific product, this would require an engineer to write dedicated queries in the production database which is not practical.</p>
+<p align="justify">The action items system supports marketing campaigns that allow Dell to reengage customers who have abandoned their carts through email. A series of microservices across cart & personalization communicates with each other through HTTP as well as AMQP to allow for the events to be processed accordingly. Events are stored in a Postgres database to allow persistence of up to four weeks. Currently management and visibility of the events are cumbersome and not efficient. For example, to see how many customers would receive abandoned cart emails that contain a specific product, this would require an engineer to write dedicated queries in the production database which is not practical.</p>
 <br>
 
 ![image](https://user-images.githubusercontent.com/34750736/161156525-6726ab50-8aad-4072-97fd-49ecd4274759.png)
@@ -14,17 +14,17 @@
 ### What are we trying to make?
 <p align="justify">Our goal is to build a fully featured web-based UI with supporting APIs on top of the existing database that allows for all analytical as well as management tasks of the action items events data. This will increase visibility as well as productivity of all admin tasks related to the dataset. This project will be developed for running on Windows only.</p>
 
-### Prerequisites to run this project.
+### A few prerequisites to run this project
 <p align=justify>You need a few things before you can run this project.</p>
 
 #### Visual Studio 2022
 <p align=justify>You can install Visual Studio 2022 on <a href="https://visualstudio.microsoft.com/vs/">Microsoft's Visual Studio downloads page</a>. You need Visual Studio 2022 as you will be using .NET 6.0 which is only compatible on Visual Studio 2022. Make sure to install the '.NET Desktop Development' Workload when installing.</p>
 
 #### .NET 6.0
-<p align=justify>You can install .NET 6.0 on <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">Microsoft's .NET downloads page</a>.</p>
+<p align=justify>You can install .NET 6.0 on <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">Microsoft's .NET downloads page</a>. You can confirm that you have it by running "dotnet --version" in your command prompt - you should see version 6.0 displayed.</p>
 
 #### PostgreSQL
-<p align=justify>You can install PostgreSQL for Windows on the <a href="https://www.postgresql.org/download/windows/"> PostgreSQL Windows installer downloads page</a>. Keep a record of the details used for the hostname, username, password, and database name as they will be needed. </p>
+<p align=justify>You can install PostgreSQL for Windows on the <a href="https://www.postgresql.org/download/windows/"> PostgreSQL Windows installer downloads page</a>. Keep a record of the details used for the hostname, username, password, and database name as they will be needed. To confirm that it is running, you can press the windows key + R, and search "services.msc", and check if PostgreSQL is running or not.</p>
 
 
 ## How to run the project
