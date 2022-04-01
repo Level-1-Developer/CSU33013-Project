@@ -1,0 +1,135 @@
+﻿@using web_app.Models;
+@using web_app.Services
+@using Microsoft.AspNetCore.Components.Web
+@using System.Text.Json;
+@inject DatabaseService databaseService
+
+
+<style>
+.navbar .container-fluid>.navbar-header {
+  float: left;
+  margin-right: 10px;
+}
+.navbar .navbar-nav {
+  float: left;
+  margin: 10px;
+}
+.nav>li {
+  float: left;
+}
+
+.dropdown {
+    margin-right: 10px;
+    width: 100px;
+}
+
+</style>
+
+<header>
+        <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white">
+            <div class="container-fluid">
+                <div class="d-sm-inline-flex justify-content-between">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filter
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="margin-right: 10px">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"style="margin-right: 10px">Search</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<div>
+<table id="table">
+  <tr id = "header">
+    <th>Id</th>
+    <th>Target</th>
+    <th>Status</th>
+    <th>Campaign</th>
+    <th>Expiry</th>
+    <th>When Created</th>
+    <th>When Updated</th>
+    <th>Content</th>
+    <th>Country</th>
+    <th>Language</th>
+    <th>Customer Set</th>
+  </tr>
+  @foreach (var actionItem in databaseService.GetActionItems()) {
+    <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal">
+      <th>@actionItem.Id</th>
+      <th>@actionItem.Target</th>
+      <th>@actionItem.Status</th>
+      <th>@actionItem.Campaign</th>
+      <th>@actionItem.Expiry</th>
+      <th>@actionItem.When_created</th>
+      <th>@actionItem.When_updated</th>
+      <th>@actionItem.Content</th>
+      <th>@actionItem.Country</th>
+      <th>@actionItem.Language</th>
+      <th>@actionItem.CustomerSet</th>
+    </tr>
+  }
+</table>
+</div>
+
+@if (@selectedItem != null)
+{
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Action Item ID: @selectedItem.Id</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Target: @selectedItem.Target</p>
+          <p>Status: @selectedItem.Status</p>
+          <p>Campaign: @selectedItem.Campaign</p>
+          <p>Expiry: @selectedItem.Expiry</p>
+          <p>When Created: @selectedItem.When_created</p>
+          <p>When Updated: @selectedItem.When_updated</p>
+          <p>Content: @selectedItem.Content</p>
+          <p>Country: @selectedItem.Country</p>
+          <p>Language: @selectedItem.Language</p>
+          <p>Customer Set: @selectedItem.CustomerSet</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+@code {
+
+    ActionItem? selectedItem;
+    string? selectedItemId;
+
+    void SelectItem(string itemId)
+    {
+        selectedItemId = itemId;
+        selectedItem = databaseService.GetActionItems().First(x => x.Id == itemId);
+    }
+
+    /**
+    string ConvertToString(string json)
+    {
+        JObject jObject = JObject.Parse(json);
+        JToken jCart = jObject["cart"];
+        string id = (string)jCart["id"];
+        return id;
+
+    }
+    */
+
+}

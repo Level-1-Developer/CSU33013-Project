@@ -1,0 +1,9 @@
+﻿@page
+@using web_app.Components
+@model web_app.Pages.ActionItemsModel
+@{
+}
+
+@(await Html.RenderComponentAsync<ActionItemList>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>

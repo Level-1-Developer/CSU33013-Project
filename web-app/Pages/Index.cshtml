@@ -1,0 +1,15 @@
+﻿
+@page
+@using web_app.Components
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Dell Analytics</h1>
+</div>
+
+@(await Html.RenderComponentAsync<ActionItemList>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>
