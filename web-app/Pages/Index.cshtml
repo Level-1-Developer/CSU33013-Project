@@ -10,6 +10,8 @@
     <h1 class="display-4">Dell Analytics</h1>
 </div>
 
-@(await Html.RenderComponentAsync<ActionItemList>(RenderMode.ServerPrerendered))
-
-<script src="_framework/blazor.server.js"></script>
+<div id="message"></div>
+    <div>
+        Compiler: <input id="compiler" value="TypeScript" onkeyup="document.getElementById('message').innerText = sayHello()" /><br />
+        Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
+    </div>
