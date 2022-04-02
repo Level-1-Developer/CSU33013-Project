@@ -312,8 +312,53 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
 
 
             //7. Transfer all lists to the frontend (TODO)
+            
+            //8. Call query functions
+            ActionItemsCampaign(conn);
         }
-    }
+        
+        static async void ActionItemsCampaign(NpgsqlConnection conn)
+        {
+            //todo: take user input from front end
+            string campaign = "saved-cart";
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems WHERE campaign = @p1", conn)
+            {
+                Parameters =
+                {
+                    new("p1", campaign)
+                }
+            };
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of message objects
+                List<ActionItem> actionItems = new List<ActionItem>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into a message item and add to list
+                    actionItems.Add(new ActionItem(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString()));
+                }
+
+                //print stuff
+                for (int i = 0; i < actionItems.Count; i++)
+                {
+                    Console.WriteLine("Action Item on row " + (i + 1) + " has:");
+                    Console.WriteLine("ID: " + actionItems[i].ID);
+                    Console.WriteLine("Target: " + actionItems[i].target);
+                    Console.WriteLine("Status: " + actionItems[i].status);
+                    Console.WriteLine("Campaign: " + actionItems[i].campaign);
+                    Console.WriteLine("Expiry: " + actionItems[i].expiry);
+                    Console.WriteLine("When_Created: " + actionItems[i].when_created);
+                    Console.WriteLine("When_Updated: " + actionItems[i].when_updated);
+                    Console.WriteLine("Content: " + actionItems[i].content);
+                    Console.WriteLine("Country: " + actionItems[i].country);
+                    Console.WriteLine("Language: " + actionItems[i].language);
+                    Console.WriteLine("CustomerSet: " + actionItems[i].customerset);
+                }
+            }
+        }
+    } 
+    
 
     class ActionItem
     {
