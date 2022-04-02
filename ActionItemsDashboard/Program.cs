@@ -206,13 +206,14 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
         public String customerset;
         public ActionItem(int ID, String target, String status, String campaign, String expiry, String when_created, String when_updated, String content, String country, String language, String customerset)
         {
+            var cultureInfo = new CultureInfo("en-US", false);
             this.ID = ID;
             this.target = target;
             this.status = status;
             this.campaign = campaign;
-            this.expiry = new DateTime(int.Parse(expiry.ToString().Substring(5, 5)), int.Parse(expiry.ToString().Substring(0, 1)), int.Parse(expiry.ToString().Substring(2, 2)), int.Parse(expiry.ToString().Substring(10, 10).Substring(0, 1)), int.Parse(expiry.ToString().Substring(10, 10).Substring(2, 2)), int.Parse(expiry.ToString().Substring(10, 10).Substring(5, 2)));
-            this.when_created = new DateTime(int.Parse(when_created.ToString().Substring(5, 5)), int.Parse(when_created.ToString().Substring(0, 1)), int.Parse(when_created.ToString().Substring(2, 2)), int.Parse(when_created.ToString().Substring(10, 10).Substring(0, 1)), int.Parse(when_created.ToString().Substring(10, 10).Substring(2, 2)), int.Parse(when_created.ToString().Substring(10, 10).Substring(5, 2)));
-            this.when_updated = new DateTime(int.Parse(when_updated.ToString().Substring(5, 5)), int.Parse(when_updated.ToString().Substring(0, 1)), int.Parse(when_updated.ToString().Substring(2, 2)), int.Parse(when_updated.ToString().Substring(10, 10).Substring(0, 1)), int.Parse(when_updated.ToString().Substring(10, 10).Substring(2, 2)), int.Parse(when_updated.ToString().Substring(10, 10).Substring(5, 2)));
+            this.expiry = DateTime.ParseExact(expiry, "dd/MM/yyyy hh:mm:ss", cultureInfo);
+            this.when_created = DateTime.ParseExact(when_created, "dd/MM/yyyy hh:mm:ss", cultureInfo);
+            this.when_updated = DateTime.ParseExact(when_updated, "dd/MM/yyyy hh:mm:ss", cultureInfo);
             this.content = content;
             this.country = country;
             this.language = language;
