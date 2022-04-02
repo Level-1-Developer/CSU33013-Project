@@ -211,9 +211,9 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             this.target = target;
             this.status = status;
             this.campaign = campaign;
-            this.expiry = DateTime.ParseExact(expiry, "dd/MM/yyyy hh:mm:ss", cultureInfo);
-            this.when_created = DateTime.ParseExact(when_created, "dd/MM/yyyy hh:mm:ss", cultureInfo);
-            this.when_updated = DateTime.ParseExact(when_updated, "dd/MM/yyyy hh:mm:ss", cultureInfo);
+            this.expiry = DateTime.Parse(expiry);
+            this.when_created = DateTime.Parse(when_created);
+            this.when_updated = DateTime.Parse(when_updated);
             this.content = content;
             this.country = country;
             this.language = language;
