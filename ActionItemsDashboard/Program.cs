@@ -206,19 +206,17 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
         public String customerset;
         public ActionItem(int ID, String target, String status, String campaign, String expiry, String when_created, String when_updated, String content, String country, String language, String customerset)
         {
-            var cultureInfo = new CultureInfo("en-US", false);
             this.ID = ID;
             this.target = target;
             this.status = status;
             this.campaign = campaign;
-            this.expiry = DateTime.ParseExact(expiry, "dd/MM/yyyy hh:mm:ss", cultureInfo);
-            this.when_created = DateTime.ParseExact(when_created, "dd/MM/yyyy hh:mm:ss", cultureInfo);
-            this.when_updated = DateTime.ParseExact(when_updated, "dd/MM/yyyy hh:mm:ss", cultureInfo);
+            this.expiry = DateTime.Parse(expiry);
+            this.when_created = DateTime.Parse(when_created);
+            this.when_updated = DateTime.Parse(when_updated);
             this.content = content;
             this.country = country;
             this.language = language;
             this.customerset = customerset;
-
         }
     }
 }
