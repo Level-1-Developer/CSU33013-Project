@@ -53,7 +53,7 @@
 <img width="668" alt="Screenshot 2022-04-01 at 00 14 03" src="https://user-images.githubusercontent.com/34750736/161164545-6a71ffb4-743f-40bb-9345-5a4b6d9d61b8.png"></p>
 
 
-7. Now you need to setup the environment variables for the C# code to connect to your PostgreSQL server. Go into the main directory of the project, and run the shell script using `sh ./setupEnv.sh`. It will ask you a number of questions, and it will make and fill a `.env` file inside of `/ActionItemsDashboard` for you.
+7. Now you need to setup the environment variables for the C# code to connect to your PostgreSQL server. Go into the main directory of the project, and run the shell script using `sh ./setupEnv.sh` (or just `./setupEnv.sh` in windows powershell). It will ask you a number of questions, and it will make and fill a `.env` file inside of `/ActionItemsDashboard` for you.
 
 <p align="center">
 <img width="668" alt="Screenshot 2022-04-01 at 00 14 03" src="https://user-images.githubusercontent.com/34750736/161165810-6410bb5d-3a82-4345-a960-3738d68a443f.gif"></p>
