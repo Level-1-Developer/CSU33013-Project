@@ -8,7 +8,6 @@
 <style>
 .container-fluid>.navbar-header {
   float: left;
-  margin-top: 0px;
   margin-right: 10px;
 }
 .navbar .navbar-nav {
@@ -20,7 +19,13 @@
 
 .dropdown {
     margin-right: 10px;
-    width: 100px;
+}
+.alert {
+    margin: 0px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 </style>
@@ -34,13 +39,19 @@
                         Status Filter
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" @onclick='(() => GetFilter("None")'>None</a>
-                        <a class="dropdown-item" @onclick='(() => GetFilter("Converted")'>Converted</a>
-                        <a class="dropdown-item" @onclick='(() => GetFilter("Purchased")'>Purchased</a>
+                        <a class="dropdown-item" @onclick="@(e => Filter = "none")">None</a>
+                        <a class="dropdown-item" @onclick="@(e => Filter = "converted")">Converted</a>
+                        <a class="dropdown-item" @onclick="@(e => Filter = "purchased")">Purchased</a>
                       </div>
                     </div>
-                    <input @bind="CurrentInput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px">
-                    <button @onclick="GetInput" class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Submit" style="margin-right: 10px">Search</button>
+                    <input @bind="CurrentInput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
+                    <button @onclick="GetInput" class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Submit" style="margin-right: 10px;">Search</button>
+                @if (Filter != "none")
+                {
+                    <div class="alert alert-primary" role="alert" style="width: 200px">
+                        Filtering by @Filter
+                    </div>
+                }
                 </div>
             </div>
         </nav>
@@ -62,21 +73,24 @@
     <th>Customer Set</th>
   </tr>
   @foreach (var actionItem in databaseService.GetActionItems()) {
-            @if (UserInput == "" || actionItem.Target.Contains(UserInput) || actionItem.Id.Contains(UserInput))
+            @if (UserInput == "" || UserInput == null || actionItem.Target.Contains(UserInput) || actionItem.Id.Contains(UserInput) || actionItem.Country.Contains(UserInput))
             {
-                <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal">
-                    <th>@actionItem.Id</th>
-                    <th>@actionItem.Target</th>
-                    <th>@actionItem.Status</th>
-                    <th>@actionItem.Campaign</th>
-                    <th>@actionItem.Expiry</th>
-                    <th>@actionItem.When_created</th>
-                    <th>@actionItem.When_updated</th>
-                    <th>@actionItem.Content</th>
-                    <th>@actionItem.Country</th>
-                    <th>@actionItem.Language</th>
-                    <th>@actionItem.CustomerSet</th>
-                </tr>
+                @if (Filter == "none" || actionItem.Status == Filter)
+                {
+                    <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal">
+                        <th>@actionItem.Id</th>
+                        <th>@actionItem.Target</th>
+                        <th>@actionItem.Status</th>
+                        <th>@actionItem.Campaign</th>
+                        <th>@actionItem.Expiry</th>
+                        <th>@actionItem.When_created</th>
+                        <th>@actionItem.When_updated</th>
+                        <th>@actionItem.Content</th>
+                        <th>@actionItem.Country</th>
+                        <th>@actionItem.Language</th>
+                        <th>@actionItem.CustomerSet</th>
+                    </tr>
+                }
             }
         }
 </table>
@@ -119,7 +133,7 @@
     string? selectedItemId;
     string CurrentInput;
     string UserInput;
-    string Filter;
+    string Filter = "none";
 
     void SelectItem(string itemId)
     {
@@ -130,11 +144,6 @@
     void GetInput()
     {
         UserInput = CurrentInput;
-    }
-
-    void GetFilter(string InFilter)
-    {
-        Filter = InFilter;
     }
 
     /**

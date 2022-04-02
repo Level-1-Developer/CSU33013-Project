@@ -77,5 +77,10 @@ table {
     margin-right: 0.5rem;
 }
 
+.dropdown-item {
+    cursor: pointer;
+}
+
+
 
 
