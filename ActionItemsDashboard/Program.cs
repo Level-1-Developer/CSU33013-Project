@@ -206,7 +206,6 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
         public String customerset;
         public ActionItem(int ID, String target, String status, String campaign, String expiry, String when_created, String when_updated, String content, String country, String language, String customerset)
         {
-            var cultureInfo = new CultureInfo("en-US", false);
             this.ID = ID;
             this.target = target;
             this.status = status;
@@ -218,7 +217,6 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             this.country = country;
             this.language = language;
             this.customerset = customerset;
-
         }
     }
 }
