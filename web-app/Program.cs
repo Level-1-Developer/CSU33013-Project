@@ -16,7 +16,6 @@ namespace web_app
         public static void Main(string[] args)
         {
             Task.Run(async () => await setupDatabase());
-            Console.WriteLine("test");
             CreateHostBuilder(args).Build().Run();
 
         }

@@ -24,6 +24,7 @@ namespace web_app.Services
         public static List<BatchForward> finalBatchForwards = new List<BatchForward>();
         public static List<BatchForwardError> finalBatchForwardErrors = new List<BatchForwardError>();
         public static List<ExternalID> finalExternalID = new List<ExternalID>();
+
         public DatabaseService(IWebHostEnvironment webHostEnvironment)
         {
             WebHostEnvironment = webHostEnvironment;
@@ -31,8 +32,6 @@ namespace web_app.Services
         }
 
         public IWebHostEnvironment WebHostEnvironment { get; }
-
-        private string JsonFileName => Path.Combine(WebHostEnvironment.WebRootPath, "data", "database.json");
 
         public IEnumerable<ActionItem> GetActionItems()
         {
@@ -84,22 +83,6 @@ namespace web_app.Services
                     actionItems.Add(new ActionItem(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString()));
                 }
                 finalActionItems = actionItems;
-                //Now that all the ActionItem objects have been added, we can print them out.
-                for (int i = 0; i < actionItems.Count; i++)
-                {
-                    Console.WriteLine("Action Item on row " + (i + 1) + " has:");
-                    Console.WriteLine("ID: " + actionItems[i].ID);
-                    Console.WriteLine("Target: " + actionItems[i].target);
-                    Console.WriteLine("Status: " + actionItems[i].status);
-                    Console.WriteLine("Campaign: " + actionItems[i].campaign);
-                    Console.WriteLine("Expiry: " + actionItems[i].expiry);
-                    Console.WriteLine("When_Created: " + actionItems[i].when_created);
-                    Console.WriteLine("When_Updated: " + actionItems[i].when_updated);
-                    Console.WriteLine("Content: " + actionItems[i].content);
-                    Console.WriteLine("Country: " + actionItems[i].country);
-                    Console.WriteLine("Language: " + actionItems[i].language);
-                    Console.WriteLine("CustomerSet: " + actionItems[i].customerset);
-                }
             }
 
             //Pull data from messages table into list of Message
@@ -114,14 +97,7 @@ namespace web_app.Services
                     //Convert each row into an ActionItem object, and add it to our list.
                     messages.Add(new Message(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), int.Parse(reader[9].ToString()), reader[10].ToString()));
                 }
-
                 finalMessages = messages;
-                //Now that all the ActionItem objects have been added, we can print them out.
-                for (int i = 0; i < messages.Count; i++)
-                {
-                    Console.WriteLine("Message on row " + (i + 1) + " has:");
-                    Console.WriteLine("ID: " + messages[i].ID.ToString());
-                }
             }
 
             //Pull data from Batch table into list of Batch
@@ -136,14 +112,7 @@ namespace web_app.Services
                     //Convert each row into an Batch object, and add it to our list.
                     batches.Add(new Batch(reader[0].ToString(), reader[1].ToString(), int.Parse(reader[2].ToString()), reader[3].ToString(), reader[4].ToString(), reader[5].ToString()));
                 }
-
                 finalBatches = batches;
-                //Now that all the Batch objects have been added, we can print them out.
-                for (int i = 0; i < batches.Count; i++)
-                {
-                    Console.WriteLine("Batch on row " + (i + 1) + " has:");
-                    Console.WriteLine("ID: " + batches[i].ID.ToString());
-                }
             }
 
             //Pull data from BatchFile table into list of BatchFile
@@ -159,12 +128,6 @@ namespace web_app.Services
                     batchfiles.Add(new BatchFile(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString()));
                 }
                 finalBatchFiles = batchfiles;
-                //Now that all the BatchFile objects have been added, we can print them out.
-                for (int i = 0; i < batchfiles.Count; i++)
-                {
-                    Console.WriteLine("BatchFile on row " + (i + 1) + " has:");
-                    Console.WriteLine("ID: " + batchfiles[i].ID.ToString());
-                }
             }
 
             //Pull data from BatchForward table into list of BatchForward
@@ -179,14 +142,7 @@ namespace web_app.Services
                     //Convert each row into an BatchForward object, and add it to our list.
                     batchforwards.Add(new BatchForward(reader[0].ToString(), int.Parse(reader[1].ToString()), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), int.Parse(reader[6].ToString()), int.Parse(reader[7].ToString()), reader[8].ToString()));
                 }
-
                 finalBatchForwards = batchforwards;
-                //Now that all the BatchForward objects have been added, we can print them out.
-                for (int i = 0; i < batchforwards.Count; i++)
-                {
-                    Console.WriteLine("BatchForward on row " + (i + 1) + " has:");
-                    Console.WriteLine("ID: " + batchforwards[i].ID.ToString());
-                }
             }
 
             //Pull data from BatchForwardError table into list of BatchForwardError
@@ -201,14 +157,7 @@ namespace web_app.Services
                     //Convert each row into an BatchForwardError object, and add it to our list.
                     batchforwarderrors.Add(new BatchForwardError(reader[0].ToString(), reader[1].ToString(), reader[2].ToString()));
                 }
-
                 finalBatchForwardErrors = batchforwarderrors;
-                //Now that all the BatchForwardError objects have been added, we can print them out.
-                for (int i = 0; i < batchforwarderrors.Count; i++)
-                {
-                    Console.WriteLine("BatchForwardError on row " + (i + 1) + " has:");
-                    Console.WriteLine("ID: " + batchforwarderrors[i].ID.ToString());
-                }
             }
 
             //Pull data from ExternalID table into list of ExternalID
@@ -225,12 +174,6 @@ namespace web_app.Services
                 }
 
                 finalExternalID = externalID;
-                //Now that all the ExternalID objects have been added, we can print them out.
-                for (int i = 0; i < externalID.Count; i++)
-                {
-                    Console.WriteLine("ExternalID on row " + (i + 1) + " has:");
-                    Console.WriteLine("ID: " + externalID[i].ID.ToString());
-                }
             }
         }
     }
