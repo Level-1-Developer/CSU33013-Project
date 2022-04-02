@@ -40,7 +40,6 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <li class="dropdown-header text-primary">Status</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("none"))">None</a>
                           <a class="dropdown-item" @onclick="@(e => AddFilter("converted"))">Converted</a>
                           <a class="dropdown-item" @onclick="@(e => AddFilter("purchased"))">Purchased</a>
                           <li class="dropdown-header text-primary">Campaign</li>
@@ -75,9 +74,9 @@
     </header>
 
 <div>
-<table id="table">
-  <thead>
-  <tr id = "header">
+<table class="table table-hover table-bordered">
+  <thead style="background-color: #007DB8; color: white;">
+  <tr>
     <th>Id</th>
     <th>Target</th>
     <th>Status</th>
@@ -91,13 +90,13 @@
     <th>Customer Set</th>
   </tr>
   </thead>
-  <tbody id="myTable">
+  <tbody>
   @foreach (var actionItem in databaseService.GetActionItems()) {
-            @if (CurrentInput == "" || CurrentInput == null || actionItem.Target.Contains(CurrentInput) || actionItem.Id.Contains(CurrentInput) || actionItem.Country.Contains(CurrentInput))
+            @if (CurrentInput == "" || CurrentInput == null || actionItem.Target.Contains(CurrentInput) || actionItem.Id.Contains(CurrentInput))
             {
                 @if (CheckFilters(actionItem))
                 {
-                    <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal">
+                    <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                         <th>@actionItem.Id</th>
                         <th>@actionItem.Target</th>
                         <th>@actionItem.Status</th>
@@ -125,7 +124,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Action Item ID: @selectedItem.Id</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-right: 0px">
         </button>
       </div>
       <div class="modal-body">
@@ -139,6 +138,26 @@
           <p><strong>Country:</strong> @selectedItem.Country</p>
           <p><strong>Language:</strong> @selectedItem.Language</p>
           <p><strong>Customer Set:</strong> @selectedItem.CustomerSet</p>
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-dark" style="pointer-events: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>
+              </button>
+              <button type="button" class="btn btn-warning">Message</button>
+              <button type="button" class="btn btn-dark" style="pointer-events: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>
+              </button>
+              <button type="button" class="btn btn-warning">Batch</button>
+              <button type="button" class="btn btn-dark" style="pointer-events: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>
+              </button>
+              <button type="button" class="btn btn-warning">Batch File</button>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -164,26 +183,11 @@
     bool CheckFilters(ActionItem actionItem)
     {
         int count = 0;
-        if (Filters.Contains(actionItem.Status))
-        {
-            count++;
-        }
-        if (Filters.Contains(actionItem.Campaign))
-        {
-            count++;
-        }
-        if (Filters.Contains(actionItem.Country))
-        {
-            count++;
-        }
-        if (Filters.Contains(actionItem.Language))
-        {
-            count++;
-        }
-        if (Filters.Contains(actionItem.CustomerSet))
-        {
-            count++;
-        }
+        if (Filters.Contains(actionItem.Status)) count++;
+        if (Filters.Contains(actionItem.Campaign)) count++;
+        if (Filters.Contains(actionItem.Country)) count++;
+        if (Filters.Contains(actionItem.Language)) count++;
+        if (Filters.Contains(actionItem.CustomerSet)) count++;
         if (count == Filters.Count())
         {
             return true;

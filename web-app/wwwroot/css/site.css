@@ -23,33 +23,6 @@ table {
     padding-right: 0px !important;
     /*increase width as per your need*/
     max-width: 100%;
-} 
-
-#table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#header {
-    background-color: #007DB8;
-    pointer-events: none;
-    color: white;
-}
-
-#table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-#table tr:hover {
-    background-color: #ddd;
-    cursor: pointer;
-}
-
-#table td, #table th {
-    border: 1px solid #ddd;
-    padding: 8px;
 }
 
 .logo-image img {
@@ -65,7 +38,7 @@ table {
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
