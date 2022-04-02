@@ -31,7 +31,7 @@
 </style>
 
 <header>
-        <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto;">
+        <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto; padding-top: 10px; padding-left: 5px">
             <div class="container-fluid">
                 <div class="d-sm-inline-flex justify-content-between">
                     <div class="dropdown">
@@ -127,7 +127,8 @@
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-right: 0px">
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="padding:30px; padding-bottom:20px; padding-top:20px">
+          <!--
           <p><strong>Target:</strong> @selectedItem.Target</p>
           <p><strong>Status:</strong> @selectedItem.Status</p>
           <p><strong>Campaign:</strong> @selectedItem.Campaign</p>
@@ -138,27 +139,60 @@
           <p><strong>Country:</strong> @selectedItem.Country</p>
           <p><strong>Language:</strong> @selectedItem.Language</p>
           <p><strong>Customer Set:</strong> @selectedItem.CustomerSet</p>
-          <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-dark" style="pointer-events: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-              </svg>
-              </button>
-              <button type="button" class="btn btn-warning">Message</button>
-              <button type="button" class="btn btn-dark" style="pointer-events: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-              </svg>
-              </button>
-              <button type="button" class="btn btn-warning">Batch</button>
-              <button type="button" class="btn btn-dark" style="pointer-events: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-              </svg>
-              </button>
-              <button type="button" class="btn btn-warning">Batch File</button>
-          </div>
+          -->
+          
+          <table class="table">
+          <tbody>
+            <tr>
+              <th>Target:</th>
+              <th>@selectedItem.Target</th>
+            </tr>
+            <tr>
+              <th>Status:</th>
+              <th>@selectedItem.Status</th>
+            </tr>
+            <tr>
+              <th>Campaign:</th>
+              <th>@selectedItem.Campaign</th>
+            </tr>
+            <tr>
+              <th>Expiry:</th>
+              <th>@selectedItem.Expiry</th>
+            </tr>
+            <tr>
+              <th>When Created:</th>
+              <th>@selectedItem.When_created</th>
+            </tr>
+            <tr>
+              <th>When Updated:</th>
+              <th>@selectedItem.When_updated</th>
+            </tr>
+            <tr>
+              <th>Content:</th>
+              <th>@selectedItem.Content</th>
+            </tr>
+            <tr>
+              <th>Country:</th>
+              <th>@selectedItem.Country</th>
+            </tr>
+            <tr>
+              <th>Language:</th>
+              <th>@selectedItem.Language</th>
+            </tr>
+            <tr> 
+              <th>Customer Set:</th>
+              <th>@selectedItem.CustomerSet</th>
+            </tr>
+         </tbody>
+         </table>
       </div>
+      <div class="btn-group" role="group" aria-label="Basic example" style="margin: 28px; margin-top: 0px">
+              <button type="button" class="btn btn-outline-danger btn-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                  </svg>
+                  &nbsp;Message</button>
+          </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
