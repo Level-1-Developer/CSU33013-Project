@@ -5,40 +5,31 @@ namespace web_app.Models
 {
     public class ActionItem
     {
-        [JsonPropertyName("id")]
-        public string? Id { get; set; }
-        
-        [JsonPropertyName("target")]
-        public string? Target { get; set; }
-        
-        [JsonPropertyName("status")]
-        public string? Status { get; set; }
-
-        [JsonPropertyName("campaign")]
-        public string? Campaign { get; set; }
-        
-        [JsonPropertyName("expiry")]
-        public string? Expiry { get; set; }
-        
-        [JsonPropertyName("when_created")]
-        public string? When_created { get; set; }
-        
-        [JsonPropertyName("when_updated")]
-        public string? When_updated { get; set; }
-        
-        [JsonPropertyName("content")]
-        public string? Content { get; set; }
-       
-        [JsonPropertyName("country")]
-        public string? Country { get; set; }
-        
-        [JsonPropertyName("language")]
-        public string? Language { get; set; }
-      
-        [JsonPropertyName("customerset")]
-        public string? CustomerSet { get; set; }
-
-        public override string ToString() => JsonSerializer.Serialize<ActionItem>(this);
-
+        public int ID;
+        public String target;
+        public String status;
+        public String campaign;
+        public DateTime expiry;
+        public DateTime when_created;
+        public DateTime when_updated;
+        public String content;
+        public String country;
+        public String language;
+        public String customerset;
+        public ActionItem(int ID, String target, String status, String campaign, String expiry, String when_created, String when_updated, String content, String country, String language, String customerset)
+        {
+            this.ID = ID;
+            this.target = target;
+            this.status = status;
+            this.campaign = campaign;
+            this.expiry = DateTime.Parse(expiry);
+            this.when_created = DateTime.Parse(when_created);
+            this.when_updated = DateTime.Parse(when_updated);
+            this.content = content;
+            this.country = country;
+            this.language = language;
+            this.customerset = customerset;
+        }
     }
+
 }

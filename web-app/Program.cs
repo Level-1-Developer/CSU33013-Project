@@ -171,7 +171,7 @@ namespace web_app
                                                                                                                        "(4574320, 17981493, 'df671c77-f6a4-4470-9975-057c390287b6', '2022-01-24 04:00:50')," +
                                                                                                                         "(4574321, 17981494, '49a7f987-1ee2-4c0d-b6bc-a43a1e0b1714', '2022-01-24 04:00:53')," +
                                                                                                                         "(4574322, 17981495, '6fff3862-b960-496a-9661-d3abed37ea5f', '2022-01-24 04:00:53')", conn))
-            await insertExternalIDData.ExecuteNonQueryAsync();
+           await insertExternalIDData.ExecuteNonQueryAsync();
         }
 
             public static IHostBuilder CreateHostBuilder(string[] args) =>

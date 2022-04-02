@@ -92,22 +92,22 @@
   </thead>
   <tbody>
   @foreach (var actionItem in databaseService.GetActionItems()) {
-            @if (CurrentInput == "" || CurrentInput == null || actionItem.Target.Contains(CurrentInput) || actionItem.Id.Contains(CurrentInput))
+            @if (CurrentInput == "" || CurrentInput == null || actionItem.target.Contains(CurrentInput) || actionItem.ID.Equals(CurrentInput))
             {
                 @if (CheckFilters(actionItem))
                 {
-                    <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                        <th>@actionItem.Id</th>
-                        <th>@actionItem.Target</th>
-                        <th>@actionItem.Status</th>
-                        <th>@actionItem.Campaign</th>
-                        <th>@actionItem.Expiry</th>
-                        <th>@actionItem.When_created</th>
-                        <th>@actionItem.When_updated</th>
-                        <th>@actionItem.Content</th>
-                        <th>@actionItem.Country</th>
-                        <th>@actionItem.Language</th>
-                        <th>@actionItem.CustomerSet</th>
+                    <tr id="row" @onclick="(e => SelectItem(actionItem.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                        <th>@actionItem.ID</th>
+                        <th>@actionItem.target</th>
+                        <th>@actionItem.status</th>
+                        <th>@actionItem.campaign</th>
+                        <th>@actionItem.expiry</th>
+                        <th>@actionItem.when_created</th>
+                        <th>@actionItem.when_updated</th>
+                        <th>@actionItem.content</th>
+                        <th>@actionItem.country</th>
+                        <th>@actionItem.language</th>
+                        <th>@actionItem.customerset</th>
                     </tr>
                 }
             }
@@ -123,21 +123,21 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Action Item ID: @selectedItem.Id</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Action Item ID: @selectedItem.ID</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-right: 0px">
         </button>
       </div>
       <div class="modal-body">
-          <p><strong>Target:</strong> @selectedItem.Target</p>
-          <p><strong>Status:</strong> @selectedItem.Status</p>
-          <p><strong>Campaign:</strong> @selectedItem.Campaign</p>
-          <p><strong>Expiry:</strong> @selectedItem.Expiry</p>
-          <p><strong>When Created:</strong> @selectedItem.When_created</p>
-          <p><strong>When Updated:</strong> @selectedItem.When_updated</p>
-          <p><strong>Content:</strong> @selectedItem.Content</p>
-          <p><strong>Country:</strong> @selectedItem.Country</p>
-          <p><strong>Language:</strong> @selectedItem.Language</p>
-          <p><strong>Customer Set:</strong> @selectedItem.CustomerSet</p>
+          <p><strong>Target:</strong> @selectedItem.target</p>
+          <p><strong>Status:</strong> @selectedItem.status</p>
+          <p><strong>Campaign:</strong> @selectedItem.campaign</p>
+          <p><strong>Expiry:</strong> @selectedItem.expiry</p>
+          <p><strong>When Created:</strong> @selectedItem.when_created</p>
+          <p><strong>When Updated:</strong> @selectedItem.when_updated</p>
+          <p><strong>Content:</strong> @selectedItem.content</p>
+          <p><strong>Country:</strong> @selectedItem.country</p>
+          <p><strong>Language:</strong> @selectedItem.language</p>
+          <p><strong>Customer Set:</strong> @selectedItem.customerset</p>
           <div class="btn-group" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-dark" style="pointer-events: none;">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -177,17 +177,17 @@
     void SelectItem(string itemId)
     {
         selectedItemId = itemId;
-        selectedItem = databaseService.GetActionItems().First(x => x.Id == itemId);
+        selectedItem = databaseService.GetActionItems().First(x => x.ID == int.Parse(itemId));
     }
 
     bool CheckFilters(ActionItem actionItem)
     {
         int count = 0;
-        if (Filters.Contains(actionItem.Status)) count++;
-        if (Filters.Contains(actionItem.Campaign)) count++;
-        if (Filters.Contains(actionItem.Country)) count++;
-        if (Filters.Contains(actionItem.Language)) count++;
-        if (Filters.Contains(actionItem.CustomerSet)) count++;
+        if (Filters.Contains(actionItem.status)) count++;
+        if (Filters.Contains(actionItem.campaign)) count++;
+        if (Filters.Contains(actionItem.country)) count++;
+        if (Filters.Contains(actionItem.language)) count++;
+        if (Filters.Contains(actionItem.customerset)) count++;
         if (count == Filters.Count())
         {
             return true;
