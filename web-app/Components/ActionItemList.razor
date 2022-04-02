@@ -31,16 +31,16 @@
                 <div class="d-sm-inline-flex justify-content-between">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Filter
+                        Status Filter
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" @onclick='(() => GetFilter("None")'>None</a>
+                        <a class="dropdown-item" @onclick='(() => GetFilter("Converted")'>Converted</a>
+                        <a class="dropdown-item" @onclick='(() => GetFilter("Purchased")'>Purchased</a>
                       </div>
                     </div>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="margin-right: 10px">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"style="margin-right: 10px">Search</button>
+                    <input @bind="CurrentInput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px">
+                    <button @onclick="GetInput" class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Submit" style="margin-right: 10px">Search</button>
                 </div>
             </div>
         </nav>
@@ -62,20 +62,23 @@
     <th>Customer Set</th>
   </tr>
   @foreach (var actionItem in databaseService.GetActionItems()) {
-    <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal">
-      <th>@actionItem.Id</th>
-      <th>@actionItem.Target</th>
-      <th>@actionItem.Status</th>
-      <th>@actionItem.Campaign</th>
-      <th>@actionItem.Expiry</th>
-      <th>@actionItem.When_created</th>
-      <th>@actionItem.When_updated</th>
-      <th>@actionItem.Content</th>
-      <th>@actionItem.Country</th>
-      <th>@actionItem.Language</th>
-      <th>@actionItem.CustomerSet</th>
-    </tr>
-  }
+            @if (UserInput == "" || actionItem.Target.Contains(UserInput) || actionItem.Id.Contains(UserInput))
+            {
+                <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal">
+                    <th>@actionItem.Id</th>
+                    <th>@actionItem.Target</th>
+                    <th>@actionItem.Status</th>
+                    <th>@actionItem.Campaign</th>
+                    <th>@actionItem.Expiry</th>
+                    <th>@actionItem.When_created</th>
+                    <th>@actionItem.When_updated</th>
+                    <th>@actionItem.Content</th>
+                    <th>@actionItem.Country</th>
+                    <th>@actionItem.Language</th>
+                    <th>@actionItem.CustomerSet</th>
+                </tr>
+            }
+        }
 </table>
 </div>
 
@@ -114,11 +117,24 @@
 
     ActionItem? selectedItem;
     string? selectedItemId;
+    string CurrentInput;
+    string UserInput;
+    string Filter;
 
     void SelectItem(string itemId)
     {
         selectedItemId = itemId;
         selectedItem = databaseService.GetActionItems().First(x => x.Id == itemId);
+    }
+
+    void GetInput()
+    {
+        UserInput = CurrentInput;
+    }
+
+    void GetFilter(string InFilter)
+    {
+        Filter = InFilter;
     }
 
     /**
