@@ -31,25 +31,42 @@
 </style>
 
 <header>
-        <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: 0.5rem;">
+        <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto;">
             <div class="container-fluid">
                 <div class="d-sm-inline-flex justify-content-between">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Status Filter
+                        Filters
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" @onclick="@(e => Filter = "none")">None</a>
-                        <a class="dropdown-item" @onclick="@(e => Filter = "converted")">Converted</a>
-                        <a class="dropdown-item" @onclick="@(e => Filter = "purchased")">Purchased</a>
+                          <li class="dropdown-header text-primary">Status</li>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("none"))">None</a>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("converted"))">Converted</a>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("purchased"))">Purchased</a>
+                          <li class="dropdown-header text-primary">Campaign</li>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("saved-cart"))">Saved Cart</a>
+                          <li class="dropdown-header text-primary">Country</li>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("jp"))">Japan</a>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("us"))">US</a>
+                          <li class="dropdown-header text-primary">Language</li>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("ja"))">Japanese</a>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("en"))">English</a>
+                          <!--
+                          <li class="dropdown-header text-primary">Customer Set</li>
+                          <a class="dropdown-item" @onclick="@(e => Filter = "jpbsd1")">jpbsd1</a>
+                          <a class="dropdown-item" @onclick="@(e => Filter = "4")">4</a>
+                          <a class="dropdown-item" @onclick="@(e => Filter = "6099")">6099</a>
+                          -->
                       </div>
                     </div>
-                    <input @bind="CurrentInput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
-                    <button @onclick="GetInput" class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Submit" style="margin-right: 10px;">Search</button>
-                @if (Filter != "none")
+                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Submit" style="margin-right: 10px;">Search</button>
+                @foreach (var Filter in Filters)
                 {
-                    <div class="alert alert-primary" role="alert" style="width: 200px">
-                        Filtering by @Filter
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="width: auto; padding-right:45px; margin-right: 10px">
+                        @Filter
+                        <button @onclick="(e => RemoveFilter(Filter))" type="button" class="btn-close" data-dismiss="alert" aria-label="Close" style="height: 4px; padding: 16px; padding-left: 5px">
+                        </button>
                     </div>
                 }
                 </div>
@@ -59,6 +76,7 @@
 
 <div>
 <table id="table">
+  <thead>
   <tr id = "header">
     <th>Id</th>
     <th>Target</th>
@@ -72,10 +90,12 @@
     <th>Language</th>
     <th>Customer Set</th>
   </tr>
+  </thead>
+  <tbody id="myTable">
   @foreach (var actionItem in databaseService.GetActionItems()) {
-            @if (UserInput == "" || UserInput == null || actionItem.Target.Contains(UserInput) || actionItem.Id.Contains(UserInput) || actionItem.Country.Contains(UserInput))
+            @if (CurrentInput == "" || CurrentInput == null || actionItem.Target.Contains(CurrentInput) || actionItem.Id.Contains(CurrentInput) || actionItem.Country.Contains(CurrentInput))
             {
-                @if (Filter == "none" || actionItem.Status == Filter)
+                @if (CheckFilters(actionItem))
                 {
                     <tr id="row" @onclick="(e => SelectItem(actionItem.Id ?? string.Empty))" data-toggle="modal" data-target="#exampleModal">
                         <th>@actionItem.Id</th>
@@ -93,6 +113,7 @@
                 }
             }
         }
+</tbody>
 </table>
 </div>
 
@@ -108,16 +129,16 @@
         </button>
       </div>
       <div class="modal-body">
-          <p>Target: @selectedItem.Target</p>
-          <p>Status: @selectedItem.Status</p>
-          <p>Campaign: @selectedItem.Campaign</p>
-          <p>Expiry: @selectedItem.Expiry</p>
-          <p>When Created: @selectedItem.When_created</p>
-          <p>When Updated: @selectedItem.When_updated</p>
-          <p>Content: @selectedItem.Content</p>
-          <p>Country: @selectedItem.Country</p>
-          <p>Language: @selectedItem.Language</p>
-          <p>Customer Set: @selectedItem.CustomerSet</p>
+          <p><strong>Target:</strong> @selectedItem.Target</p>
+          <p><strong>Status:</strong> @selectedItem.Status</p>
+          <p><strong>Campaign:</strong> @selectedItem.Campaign</p>
+          <p><strong>Expiry:</strong> @selectedItem.Expiry</p>
+          <p><strong>When Created:</strong> @selectedItem.When_created</p>
+          <p><strong>When Updated:</strong> @selectedItem.When_updated</p>
+          <p><strong>Content:</strong> @selectedItem.Content</p>
+          <p><strong>Country:</strong> @selectedItem.Country</p>
+          <p><strong>Language:</strong> @selectedItem.Language</p>
+          <p><strong>Customer Set:</strong> @selectedItem.CustomerSet</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -131,9 +152,8 @@
 
     ActionItem? selectedItem;
     string? selectedItemId;
-    string CurrentInput;
-    string UserInput;
-    string Filter = "none";
+    string? CurrentInput;
+    public List<string> Filters = new List<string>();
 
     void SelectItem(string itemId)
     {
@@ -141,9 +161,50 @@
         selectedItem = databaseService.GetActionItems().First(x => x.Id == itemId);
     }
 
-    void GetInput()
+    bool CheckFilters(ActionItem actionItem)
     {
-        UserInput = CurrentInput;
+        int count = 0;
+        if (Filters.Contains(actionItem.Status))
+        {
+            count++;
+        }
+        if (Filters.Contains(actionItem.Campaign))
+        {
+            count++;
+        }
+        if (Filters.Contains(actionItem.Country))
+        {
+            count++;
+        }
+        if (Filters.Contains(actionItem.Language))
+        {
+            count++;
+        }
+        if (Filters.Contains(actionItem.CustomerSet))
+        {
+            count++;
+        }
+        if (count == Filters.Count())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void RemoveFilter(string Filter)
+    {
+        Filters.Remove(Filter);
+    }
+
+    void AddFilter(string Filter)
+    {
+        if (!Filters.Contains(Filter))
+        {
+            Filters.Add(Filter);
+        }
     }
 
     /**
