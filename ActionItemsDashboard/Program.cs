@@ -226,7 +226,7 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
                 }
             }
 
-            //Pull data from BatchFile table into list of Batch
+            //Pull data from BatchFile table into list of BatchFile
 
             //Declaration of a list of BatchFile objects, each element in this list representing a row in the table.
             List<BatchFile> batchfiles = new List<BatchFile>();
@@ -247,7 +247,7 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
                 }
             }
 
-            //Pull data from BatchForward table into list of Batch
+            //Pull data from BatchForward table into list of BatchForward
 
             //Declaration of a list of BatchForward objects, each element in this list representing a row in the table.
             List<BatchForward> batchforwards = new List<BatchForward>();
@@ -268,7 +268,7 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
                 }
             }
 
-            //Pull data from BatchForwardError table into list of Batch
+            //Pull data from BatchForwardError table into list of BatchForwardError
 
             //Declaration of a list of BatchForwardError objects, each element in this list representing a row in the table.
             List<BatchForwardError> batchforwarderrors = new List<BatchForwardError>();
@@ -289,7 +289,7 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
                 }
             }
 
-            //Pull data from ExternalID table into list of Batch
+            //Pull data from ExternalID table into list of ExternalID
 
             //Declaration of a list of ExternalID objects, each element in this list representing a row in the table.
             List<ExternalID> externalID = new List<ExternalID>();
