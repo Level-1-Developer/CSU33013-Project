@@ -101,24 +101,24 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             await using (var insertBatchForwardData = new NpgsqlCommand("INSERT INTO postgres.actionitemsdata.batchforwards VALUES ('00275822-788e-4f40-8da7-2d7f0ab12040', 1000, 'BatchDelivery', 'abandoned-cart', '2022-03-10 10:10:00', '2022-03-10 10:10:01', 355, 2, 'Forwarded')," +
                                                                                                                                   "('0057a4d5-022b-4351-a902-211e43140482', 1000, 'BatchDelivery', 'saved-cart', '2022-03-20 16:00:00', '2022-03-20 16:00:01', 34, 2, 'Forwarded')," +
                                                                                                                                   "('00596c4e-364f-407e-bbcf-af69273e2e81', 1000, 'BatchDelivery', 'saved-cart', '2022-02-01 17:00:00', '2022-02-01 17:00:01', 57, 2, 'Forwarded')," +
-                                                                                                                                  "('006055af-0f5d-4b46-a0d8-0fec96728cf91', 1000, 'BatchDelivery', 'saved-cart', '2022-03-07 06:00:00', '2022-03-07 06:00:01', 20, 2, 'Forwarded')," +
+                                                                                                                                  "('006055af-0f5d-4b46-a0d8-0fec96728cf9', 1000, 'BatchDelivery', 'saved-cart', '2022-03-07 06:00:00', '2022-03-07 06:00:01', 20, 2, 'Forwarded')," +
                                                                                                                                   "('0073a032-5d54-4c87-9e2a-9471abc3979b', 1000, 'BatchDelivery', 'abandoned-car', '2022-03-14 09:10:00', '2022-03-14 09:10:02', 307, 2, 'Forwarded')", conn))
              await insertBatchForwardData.ExecuteNonQueryAsync();
 
 
             //Inserting sample data into batch forward error table.
-            await using (var insertBatchForwardErrorData = new NpgsqlCommand("INSERT INTO postgres.actionitemsdata.batchforwarderrors VALUES ('00275822-788z-4f40-8da7-2d7f0ab1204', 'Forwarding Error', '00275822-788e-4f40-8da7-2d7f0ab12040')," +
-                                                                                                                                            "('0057a4d5-022z-4351-a902-211e43140482', 'Forwarding Error', '0057a4d5-022b-4351-a902-211e43140482')," +
-                                                                                                                                            "('00596c4e-364z-407e-bbcf-af69273e2e81', 'Forwarding Error', '00596c4e-364f-407e-bbcf-af69273e2e81')," +
-                                                                                                                                            "('006055af-0f5z-4b46-a0d8-0fec96728cf9', 'Forwarding Error', '006055af-0f5d-4b46-a0d8-0fec96728cf91')," +
-                                                                                                                                            "('0073a032-5d5z-4c87-9e2a-9471abc3979b', 'Forwarding Error', '0073a032-5d54-4c87-9e2a-9471abc3979b')", conn))
+            await using (var insertBatchForwardErrorData = new NpgsqlCommand("INSERT INTO postgres.actionitemsdata.batchforwarderrors VALUES ('00275822-788a-4f40-8da7-2d7f0ab12040', 'Forwarding Error', '00275822-788e-4f40-8da7-2d7f0ab12040')," +
+                                                                                                                                            "('0057a4d5-022a-4351-a902-211e43140482', 'Forwarding Error', '0057a4d5-022b-4351-a902-211e43140482')," +
+                                                                                                                                            "('00596c4e-364a-407e-bbcf-af69273e2e81', 'Forwarding Error', '00596c4e-364f-407e-bbcf-af69273e2e81')," +
+                                                                                                                                            "('006055af-0f5a-4b46-a0d8-0fec96728cf9', 'Forwarding Error', '006055af-0f5d-4b46-a0d8-0fec96728cf9')," +
+                                                                                                                                            "('0073a032-5d5a-4c87-9e2a-9471abc3979b', 'Forwarding Error', '0073a032-5d54-4c87-9e2a-9471abc3979b')", conn))
             await insertBatchForwardErrorData.ExecuteNonQueryAsync();
 
             //Inserting sample data into batch table.
             await using (var insertBatchData = new NpgsqlCommand("INSERT INTO postgres.actionitemsdata.batches VALUES ('000d2be7-aeb5-4909-98bb-c4fa755cfc49', '00275822-788e-4f40-8da7-2d7f0ab12040', 21, 'Dispatched', 'saved-cart', '2022-02-08 03:00:00')," +
                                                                                                                      "('00102b83-80ab-4b16-b03c-0211cfe92463', '0057a4d5-022b-4351-a902-211e43140482', 385, 'Dispatched', 'abandoned-cart', '2022-02-22 12:10:01')," +
                                                                                                                      "('003471bf-5071-430f-a9cf-9b9e9f05456e', '00596c4e-364f-407e-bbcf-af69273e2e81', 101, 'Dispatched', 'abandoned-cart', '2022-01-28 17:10:00')," +
-                                                                                                                     "('0036b880-9f97-42ef-adc4-c8e4d9760c57', '006055af-0f5d-4b46-a0d8-0fec96728cf91', 41, 'Dispatched', 'saved-cart', '2022-02-28 23:00:01')," +
+                                                                                                                     "('0036b880-9f97-42ef-adc4-c8e4d9760c57', '006055af-0f5d-4b46-a0d8-0fec96728cf9', 41, 'Dispatched', 'saved-cart', '2022-02-28 23:00:01')," +
                                                                                                                      "('0071d61f-81d0-4505-8a60-2d574d0ad51b', '0073a032-5d54-4c87-9e2a-9471abc3979b', 48, 'Dispatched', 'saved-cart', '2022-02-21 12:00:01')", conn))
             await insertBatchData.ExecuteNonQueryAsync();
 
@@ -153,11 +153,12 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             //6. Pull data from the postgres database.
 
             //Pull data from action items table into list of ActionItem
+
+            //Declaration of a list of ActionItem objects, each element in this list representing a row in the table.
+            List<ActionItem> actionItems = new List<ActionItem>();
             await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems", conn))
             await using (var reader = await cmd.ExecuteReaderAsync())
             {
-              //Declaration of a list of ActionItem objects, each element in this list representing a row in the table.
-              List<ActionItem> actionItems = new List<ActionItem>();
               while (await reader.ReadAsync())
               {
                  //Convert each row into an ActionItem object, and add it to our list.
@@ -183,11 +184,134 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             }
 
 
-            //Pull data from batch forward table into list of BatchForward and other remaining objects (TODO)
+            //Pull data from messages table into list of Message
+
+            //Declaration of a list of Message objects, each element in this list representing a row in the table.
+            List<Message> messages = new List<Message>();
+            await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.messages", conn))
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an ActionItem object, and add it to our list.
+                    messages.Add(new Message(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), int.Parse(reader[9].ToString()), reader[10].ToString()));
+                }
+
+                //Now that all the ActionItem objects have been added, we can print them out.
+                for (int i = 0; i < messages.Count; i++)
+                {
+                    Console.WriteLine("Message on row " + (i + 1) + " has:");
+                    Console.WriteLine("ID: " + messages[i].ID.ToString());
+                }
+            }
+
+            //Pull data from Batch table into list of Batch
+
+            //Declaration of a list of Batch objects, each element in this list representing a row in the table.
+            List<Batch> batches = new List<Batch>();
+            await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.batches", conn))
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an Batch object, and add it to our list.
+                    batches.Add(new Batch(reader[0].ToString(), reader[1].ToString(), int.Parse(reader[2].ToString()), reader[3].ToString(), reader[4].ToString(), reader[5].ToString()));
+                }
+
+                //Now that all the Batch objects have been added, we can print them out.
+                for (int i = 0; i < batches.Count; i++)
+                {
+                    Console.WriteLine("Batch on row " + (i + 1) + " has:");
+                    Console.WriteLine("ID: " + batches[i].ID.ToString());
+                }
+            }
+
+            //Pull data from BatchFile table into list of Batch
+
+            //Declaration of a list of BatchFile objects, each element in this list representing a row in the table.
+            List<BatchFile> batchfiles = new List<BatchFile>();
+            await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.batchfiles", conn))
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an BatchFile object, and add it to our list.
+                    batchfiles.Add(new BatchFile(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString()));
+                }
+
+                //Now that all the BatchFile objects have been added, we can print them out.
+                for (int i = 0; i < batchfiles.Count; i++)
+                {
+                    Console.WriteLine("BatchFile on row " + (i + 1) + " has:");
+                    Console.WriteLine("ID: " + batchfiles[i].ID.ToString());
+                }
+            }
+
+            //Pull data from BatchForward table into list of Batch
+
+            //Declaration of a list of BatchForward objects, each element in this list representing a row in the table.
+            List<BatchForward> batchforwards = new List<BatchForward>();
+            await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.batchforwards", conn))
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an BatchForward object, and add it to our list.
+                    batchforwards.Add(new BatchForward(reader[0].ToString(), int.Parse(reader[1].ToString()), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), int.Parse(reader[6].ToString()), int.Parse(reader[7].ToString()), reader[8].ToString()));
+                }
+
+                //Now that all the BatchForward objects have been added, we can print them out.
+                for (int i = 0; i < batchforwards.Count; i++)
+                {
+                    Console.WriteLine("BatchForward on row " + (i + 1) + " has:");
+                    Console.WriteLine("ID: " + batchforwards[i].ID.ToString());
+                }
+            }
+
+            //Pull data from BatchForwardError table into list of Batch
+
+            //Declaration of a list of BatchForwardError objects, each element in this list representing a row in the table.
+            List<BatchForwardError> batchforwarderrors = new List<BatchForwardError>();
+            await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.batchforwarderrors", conn))
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an BatchForwardError object, and add it to our list.
+                    batchforwarderrors.Add(new BatchForwardError(reader[0].ToString(), reader[1].ToString(), reader[2].ToString()));
+                }
+
+                //Now that all the BatchForwardError objects have been added, we can print them out.
+                for (int i = 0; i < batchforwarderrors.Count; i++)
+                {
+                    Console.WriteLine("BatchForwardError on row " + (i + 1) + " has:");
+                    Console.WriteLine("ID: " + batchforwarderrors[i].ID.ToString());
+                }
+            }
+
+            //Pull data from ExternalID table into list of Batch
+
+            //Declaration of a list of ExternalID objects, each element in this list representing a row in the table.
+            List<ExternalID> externalID = new List<ExternalID>();
+            await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.externalid", conn))
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an ExternalID object, and add it to our list.
+                    externalID.Add(new ExternalID(int.Parse(reader[0].ToString()), int.Parse(reader[1].ToString()), reader[2].ToString(), reader[3].ToString()));
+                }
+
+                //Now that all the ExternalID objects have been added, we can print them out.
+                for (int i = 0; i < externalID.Count; i++)
+                {
+                    Console.WriteLine("ExternalID on row " + (i + 1) + " has:");
+                    Console.WriteLine("ID: " + externalID[i].ID.ToString());
+                }
+            }
 
 
-
-            //7. Transfer list of ActionItem, list of BranchForward etc to the frontend (TODO)
+            //7. Transfer all lists to the frontend (TODO)
         }
     }
 
@@ -217,6 +341,130 @@ namespace ActionItemsDashboard // Note: actual namespace depends on the project 
             this.country = country;
             this.language = language;
             this.customerset = customerset;
+        }
+    }
+
+    class Message
+    {
+        public Guid ID;
+        public Guid batch_id;
+        public String subject;
+        public String body;
+        public String campaign;
+        public String delivery_method;
+        public DateTime created_at;
+        public DateTime sent_at;
+        public String status;
+        public int action_item_id;
+        public String target;
+        public Message(String ID, String batch_id, String subject, String body, String campaign, String delivery_method, String created_at, String sent_at, String status, int action_item_id, String target)
+        {
+            this.ID = Guid.Parse(ID);
+            this.batch_id = Guid.Parse(batch_id);
+            this.subject = subject;
+            this.body = body;
+            this.campaign = campaign;
+            this.delivery_method = delivery_method;
+            this.created_at = DateTime.Parse(created_at);
+            this.sent_at = DateTime.Parse(sent_at);
+            this.status = status;
+            this.action_item_id = action_item_id;
+            this.target = target;
+        }
+    }
+
+    class Batch
+    {
+        public Guid ID;
+        public Guid batch_forward_id;
+        public int size;
+        public String status;
+        public String campaign;
+        public DateTime dispatched_at;
+        public Batch(String ID, String batch_forward_id, int size, String status, String campaign, String dispatched_at)
+        {
+            this.ID = Guid.Parse(ID);
+            this.batch_forward_id = Guid.Parse(batch_forward_id);
+            this.size = size;
+            this.status = status;
+            this.campaign = campaign;
+            this.dispatched_at = DateTime.Parse(dispatched_at);
+        }
+    }
+
+    class BatchFile
+    {
+        public Guid ID;
+        public Guid batch_id;
+        public String file_name;
+        public String status;
+        public DateTime dispatched_at;
+        public String content;
+
+        public BatchFile(String ID, String batch_id, String file_name, String status, String dispatched_at, String content)
+        {
+            this.ID = Guid.Parse(ID);
+            this.batch_id = Guid.Parse(batch_id);
+            this.file_name = file_name;
+            this.status = status;
+            this.dispatched_at = DateTime.Parse(dispatched_at);
+            this.content = content;
+        }
+    }
+
+    class BatchForward
+    {
+        public Guid ID;
+        public int batch_size;
+        public String delivery_method;
+        public String campaign;
+        public DateTime started_at;
+        public DateTime completed_at;
+        public int total_processed_messages;
+        public int total_processed_batches;
+        public String forward_status;
+
+        public BatchForward(String ID, int batch_size, String delivery_method, String campaign, String started_at, String completed_at, int total_processed_messages, int total_processed_batches, String forward_status)
+        {
+            this.ID = Guid.Parse(ID);
+            this.batch_size = batch_size;
+            this.delivery_method = delivery_method;
+            this.campaign = campaign;
+            this.started_at = DateTime.Parse(started_at);
+            this.completed_at = DateTime.Parse(completed_at);
+            this.total_processed_messages = total_processed_messages;
+            this.total_processed_batches = total_processed_batches;
+            this.forward_status = forward_status;
+        }
+    }
+
+    class BatchForwardError
+    {
+        public Guid ID;
+        public String error;
+        public Guid batch_forward_id;
+
+        public BatchForwardError(String ID, String error, String batch_forward_id)
+        {
+            this.ID = Guid.Parse(ID);
+            this.error = error;
+            this.batch_forward_id = Guid.Parse(batch_forward_id);
+        }
+    }
+
+    class ExternalID
+    {
+        public int ID;
+        public int action_items_id;
+        public Guid external_id;
+        public DateTime created_at;
+
+        public ExternalID(int ID, int action_items_id, String external_id, String created_at)
+        {
+            this.ID = ID;
+            this.action_items_id = action_items_id;
+            this.external_id = Guid.Parse(external_id);
+            this.created_at = DateTime.Parse(created_at);
         }
     }
 }
