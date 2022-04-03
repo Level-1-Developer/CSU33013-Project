@@ -39,10 +39,9 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <li class="dropdown-header text-primary">Status</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("Forwarded"))">Forwarded</a>
-                          <li class="dropdown-header text-primary">Campaign</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("saved-cart"))">Saved Cart</a>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("abandoned-cart"))">Abandoned Cart</a>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("Dispatched"))">Dispatched</a>
+                          <li class="dropdown-header text-primary">Content</li>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("binary data"))">Binary Data</a>
                       </div>
                     </div>
                     <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
@@ -65,32 +64,26 @@
   <thead style="background-color: #007DB8; color: white;">
   <tr>
     <th>ID</th>
-    <th>Batch Size</th>
-    <th>Deleivery Method</th>
-    <th>Campaign</th>
-    <th>Started At</th>
-    <th>Completed At</th>
-    <th>Total Processed Messages</th>
-    <th>Total Processed Batches</th>
+    <th>Batch Forward ID</th>
+    <th>Size</th>
     <th>Status</th>
+    <th>Campaign</th>
+    <th>Dispatched At</th>
   </tr>
   </thead>
   <tbody>
-  @foreach (var batchForwards in databaseService.GetBatchForwards()) {
-            @if (CurrentInput == "" || CurrentInput == null || batchForwards.ID.ToString().Contains(CurrentInput))
+  @foreach (var item in databaseService.GetBatchFiles()) {
+            @if (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput))
             {
-                @if (CheckFilters(batchForwards))
+                @if (CheckFilters(item))
                 {
-                    <tr id="row" @onclick="(e => SelectItem(batchForwards.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                        <th>@batchForwards.ID</th>
-                        <th>@batchForwards.batch_size</th>
-                        <th>@batchForwards.delivery_method</th>
-                        <th>@batchForwards.campaign</th>
-                        <th>@batchForwards.started_at</th>
-                        <th>@batchForwards.completed_at</th>
-                        <th>@batchForwards.total_processed_messages</th>
-                        <th>@batchForwards.total_processed_batches</th>
-                        <th>@batchForwards.forward_status</th>
+                    <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                        <th>@item.ID</th>
+                        <th>@item.batch_id</th>
+                        <th>@item.file_name</th>
+                        <th>@item.status</th>
+                        <th>@item.dispatched_at</th>
+                        <th>@item.content</th>
                     </tr>
                 }
             }
@@ -102,7 +95,7 @@
 @if (@selectedItemId != null)
 {
     <!-- Modal -->
-    <BatchForwardDetails batchForwardID="@selectedItemId" />
+    <BatchFileDetails batchFileID="@selectedItemId" />
 }
 
 @code {
@@ -116,11 +109,11 @@
         selectedItemId = itemId;
     }
 
-    bool CheckFilters(BatchForward batchForward)
+    bool CheckFilters(BatchFile batchFile)
     {
         int count = 0;
-        if (Filters.Contains(batchForward.forward_status)) count++;
-        if (Filters.Contains(batchForward.campaign)) count++;
+        if (Filters.Contains(batchFile.status)) count++;
+        if (Filters.Contains(batchFile.content)) count++;
         if (count == Filters.Count())
         {
             return true;

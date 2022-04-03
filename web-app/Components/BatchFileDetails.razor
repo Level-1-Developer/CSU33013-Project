@@ -6,15 +6,15 @@
 
 @code {
     [Parameter]
-    public Guid batchID { get; set; }
+    public Guid batchFileID { get; set; }
 
-    public Batch? batch { get; set; }
+    public BatchFile? item { get; set; }
 
 }
 
-@{batch = databaseService.GetBatches().FirstOrDefault(x => x.ID == batchID);}
+@{item = databaseService.GetBatchFiles().FirstOrDefault(x => x.ID == batchFileID);}
 
-@if (@batch != null )
+@if (@item != null )
 {
 
 <!-- Modal -->
@@ -22,33 +22,33 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding-left:30px">
-        <h5 class="modal-title" id="exampleModalLabel">Batch ID: @batch.ID</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Batch File ID: @item.ID</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-right: 0px">
         </button>
       </div>
-      <div class="modal-body" style="padding:30px; padding-bottom:20px; padding-top:20px">
+      <div class="modal-body" style="padding:30px; padding-bottom:20px; padding-top:20px;">
           
           <table class="table" style="border-collapse:collapse; table-layout:fixed; border:solid 1px">
           <tbody>
               <tr>
-                <th>Batch Forward ID:</th>
-                <th>@batch.batch_forward_id</th>
+                <th>Batch ID:</th>
+                <th>@item.batch_id</th>
               </tr>
               <tr>
-                <th>Size:</th>
-                <th>@batch.size</th>
+                <th>File Name:</th>
+                <th style="word-wrap:break-word">@item.file_name</th>
               </tr>
               <tr>
                 <th>Status:</th>
-                <th>@batch.status</th>
-              </tr>
-              <tr>
-                <th>Campaign:</th>
-                <th>@batch.campaign</th>
+                <th>@item.status</th>
               </tr>
               <tr>
                 <th>Dispatched At:</th>
-                <th>@batch.dispatched_at</th>
+                <th>@item.dispatched_at</th>
+              </tr>
+              <tr>
+                <th>Content:</th>
+                <th>@item.content</th>
               </tr>
          </tbody>
          </table>
