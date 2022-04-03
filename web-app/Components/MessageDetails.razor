@@ -1,0 +1,88 @@
+﻿@using web_app.Models;
+@using web_app.Services;
+@using web_app.Components;
+@using Microsoft.AspNetCore.Components.Web;
+@inject DatabaseService databaseService;
+
+@code {
+    [Parameter]
+    public Guid messageID { get; set; }
+
+    public Message? message { get; set; }
+
+}
+
+@{message = databaseService.GetMessages().FirstOrDefault(x => x.ID == messageID);}
+
+@if (@message != null )
+{
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-left:30px">
+        <h5 class="modal-title" id="exampleModalLabel">Message ID: @message.ID</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-right: 0px">
+        </button>
+      </div>
+      <div class="modal-body" style="padding:30px; padding-bottom:20px; padding-top:20px">
+          
+          <table class="table">
+          <tbody>
+              <tr>
+                <th>Batch ID:</th>
+                <th>@message.batch_id</th>
+              </tr>
+              <tr>
+                <th>Subject:</th>
+                <th>@message.subject</th>
+              </tr>
+              <tr>
+                <th>Body:</th>
+                <th>@message.body</th>
+              </tr>
+              <tr>
+                <th>Campaign:</th>
+                <th>@message.campaign</th>
+              </tr>
+              <tr>
+                <th>Delivery Method:</th>
+                <th>@message.delivery_method</th>
+              </tr>
+              <tr>
+                <th>Created At:</th>
+                <th>@message.created_at</th>
+              </tr>
+              <tr>
+                <th>Sent At:</th>
+                <th>@message.sent_at</th>
+              </tr>
+              <tr>
+                <th>Status:</th>
+                <th>@message.status</th>
+              </tr>
+              <tr>
+                <th>Action Item ID:</th>
+                <th>@message.action_item_id</th>
+              </tr>
+              <tr>
+                <th>Target:</th>
+                <th>@message.target</th>
+              </tr>
+         </tbody>
+         </table>
+      </div>
+      <button type="button" class="btn btn-outline-danger btn-lg" style="margin: 28px; margin-top: 0px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+          </svg>
+          &nbsp;Batch
+      </button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+}

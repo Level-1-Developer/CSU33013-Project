@@ -1,0 +1,68 @@
+﻿@using web_app.Models;
+@using web_app.Services;
+@using web_app.Components;
+@using Microsoft.AspNetCore.Components.Web;
+@inject DatabaseService databaseService;
+
+@code {
+    [Parameter]
+    public Guid batchID { get; set; }
+
+    public Batch? batch { get; set; }
+
+}
+
+@{batch = databaseService.GetBatches().FirstOrDefault(x => x.ID == batchID);}
+
+@if (@batch != null )
+{
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-left:30px">
+        <h5 class="modal-title" id="exampleModalLabel">Batch ID: @batch.ID</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-right: 0px">
+        </button>
+      </div>
+      <div class="modal-body" style="padding:30px; padding-bottom:20px; padding-top:20px">
+          
+          <table class="table">
+          <tbody>
+              <tr>
+                <th>Batch Forward ID:</th>
+                <th>@batch.batch_forward_id</th>
+              </tr>
+              <tr>
+                <th>Size:</th>
+                <th>@batch.size</th>
+              </tr>
+              <tr>
+                <th>Status:</th>
+                <th>@batch.size</th>
+              </tr>
+              <tr>
+                <th>Campaign:</th>
+                <th>@batch.campaign</th>
+              </tr>
+              <tr>
+                <th>Dispatched At:</th>
+                <th>@batch.dispatched_at</th>
+              </tr>
+         </tbody>
+         </table>
+      </div>
+      <button type="button" class="btn btn-outline-danger btn-lg" style="margin: 28px; margin-top: 0px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+          </svg>
+          &nbsp;Batch File
+      </button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+}

@@ -1,0 +1,9 @@
+﻿@page
+@using web_app.Components
+@model web_app.Pages.MessagesModel
+@{
+}
+
+@(await Html.RenderComponentAsync<MessageList>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>

@@ -22,6 +22,7 @@ namespace web_app
             services.AddHttpClient();
             services.AddControllers();
             services.AddTransient<DatabaseService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

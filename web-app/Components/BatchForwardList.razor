@@ -39,23 +39,10 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <li class="dropdown-header text-primary">Status</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("converted"))">Converted</a>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("purchased"))">Purchased</a>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("Dispatched"))">Forwarded</a>
                           <li class="dropdown-header text-primary">Campaign</li>
                           <a class="dropdown-item" @onclick="@(e => AddFilter("saved-cart"))">Saved Cart</a>
                           <a class="dropdown-item" @onclick="@(e => AddFilter("abandoned-cart"))">Abandoned Cart</a>
-                          <li class="dropdown-header text-primary">Country</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("jp"))">Japan</a>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("us"))">US</a>
-                          <li class="dropdown-header text-primary">Language</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("ja"))">Japanese</a>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("en"))">English</a>
-                          <!--
-                          <li class="dropdown-header text-primary">Customer Set</li>
-                          <a class="dropdown-item" @onclick="@(e => Filter = "jpbsd1")">jpbsd1</a>
-                          <a class="dropdown-item" @onclick="@(e => Filter = "4")">4</a>
-                          <a class="dropdown-item" @onclick="@(e => Filter = "6099")">6099</a>
-                          -->
                       </div>
                     </div>
                     <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
@@ -78,36 +65,32 @@
   <thead style="background-color: #007DB8; color: white;">
   <tr>
     <th>ID</th>
-    <th>Target</th>
-    <th>Status</th>
+    <th>Batch Size</th>
+    <th>Deleivery Method</th>
     <th>Campaign</th>
-    <th>Expiry</th>
-    <th>When Created</th>
-    <th>When Updated</th>
-    <th>Content</th>
-    <th>Country</th>
-    <th>Language</th>
-    <th>Customer Set</th>
+    <th>Started At</th>
+    <th>Completed At</th>
+    <th>Total Processed Messages</th>
+    <th>Total Processed Batches</th>
+    <th>Status</th>
   </tr>
   </thead>
   <tbody>
-  @foreach (var actionItem in databaseService.GetActionItems()) {
-            @if (CurrentInput == "" || CurrentInput == null || actionItem.target.Contains(CurrentInput) || actionItem.ID.ToString().Contains(CurrentInput))
+  @foreach (var batchForwards in databaseService.GetBatchForwards()) {
+            @if (CurrentInput == "" || CurrentInput == null || batchForwards.ID.ToString().Contains(CurrentInput))
             {
-                @if (CheckFilters(actionItem))
+                @if (CheckFilters(batchForwards))
                 {
-                    <tr id="row" @onclick="(e => SelectItem(actionItem.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                        <th>@actionItem.ID</th>
-                        <th>@actionItem.target</th>
-                        <th>@actionItem.status</th>
-                        <th>@actionItem.campaign</th>
-                        <th>@actionItem.expiry</th>
-                        <th>@actionItem.when_created</th>
-                        <th>@actionItem.when_updated</th>
-                        <th>@actionItem.content</th>
-                        <th>@actionItem.country</th>
-                        <th>@actionItem.language</th>
-                        <th>@actionItem.customerset</th>
+                    <tr id="row" @onclick="(e => SelectItem(batchForwards.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                        <th>@batchForwards.ID</th>
+                        <th>@batchForwards.batch_size</th>
+                        <th>@batchForwards.delivery_method</th>
+                        <th>@batchForwards.campaign</th>
+                        <th>@batchForwards.started_at</th>
+                        <th>@batchForwards.completed_at</th>
+                        <th>@batchForwards.total_processed_messages</th>
+                        <th>@batchForwards.total_processed_batches</th>
+                        <th>@batchForwards.forward_status</th>
                     </tr>
                 }
             }
@@ -119,29 +102,25 @@
 @if (@selectedItemId != null)
 {
     <!-- Modal -->
-    <ActionItemDetails actionItemID="@selectedItemId" />
+    <BatchForwardDetails batchForwardID="@selectedItemId" />
 }
 
 @code {
 
-    ActionItem? selectedItem;
-    public string? selectedItemId;
+    public Guid selectedItemId;
     string? CurrentInput;
     public List<string> Filters = new List<string>();
 
-    void SelectItem(string itemId)
+    void SelectItem(Guid itemId)
     {
         selectedItemId = itemId;
     }
 
-    bool CheckFilters(ActionItem actionItem)
+    bool CheckFilters(BatchForward batchForward)
     {
         int count = 0;
-        if (Filters.Contains(actionItem.status)) count++;
-        if (Filters.Contains(actionItem.campaign)) count++;
-        if (Filters.Contains(actionItem.country)) count++;
-        if (Filters.Contains(actionItem.language)) count++;
-        if (Filters.Contains(actionItem.customerset)) count++;
+        if (Filters.Contains(batchForward.forward_status)) count++;
+        if (Filters.Contains(batchForward.campaign)) count++;
         if (count == Filters.Count())
         {
             return true;
@@ -164,15 +143,5 @@
             Filters.Add(Filter);
         }
     }
-
-    /**
-    string ConvertToString(string json)
-    {
-        JObject jObject = JObject.Parse(json);
-        JToken jCart = jObject["cart"];
-        string id = (string)jCart["id"];
-        return id;
-    }
-    */
 
 }

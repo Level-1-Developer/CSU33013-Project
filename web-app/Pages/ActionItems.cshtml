@@ -6,4 +6,12 @@
 
 @(await Html.RenderComponentAsync<ActionItemList>(RenderMode.ServerPrerendered))
 
+@{
+    if (Model.itemId != null)
+    {
+        string actionItemID = Model.itemId;
+        //await Html.RenderComponentAsync<Navigation>(RenderMode.ServerPrerendered, actionItemID);
+    }
+}
+
 <script src="_framework/blazor.server.js"></script>

@@ -39,23 +39,10 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <li class="dropdown-header text-primary">Status</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("converted"))">Converted</a>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("purchased"))">Purchased</a>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("Dispatched"))">Dispatched</a>
                           <li class="dropdown-header text-primary">Campaign</li>
                           <a class="dropdown-item" @onclick="@(e => AddFilter("saved-cart"))">Saved Cart</a>
                           <a class="dropdown-item" @onclick="@(e => AddFilter("abandoned-cart"))">Abandoned Cart</a>
-                          <li class="dropdown-header text-primary">Country</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("jp"))">Japan</a>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("us"))">US</a>
-                          <li class="dropdown-header text-primary">Language</li>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("ja"))">Japanese</a>
-                          <a class="dropdown-item" @onclick="@(e => AddFilter("en"))">English</a>
-                          <!--
-                          <li class="dropdown-header text-primary">Customer Set</li>
-                          <a class="dropdown-item" @onclick="@(e => Filter = "jpbsd1")">jpbsd1</a>
-                          <a class="dropdown-item" @onclick="@(e => Filter = "4")">4</a>
-                          <a class="dropdown-item" @onclick="@(e => Filter = "6099")">6099</a>
-                          -->
                       </div>
                     </div>
                     <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
@@ -78,36 +65,26 @@
   <thead style="background-color: #007DB8; color: white;">
   <tr>
     <th>ID</th>
-    <th>Target</th>
+    <th>Batch Forward ID</th>
+    <th>Size</th>
     <th>Status</th>
     <th>Campaign</th>
-    <th>Expiry</th>
-    <th>When Created</th>
-    <th>When Updated</th>
-    <th>Content</th>
-    <th>Country</th>
-    <th>Language</th>
-    <th>Customer Set</th>
+    <th>Dispatched At</th>
   </tr>
   </thead>
   <tbody>
-  @foreach (var actionItem in databaseService.GetActionItems()) {
-            @if (CurrentInput == "" || CurrentInput == null || actionItem.target.Contains(CurrentInput) || actionItem.ID.ToString().Contains(CurrentInput))
+  @foreach (var batch in databaseService.GetBatches()) {
+            @if (CurrentInput == "" || CurrentInput == null || batch.ID.ToString().Contains(CurrentInput))
             {
-                @if (CheckFilters(actionItem))
+                @if (CheckFilters(batch))
                 {
-                    <tr id="row" @onclick="(e => SelectItem(actionItem.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                        <th>@actionItem.ID</th>
-                        <th>@actionItem.target</th>
-                        <th>@actionItem.status</th>
-                        <th>@actionItem.campaign</th>
-                        <th>@actionItem.expiry</th>
-                        <th>@actionItem.when_created</th>
-                        <th>@actionItem.when_updated</th>
-                        <th>@actionItem.content</th>
-                        <th>@actionItem.country</th>
-                        <th>@actionItem.language</th>
-                        <th>@actionItem.customerset</th>
+                    <tr id="row" @onclick="(e => SelectItem(batch.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                        <th>@batch.ID</th>
+                        <th>@batch.batch_forward_id</th>
+                        <th>@batch.size</th>
+                        <th>@batch.status</th>
+                        <th>@batch.campaign</th>
+                        <th>@batch.dispatched_at</th>
                     </tr>
                 }
             }
@@ -119,29 +96,25 @@
 @if (@selectedItemId != null)
 {
     <!-- Modal -->
-    <ActionItemDetails actionItemID="@selectedItemId" />
+    <BatchDetails batchID="@selectedItemId" />
 }
 
 @code {
 
-    ActionItem? selectedItem;
-    public string? selectedItemId;
+    public Guid selectedItemId;
     string? CurrentInput;
     public List<string> Filters = new List<string>();
 
-    void SelectItem(string itemId)
+    void SelectItem(Guid itemId)
     {
         selectedItemId = itemId;
     }
 
-    bool CheckFilters(ActionItem actionItem)
+    bool CheckFilters(Batch batch)
     {
         int count = 0;
-        if (Filters.Contains(actionItem.status)) count++;
-        if (Filters.Contains(actionItem.campaign)) count++;
-        if (Filters.Contains(actionItem.country)) count++;
-        if (Filters.Contains(actionItem.language)) count++;
-        if (Filters.Contains(actionItem.customerset)) count++;
+        if (Filters.Contains(batch.status)) count++;
+        if (Filters.Contains(batch.campaign)) count++;
         if (count == Filters.Count())
         {
             return true;
@@ -164,15 +137,5 @@
             Filters.Add(Filter);
         }
     }
-
-    /**
-    string ConvertToString(string json)
-    {
-        JObject jObject = JObject.Parse(json);
-        JToken jCart = jObject["cart"];
-        string id = (string)jCart["id"];
-        return id;
-    }
-    */
 
 }
