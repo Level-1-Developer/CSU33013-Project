@@ -24,11 +24,20 @@ namespace web_app.Services
         public static List<BatchForward> finalBatchForwards = new List<BatchForward>();
         public static List<BatchForwardError> finalBatchForwardErrors = new List<BatchForwardError>();
         public static List<ExternalID> finalExternalID = new List<ExternalID>();
+        public static List<ActionItem> finalActionItemsInTimeRange = new List<ActionItem>();
+        public static Message messageLinkedWithActionItem;
+        public static Batch batchLinkedWithMessage;
+        public static BatchFile batchFileLinkedWithBatch;
 
         public DatabaseService(IWebHostEnvironment webHostEnvironment)
         {
             WebHostEnvironment = webHostEnvironment;
             Task.Run(async () => await getListOfObjects());
+            //Examples of running some new added functions (can be used for the frontend)
+            //Console.WriteLine(GetActionItemsInTimeRange("2022-01-24 06:00:30", "2022-01-24 06:00:50", "expiry").Count());
+            //Console.WriteLine(GetBatchFromMessage("00102b83-80ab-4b16-b03c-0211cfe92463").ID.ToString());
+            //Console.WriteLine(GetMessageFromActionItemID("17981494").ID.ToString());
+            //Console.WriteLine(GetBatchFileFromBatch("000d2be7-aeb5-4909-98bb-c4fa755cfc49").ID.ToString());
         }
 
         public IWebHostEnvironment WebHostEnvironment { get; }
@@ -61,6 +70,64 @@ namespace web_app.Services
         {
             return finalExternalID;
         }
+
+        public IEnumerable<ActionItem> GetActionItemsInTimeRange(String startDate, String endDate, String dateAttribute)
+        {
+            ActionItemsTimeRange(startDate, endDate, dateAttribute);
+            if (finalActionItemsInTimeRange != null)
+            {
+                Console.WriteLine("lol2");
+                return finalActionItemsInTimeRange;
+            }
+            else
+            {
+                Console.WriteLine("lol");
+                return new List<ActionItem>();
+            }
+        }
+
+        public Message GetMessageFromActionItemID(String actionItemID)
+        {
+            getMessageLinkedWithActionItem(actionItemID);
+            if (messageLinkedWithActionItem != null)
+            {
+                return messageLinkedWithActionItem;
+            }
+            else
+            {
+                return new Message("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "ERROR", "ERROR", "ERROR", "ERROR", "2022-01-24 06:04:19", "2022-01-24 06:04:29", "ERROR", 99999999, "ERROR");
+            }
+            
+        }
+
+        public Batch GetBatchFromMessage(String batchID)
+        {
+            getBatchLinkedWithMessage(batchID);
+            if (batchLinkedWithMessage != null)
+            {
+                return batchLinkedWithMessage;
+            }
+            else
+            {
+                return new Batch("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", 999999, "ERROR", "ERROR", "2022-01-24 06:04:19");
+            }
+
+        }
+
+        public BatchFile GetBatchFileFromBatch(String batchID)
+        {
+            getBatchFileLinkedWithBatch(batchID);
+            if (batchFileLinkedWithBatch != null)
+            {
+                return batchFileLinkedWithBatch;
+            }
+            else
+            {
+                return new BatchFile("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "ERROR", "ERROR", "2022-01-24 06:04:19", "ERROR");
+            }
+
+        }
+
 
         static async Task getListOfObjects()
         {
@@ -177,7 +244,7 @@ namespace web_app.Services
             }
         }
         
-        static async void ActionItemsTimeRange(string startDate, string endDate, string dateAttribute)
+        static async Task ActionItemsTimeRange(String startDate, String endDate, String dateAttribute)
     {
             //1. Load values from .env file to establish connection to postgres server running locally.
             new EnvLoader().Load();
@@ -185,26 +252,114 @@ namespace web_app.Services
             var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
             await using var conn = new NpgsqlConnection(connString);
             await conn.OpenAsync();
+            Console.WriteLine("'" + startDate + "'");
+            Console.WriteLine(endDate);
+            Console.WriteLine(dateAttribute);
+            String command = "SELECT * FROM actionitemsdata.actionitems WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
+            Console.WriteLine(command);
+            //SQL Query below only works with Parameters and empty parameters in {}. 
+            await using var cmd = new NpgsqlCommand(command, conn){Parameters ={}};
 
-            await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems WHERE @p1 BETWEEN @p2 AND @p3;", conn)
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of action items objects
+                List<ActionItem> actionItemsInTimeRange = new List<ActionItem>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an action item object and add to list
+                    actionItemsInTimeRange.Add(new ActionItem(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString()));
+                }
+                finalActionItemsInTimeRange = actionItemsInTimeRange;
+            }
+        }
+
+
+        static async Task getMessageLinkedWithActionItem(string actionItemID)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.messages WHERE action_item_id = (@p1);", conn)
             {
                 Parameters =
                 {
-                    new("p1", dateAttribute),
-                    new("p2", startDate),
-                    new("p3", endDate)
+                    new("p1", int.Parse(actionItemID))
                 }
             };
-        await using (var reader = await cmd.ExecuteReaderAsync()){
-                  //list of action items objects
-              List<ActionItem> actionItemsInTimeRange = new List<ActionItem>();
-              while (await reader.ReadAsync())
-              {
-                    //Convert each row into an action item object and add to list
-                    actionItemsInTimeRange.Add(new ActionItem(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString()));
-              }
-                finalActionItems = actionItemsInTimeRange;
+
+            Message messageReceived = new Message("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "ERROR", "ERROR", "ERROR", "ERROR", "2022-01-24 06:04:19", "2022-01-24 06:04:29", "ERROR", 99999999, "ERROR");
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    messageReceived = new Message(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), int.Parse(reader[9].ToString()), reader[10].ToString());
+                }
+
             }
-        }   
+            messageLinkedWithActionItem = messageReceived;
+        }
+
+
+        static async Task getBatchLinkedWithMessage(string batchID)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.batches WHERE ID = (@p1);", conn)
+            {
+                Parameters =
+                {
+                    new("p1", batchID)
+                }
+            };
+
+            Batch batchReceived = new Batch("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", 999999, "ERROR", "ERROR", "2022-01-24 06:04:19");
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    batchReceived = new Batch(reader[0].ToString(), reader[1].ToString(), int.Parse(reader[2].ToString()), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+                }
+
+            }
+            batchLinkedWithMessage = batchReceived;
+        }
+
+        static async Task getBatchFileLinkedWithBatch(string batchID)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.batchfiles WHERE batch_id = (@p1);", conn)
+            {
+                Parameters =
+                {
+                    new("p1", batchID)
+                }
+            };
+
+            BatchFile batchFileReceived = new BatchFile("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "ERROR", "ERROR", "2022-01-24 06:04:19", "ERROR");
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    batchFileReceived = new BatchFile(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString());
+                }
+
+            }
+            batchFileLinkedWithBatch = batchFileReceived;
+        }
     }
 }
