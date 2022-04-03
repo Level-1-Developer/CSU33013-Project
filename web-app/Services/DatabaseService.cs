@@ -176,5 +176,28 @@ namespace web_app.Services
                 finalExternalID = externalID;
             }
         }
+        
+        static async void ActionItemsTimeRange(string startDate, string endDate, string dateAttribute)
+    {
+        await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems WHERE @p1 BETWEEN @p2 AND @p3;", conn)
+            {
+                Parameters =
+                {
+                    new("p1", dateAttribute),
+                    new("p2", startDate),
+                    new("p3", endDate)
+                }
+            };
+        await using (var reader = await cmd.ExecuteReaderAsync()){
+                  //list of action items objects
+              List<Actionitem> actionItems = new List<Actionitem>();
+              while (await reader.ReadAsync())
+              {
+                 //Convert each row into an action item object and add to list
+                 actionItems.Add(new Actionitem(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString()));
+              }
+
+            }
+        }   
     }
 }
