@@ -179,7 +179,14 @@ namespace web_app.Services
         
         static async void ActionItemsTimeRange(string startDate, string endDate, string dateAttribute)
     {
-        await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems WHERE @p1 BETWEEN @p2 AND @p3;", conn)
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems WHERE @p1 BETWEEN @p2 AND @p3;", conn)
             {
                 Parameters =
                 {
@@ -190,13 +197,13 @@ namespace web_app.Services
             };
         await using (var reader = await cmd.ExecuteReaderAsync()){
                   //list of action items objects
-              List<Actionitem> actionItems = new List<Actionitem>();
+              List<ActionItem> actionItemsInTimeRange = new List<ActionItem>();
               while (await reader.ReadAsync())
               {
-                 //Convert each row into an action item object and add to list
-                 actionItems.Add(new Actionitem(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString()));
+                    //Convert each row into an action item object and add to list
+                    actionItemsInTimeRange.Add(new ActionItem(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString()));
               }
-
+                finalActionItems = actionItemsInTimeRange;
             }
         }   
     }
