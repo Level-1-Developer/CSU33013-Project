@@ -50,7 +50,23 @@ table {
     margin-right: 0.5rem;
 }
 
+.dropdown {
+    margin-right: 20px;
+}
+
 .dropdown-item {
     cursor: pointer;
 }
 
+.input-group {
+    width: auto;
+    margin-right: 10px;
+}
+
+.alert {
+    margin: 0px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
