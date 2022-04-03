@@ -1,0 +1,50 @@
+﻿@using web_app.Models;
+@using web_app.Services;
+@using web_app.Components;
+@using Microsoft.AspNetCore.Components.Web;
+@inject DatabaseService databaseService;
+
+@code {
+    [Parameter]
+    public Guid itemID { get; set; }
+
+    public BatchForwardError? item { get; set; }
+
+}
+
+@{item = databaseService.GetBatchForwardErrors().FirstOrDefault(x => x.ID == itemID);}
+
+@if (@item != null )
+{
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-left:30px">
+        <h5 class="modal-title" id="exampleModalLabel">Batch Forward Error ID: @item.ID</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-right: 0px">
+        </button>
+      </div>
+      <div class="modal-body" style="padding:30px; padding-bottom:20px; padding-top:20px">
+          
+          <table class="table" style="border-collapse:collapse; table-layout:fixed; border:solid 1px">
+          <tbody>
+              <tr>
+                <th>Error Type:</th>
+                <th>@item.error</th>
+              </tr>
+              <tr>
+                <th>Batch Forward ID:</th>
+                <th>@item.batch_forward_id</th>
+              </tr>
+         </tbody>
+         </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+}

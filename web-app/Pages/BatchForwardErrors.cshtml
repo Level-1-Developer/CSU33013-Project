@@ -1,0 +1,9 @@
+﻿@page
+@using web_app.Components
+@model web_app.Pages.BatchForwardErrorsModel
+@{
+}
+
+@(await Html.RenderComponentAsync<BatchForwardErrorList>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>

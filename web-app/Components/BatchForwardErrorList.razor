@@ -1,0 +1,162 @@
+﻿@using web_app.Models;
+@using web_app.Services
+@using web_app.Components
+@using Microsoft.AspNetCore.Components.Web
+@using System.Text.Json;
+@inject DatabaseService databaseService
+
+
+<style>
+.container-fluid>.navbar-header {
+  float: left;
+  margin-right: 10px;
+}
+.navbar .navbar-nav {
+  float: left;
+}
+.nav>li {
+  float: left;
+}
+.dropdown {
+    margin-right: 10px;
+}
+.alert {
+    margin: 0px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+</style>
+
+<header>
+        <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto; padding-top: 10px; padding-left: 5px">
+            <div class="container-fluid">
+                <div class="d-sm-inline-flex justify-content-between">
+                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filters
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <li class="dropdown-header text-primary">Error Type</li>
+                          <a class="dropdown-item" @onclick="@(e => AddFilter("Forwarding Error"))">Forwarding Error</a>
+                      </div>
+                    </div>
+                    <!-- Date Picker -->
+                    <div class="input-group" style="width:auto">
+                      <span class="input-group-text btn-dark" id="basic-addon1">Start Date</span>
+                      <input @bind="StartDate" class="form-control" type="datetime-local" id="datepicker">
+                    </div>
+                    <div class="input-group" style="width:auto">
+                      <span class="input-group-text btn-dark" id="basic-addon1">End Date</span>
+                      <input @bind="EndDate" class="form-control" type="datetime-local" id="datepicker">
+                    </div>
+                    <button @onclick="@ResetDate" type="button" class="btn btn-primary" style="margin-right: 10px">Clear Date</button>
+                    
+                @foreach (var Filter in Filters)
+                {
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="width: auto; padding-right:45px; margin-right: 10px">
+                        @Filter
+                        <button @onclick="(e => RemoveFilter(Filter))" type="button" class="btn-close" data-dismiss="alert" aria-label="Close" style="height: 4px; padding: 16px; padding-left: 5px">
+                        </button>
+                    </div>
+                }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<div>
+<table class="table table-hover table-bordered">
+  <thead style="background-color: #007DB8; color: white;">
+  <tr>
+    <th>ID</th>
+    <th>Error</th>
+    <th>Batch Forward ID</th>
+  </tr>
+  </thead>
+  <tbody>
+  @if (StartDate == null && EndDate == null)
+  {
+      @foreach (var item in databaseService.GetBatchForwardErrors()) {
+          @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput)))
+          {
+                  <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                      <th>@item.ID</th>
+                      <th>@item.error</th>
+                      <th>@item.batch_forward_id</th>
+                  </tr>
+          }
+      }
+
+  }
+  else {
+      @foreach (var item in databaseService.GetBatchForwardErrorsInTimeRange(StartDate, EndDate, "dispatched_at")) {
+          @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput)))
+          {
+                  <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                      <th>@item.ID</th>
+                      <th>@item.error</th>
+                      <th>@item.batch_forward_id</th>
+                  </tr>
+          }
+      }
+  }
+</tbody>
+</table>
+</div>
+
+@if (@selectedItemId != null)
+{
+    <!-- Modal -->
+    <BatchForwardErrorDetails itemID="@selectedItemId" />
+}
+
+@code {
+
+    public Guid selectedItemId;
+    string? CurrentInput;
+    public List<string> Filters = new List<string>();
+    DateTime? StartDate;
+    DateTime? EndDate;
+
+    void SelectItem(Guid itemId)
+    {
+        selectedItemId = itemId;
+    }
+
+    bool CheckFilters(BatchForwardError item)
+    {
+        int count = 0;
+        if (Filters.Contains(item.error)) count++;
+        if (count == Filters.Count())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void RemoveFilter(string Filter)
+    {
+        Filters.Remove(Filter);
+    }
+
+    void AddFilter(string Filter)
+    {
+        if (!Filters.Contains(Filter))
+        {
+            Filters.Add(Filter);
+        }
+    }
+
+    void ResetDate()
+    {
+        StartDate = null;
+        EndDate = null;
+    }
+
+}
