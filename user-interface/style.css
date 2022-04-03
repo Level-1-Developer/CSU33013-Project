@@ -1,7 +1,7 @@
 /*
 author: Eimear Ryan
  */
-* {
+ * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -257,53 +257,23 @@ ul li a i{
 }
 
 .gen-totals {
-    margin-top: 4rem;
-    display: flex;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-
-.gen-total1{
     background-color: #e7e7e7;
     padding: 1rem;
-    height: 90%;
-    width: 100%;
-    margin-right: 2rem;
+    height: 25rem;
+    width: 100rem;
+    margin: 2rem;
     box-shadow: 1rem 1rem 0.5rem lightblue;
     border: 0.1rem solid #969393;
-
-}
-.gen-total2{
-    background-color: #e7e7e7;
-    padding: 1rem;
-    height: 90%;
-    width: 100%;
-    margin-right: 2rem;
-    box-shadow: 1rem 1rem 0.5rem lightblue;
-    border: 0.1rem solid #969393;
-
-}
-.gen-total3{
-    background-color: #e7e7e7;
-    padding: 1rem;
-    height: 90%;
-    width: 100%;
-    box-shadow: 1rem 1rem 0.5rem lightblue;
-    border: 0.1rem solid #969393;
-
-}
-
-.graph-box{
-    display: flex;
     text-align: center;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-    height: 55%;
-    background-color: white;
-    font-size: 1rem;
+
 }
+
+.gen-totals .chart-box{
+    margin-top: 1rem;
+    height: 90%;
+    width: 100%;
+    background-color: white;
+}
+
 
 

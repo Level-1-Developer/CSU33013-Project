@@ -48,34 +48,35 @@
 
                 <div class="general">
                     <div class="gen-totals">
-                        <div class="gen-total1">
-                            <h2>Messages Sent</h2>
-                            <p>120</p>
-                            <p>% increase</p>
-                            <div class="graph-box">(total messages over time graph)</div>
+                        <h2>Processed Messages</h2>
+                        <div class="chart-box">
+                            <canvas id="msgsChart"></canvas></br>
+                            Start: <input id="start1" type="date" value=getTodaysDate()></br>
+                            End: <input id="end1" type="date" value=getTodaysDate()></br>
+                            <button onclick="filterDate1()">Filter</button>
+                            <button onClick="resetDate1()">Reset</button>
                         </div>
-                        <div class="gen-total2">
-                            <h2>Customer Returns</h2>
-                            <p>67</p>
-                            <p>% increase</p>
-                            <div class="graph-box">(total customer returns over time graph)</div>
-                        </div>
-                        <div class="gen-total3">
-                            <h2>Purchases Made</h2>
-                            <p>45</p>
-                            <p>% increase</p>
-                            <div class="graph-box">(total purchases made over time graph)</div>
-                        </div>
-
                     </div>
 
+                    <div class="gen-totals">
+                        <h2>Action Items Status</h2>
+                        <div class="chart-box"></div>
+                    </div>
+
+                    <div class="gen-totals">
+                        <h2>Batches Sent</h2>
+                        <div class="chart-box"></div>
+                    </div>
+
+                    </div>
                 </div>
-
             </div>
-        </div>
-
     </header>
 
-<script src="navMenu.js"></script>
+    <script src="navMenu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="BatchForwardsElements.js"></script>
+    <script src="bar-chart.js"></script>
 </body>
 </html>
