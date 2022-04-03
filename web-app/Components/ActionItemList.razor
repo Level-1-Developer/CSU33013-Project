@@ -93,33 +93,51 @@
   </tr>
   </thead>
   <tbody>
-      <!-- Populate Table with Data from Database -->
+  <!-- Populate Table with Data from Database -->
+  @if (StartDate == null && EndDate == null)
+  {
       @foreach (var item in databaseService.GetActionItems())
       {
-                @if (@checkDateRange(item.when_created))
-                {
-                    @if (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput))
-                    {
-                        @if (CheckFilters(item))
-                        {
-                            <tr id="row" @onclick="(e => SelectItem(item.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                                <th>@item.ID</th>
-                                <th>@item.target</th>
-                                <th>@item.status</th>
-                                <th>@item.campaign</th>
-                                <th>@item.expiry</th>
-                                <th>@item.when_created</th>
-                                <th>@item.when_updated</th>
-                                <th>@item.content</th>
-                                <th>@item.country</th>
-                                <th>@item.language</th>
-                                <th>@item.customerset</th>
-                            </tr>
-                        }
-                    }
-                }
+          @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput)))
+          {
+                <tr id="row" @onclick="(e => SelectItem(item.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                    <th>@item.ID</th>
+                    <th>@item.target</th>
+                    <th>@item.status</th>
+                    <th>@item.campaign</th>
+                    <th>@item.expiry</th>
+                    <th>@item.when_created</th>
+                    <th>@item.when_updated</th>
+                    <th>@item.content</th>
+                    <th>@item.country</th>
+                    <th>@item.language</th>
+                    <th>@item.customerset</th>
+                </tr>
+          }
       }
-</tbody>
+  }
+  else { <!-- Filter within date range -->
+      @foreach (var item in databaseService.GetActionItemsInTimeRange(StartDate, EndDate, "when_created"))
+      {
+          @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput)))
+          {
+                <tr id="row" @onclick="(e => SelectItem(item.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                    <th>@item.ID</th>
+                    <th>@item.target</th>
+                    <th>@item.status</th>
+                    <th>@item.campaign</th>
+                    <th>@item.expiry</th>
+                    <th>@item.when_created</th>
+                    <th>@item.when_updated</th>
+                    <th>@item.content</th>
+                    <th>@item.country</th>
+                    <th>@item.language</th>
+                    <th>@item.customerset</th>
+                </tr>
+          }
+      }
+  }
+        </tbody>
 </table>
 </div>
 
@@ -178,18 +196,6 @@
     {
         StartDate = null;
         EndDate = null;
-    }
-
-    bool checkDateRange(DateTime itemDate)
-    {
-        if (StartDate == null && EndDate == null) return true;
-        else if (StartDate == null && itemDate <= EndDate) return true;
-        else if (EndDate == null && itemDate >= StartDate) return true;
-        else if (itemDate >= StartDate && itemDate <= EndDate) return true;
-        else
-        {
-            return false;
-        }
     }
 
 }

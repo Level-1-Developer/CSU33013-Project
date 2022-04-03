@@ -81,25 +81,36 @@
   </thead>
   <tbody>
   <!-- Populate Table with Data from Database -->
-  @foreach (var item in databaseService.GetBatchFiles()) {
-      @if (@checkDateRange(item.dispatched_at))
-      {
-            @if (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput))
+  @if (StartDate == null && EndDate == null) {
+      @foreach (var item in databaseService.GetBatchFiles()) {
+            @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput)))
             {
-                @if (CheckFilters(item))
-                {
-                    <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                        <th>@item.ID</th>
-                        <th>@item.batch_id</th>
-                        <th>@item.file_name</th>
-                        <th>@item.status</th>
-                        <th>@item.dispatched_at</th>
-                        <th>@item.content</th>
-                    </tr>
-                }
+                <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                    <th>@item.ID</th>
+                    <th>@item.batch_id</th>
+                    <th>@item.file_name</th>
+                    <th>@item.status</th>
+                    <th>@item.dispatched_at</th>
+                    <th>@item.content</th>
+                </tr>
             }
-        }
-    }
+      }
+  }
+  else {
+      @foreach (var item in databaseService.GetBatchFiles()) {
+            @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput)))
+            {
+                <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                    <th>@item.ID</th>
+                    <th>@item.batch_id</th>
+                    <th>@item.file_name</th>
+                    <th>@item.status</th>
+                    <th>@item.dispatched_at</th>
+                    <th>@item.content</th>
+                </tr>
+            }
+      }
+  }
 </tbody>
 </table>
 </div>

@@ -71,9 +71,12 @@ namespace web_app.Services
             return finalExternalID;
         }
 
-        public IEnumerable<ActionItem> GetActionItemsInTimeRange(String startDate, String endDate, String dateAttribute)
+        public IEnumerable<ActionItem> GetActionItemsInTimeRange(DateTime? startDate, DateTime? endDate, String dateAttribute)
         {
-            ActionItemsTimeRange(startDate, endDate, dateAttribute);
+            if (startDate == null) startDate = new DateTime(1980, 1, 1); // must pass date into function so it passes in this random date
+            if (endDate == null) endDate = DateTime.Now;
+
+            ActionItemsTimeRange(startDate.ToString(), endDate.ToString(), dateAttribute);
             if (finalActionItemsInTimeRange != null)
             {
                 return finalActionItemsInTimeRange;
