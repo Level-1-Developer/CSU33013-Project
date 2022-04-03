@@ -25,6 +25,13 @@ namespace web_app.Services
         public static List<BatchForwardError> finalBatchForwardErrors = new List<BatchForwardError>();
         public static List<ExternalID> finalExternalID = new List<ExternalID>();
         public static List<ActionItem> finalActionItemsInTimeRange = new List<ActionItem>();
+        public static List<Message> finalMessagesInTimeRange = new List<Message>();
+        public static List<Batch> finalBatchesInTimeRange = new List<Batch>();
+        public static List<BatchFile> finalBatchFilesInTimeRange = new List<BatchFile>();
+        public static List<BatchForward> finalBatchForwardsInTimeRange = new List<BatchForward>();
+        public static List<BatchForwardError> finalBatchForwardErrorsInTimeRange = new List<BatchForwardError>();
+        public static List<ExternalID> finalExternalIDInTimeRange = new List<ExternalID>();
+
         public static Message messageLinkedWithActionItem;
         public static Batch batchLinkedWithMessage;
         public static BatchFile batchFileLinkedWithBatch;
@@ -87,6 +94,86 @@ namespace web_app.Services
             }
         }
 
+        public IEnumerable<Message> GetMessagesInTimeRange(DateTime? startDate, DateTime? endDate, String dateAttribute)
+        {
+            if (startDate == null) startDate = new DateTime(1980, 1, 1); // must pass date into function so it passes in this random date
+            if (endDate == null) endDate = DateTime.Now;
+
+            MessagesTimeRange(startDate.ToString(), endDate.ToString(), dateAttribute);
+            if (finalActionItemsInTimeRange != null)
+            {
+                return finalMessagesInTimeRange;
+            }
+            else
+            {
+                return new List<Message>();
+            }
+        }
+
+        public IEnumerable<Batch> GetBatchesInTimeRange(DateTime? startDate, DateTime? endDate, String dateAttribute)
+        {
+            if (startDate == null) startDate = new DateTime(1980, 1, 1); // must pass date into function so it passes in this random date
+            if (endDate == null) endDate = DateTime.Now;
+
+            BatchesTimeRange(startDate.ToString(), endDate.ToString(), dateAttribute);
+            if (finalActionItemsInTimeRange != null)
+            {
+                return finalBatchesInTimeRange;
+            }
+            else
+            {
+                return new List<Batch>();
+            }
+        }
+
+        public IEnumerable<BatchFile> GetBatchFileInTimeRange(DateTime? startDate, DateTime? endDate, String dateAttribute)
+        {
+            if (startDate == null) startDate = new DateTime(1980, 1, 1); // must pass date into function so it passes in this random date
+            if (endDate == null) endDate = DateTime.Now;
+
+            BatchFilesTimeRange(startDate.ToString(), endDate.ToString(), dateAttribute);
+            if (finalBatchFilesInTimeRange != null)
+            {
+                return finalBatchFilesInTimeRange;
+            }
+            else
+            {
+                return new List<BatchFile>();
+            }
+        }
+
+        public IEnumerable<BatchForward> GetBatchForwardInTimeRange(DateTime? startDate, DateTime? endDate, String dateAttribute)
+        {
+            if (startDate == null) startDate = new DateTime(1980, 1, 1); // must pass date into function so it passes in this random date
+            if (endDate == null) endDate = DateTime.Now;
+
+            BatchForwardTimeRange(startDate.ToString(), endDate.ToString(), dateAttribute);
+            if (finalBatchForwardsInTimeRange != null)
+            {
+                return finalBatchForwardsInTimeRange;
+            }
+            else
+            {
+                return new List<BatchForward>();
+            }
+        }
+
+        public IEnumerable<BatchForwardError> GetBatchForwardErrorsInTimeRange(DateTime? startDate, DateTime? endDate, String dateAttribute)
+        {
+            if (startDate == null) startDate = new DateTime(1980, 1, 1); // must pass date into function so it passes in this random date
+            if (endDate == null) endDate = DateTime.Now;
+
+            BatchForwardErrorTimeRange(startDate.ToString(), endDate.ToString(), dateAttribute);
+            if (finalBatchForwardErrorsInTimeRange != null)
+            {
+                return finalBatchForwardErrorsInTimeRange;
+            }
+            else
+            {
+                return new List<BatchForwardError>();
+            }
+        }
+
         public Message GetMessageFromActionItemID(String actionItemID)
         {
             getMessageLinkedWithActionItem(actionItemID);
@@ -98,7 +185,7 @@ namespace web_app.Services
             {
                 return new Message("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF", "ERROR", "ERROR", "ERROR", "ERROR", "2022-01-24 06:04:19", "2022-01-24 06:04:29", "ERROR", 99999999, "ERROR");
             }
-            
+
         }
 
         public Batch GetBatchFromMessage(String batchID)
@@ -138,8 +225,8 @@ namespace web_app.Services
             var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
             await using var conn = new NpgsqlConnection(connString);
             await conn.OpenAsync();
-            
-    
+
+
             //2. Declaration of a list of ActionItem objects, each element in this list representing a row in the table.
             List<ActionItem> actionItems = new List<ActionItem>();
             await using (var cmd = new NpgsqlCommand("SELECT * FROM actionitemsdata.actionitems", conn))
@@ -244,9 +331,9 @@ namespace web_app.Services
                 finalExternalID = externalID;
             }
         }
-        
+
         static async Task ActionItemsTimeRange(String startDate, String endDate, String dateAttribute)
-    {
+        {
             //1. Load values from .env file to establish connection to postgres server running locally.
             new EnvLoader().Load();
             var envReader = new EnvReader();
@@ -255,7 +342,7 @@ namespace web_app.Services
             await conn.OpenAsync();
             String command = "SELECT * FROM actionitemsdata.actionitems WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
             //SQL Query below only works with Parameters and empty parameters in {}. 
-            await using var cmd = new NpgsqlCommand(command, conn){Parameters ={}};
+            await using var cmd = new NpgsqlCommand(command, conn) { Parameters = { } };
 
             await using (var reader = await cmd.ExecuteReaderAsync())
             {
@@ -269,6 +356,158 @@ namespace web_app.Services
                 finalActionItemsInTimeRange = actionItemsInTimeRange;
             }
         }
+
+        static async Task MessagesTimeRange(String startDate, String endDate, String dateAttribute)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+            String command = "SELECT * FROM actionitemsdata.messages WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
+            //SQL Query below only works with Parameters and empty parameters in {}. 
+            await using var cmd = new NpgsqlCommand(command, conn) { Parameters = { } };
+
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of action items objects
+                List<Message> messagesInTimeRange = new List<Message>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an action item object and add to list
+                    messagesInTimeRange.Add(new Message(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), int.Parse(reader[9].ToString()), reader[10].ToString()));
+                }
+                finalMessagesInTimeRange = messagesInTimeRange;
+            }
+        }
+
+        static async Task BatchesTimeRange(String startDate, String endDate, String dateAttribute)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+            String command = "SELECT * FROM actionitemsdata.batches WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
+            //SQL Query below only works with Parameters and empty parameters in {}. 
+            await using var cmd = new NpgsqlCommand(command, conn) { Parameters = { } };
+
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of action items objects
+                List<Batch> batchesInTimeRange = new List<Batch>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an action item object and add to list
+                    batchesInTimeRange.Add(new Batch(reader[0].ToString(), reader[1].ToString(), int.Parse(reader[2].ToString()), reader[3].ToString(), reader[4].ToString(), reader[5].ToString()));
+                }
+                finalBatchesInTimeRange = batchesInTimeRange;
+            }
+        }
+
+        static async Task BatchFilesTimeRange(String startDate, String endDate, String dateAttribute)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+            String command = "SELECT * FROM actionitemsdata.batchfiles WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
+            //SQL Query below only works with Parameters and empty parameters in {}. 
+            await using var cmd = new NpgsqlCommand(command, conn) { Parameters = { } };
+
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of action items objects
+                List<BatchFile> batchFilesInTimeRange = new List<BatchFile>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an action item object and add to list
+                    batchFilesInTimeRange.Add(new BatchFile(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString()));
+                }
+                finalBatchFilesInTimeRange = batchFilesInTimeRange;
+            }
+        }
+
+        static async Task BatchForwardTimeRange(String startDate, String endDate, String dateAttribute)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+            String command = "SELECT * FROM actionitemsdata.batchforwards WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
+            //SQL Query below only works with Parameters and empty parameters in {}. 
+            await using var cmd = new NpgsqlCommand(command, conn) { Parameters = { } };
+
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of action items objects
+                List<BatchForward> batchForwardInTimeRange = new List<BatchForward>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an action item object and add to list
+                    batchForwardInTimeRange.Add(new BatchForward(reader[0].ToString(), int.Parse(reader[1].ToString()), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), int.Parse(reader[6].ToString()), int.Parse(reader[7].ToString()), reader[8].ToString()));
+                }
+                finalBatchForwardsInTimeRange = batchForwardInTimeRange;
+            }
+        }
+
+        static async Task BatchForwardErrorTimeRange(String startDate, String endDate, String dateAttribute)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+            String command = "SELECT * FROM actionitemsdata.batchforwarderrors WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
+            //SQL Query below only works with Parameters and empty parameters in {}. 
+            await using var cmd = new NpgsqlCommand(command, conn) { Parameters = { } };
+
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of action items objects
+                List<BatchForwardError> batchForwardErrorInTimeRange = new List<BatchForwardError>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an action item object and add to list
+                    batchForwardErrorInTimeRange.Add(new BatchForwardError(reader[0].ToString(), reader[1].ToString(), reader[2].ToString()));
+                }
+                finalBatchForwardErrorsInTimeRange = batchForwardErrorInTimeRange;
+            }
+        }
+
+        static async Task ExternalIDTimeRange(String startDate, String endDate, String dateAttribute)
+        {
+            //1. Load values from .env file to establish connection to postgres server running locally.
+            new EnvLoader().Load();
+            var envReader = new EnvReader();
+            var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
+            await using var conn = new NpgsqlConnection(connString);
+            await conn.OpenAsync();
+            String command = "SELECT * FROM actionitemsdata.externalid WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
+            //SQL Query below only works with Parameters and empty parameters in {}. 
+            await using var cmd = new NpgsqlCommand(command, conn) { Parameters = { } };
+
+            await using (var reader = await cmd.ExecuteReaderAsync())
+            {
+                //list of action items objects
+                List<ExternalID> externalIDInTimeRange = new List<ExternalID>();
+                while (await reader.ReadAsync())
+                {
+                    //Convert each row into an action item object and add to list
+                    externalIDInTimeRange.Add(new ExternalID(int.Parse(reader[0].ToString()), int.Parse(reader[1].ToString()), reader[2].ToString(), reader[3].ToString()));
+                }
+                finalExternalIDInTimeRange = externalIDInTimeRange;
+            }
+        }
+
+
 
 
         static async Task getMessageLinkedWithActionItem(string actionItemID)
