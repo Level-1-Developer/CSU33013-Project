@@ -76,12 +76,10 @@ namespace web_app.Services
             ActionItemsTimeRange(startDate, endDate, dateAttribute);
             if (finalActionItemsInTimeRange != null)
             {
-                Console.WriteLine("lol2");
                 return finalActionItemsInTimeRange;
             }
             else
             {
-                Console.WriteLine("lol");
                 return new List<ActionItem>();
             }
         }
@@ -252,11 +250,7 @@ namespace web_app.Services
             var connString = "Host=" + envReader["HOST"] + ";Username=" + envReader["NAME"] + ";Password=" + envReader["PASSWORD"] + "; Database=" + envReader["DATABASE"] + ";";
             await using var conn = new NpgsqlConnection(connString);
             await conn.OpenAsync();
-            Console.WriteLine("'" + startDate + "'");
-            Console.WriteLine(endDate);
-            Console.WriteLine(dateAttribute);
             String command = "SELECT * FROM actionitemsdata.actionitems WHERE " + dateAttribute.ToString() + " BETWEEN '" + startDate.ToString() + "' AND '" + endDate.ToString() + "'";
-            Console.WriteLine(command);
             //SQL Query below only works with Parameters and empty parameters in {}. 
             await using var cmd = new NpgsqlCommand(command, conn){Parameters ={}};
 
