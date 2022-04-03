@@ -53,6 +53,7 @@
                           -->
                       </div>
                     </div>
+                    <!-- Date Picker -->
                     <div class="input-group" style="width:auto">
                       <span class="input-group-text btn-dark" id="basic-addon1">Start Date</span>
                       <input @bind="StartDate" class="form-control" type="datetime-local" id="datepicker">
@@ -100,7 +101,7 @@
       {
           @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput)))
           {
-                <tr id="row" @onclick="(e => SelectItem(item.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => selectedItemID = item.ID)" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                     <th>@item.ID</th>
                     <th>@item.target</th>
                     <th>@item.status</th>
@@ -121,7 +122,7 @@
       {
           @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput)))
           {
-                <tr id="row" @onclick="(e => SelectItem(item.ID.ToString() ?? string.Empty))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => selectedItemID = item.ID)" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                     <th>@item.ID</th>
                     <th>@item.target</th>
                     <th>@item.status</th>
@@ -141,25 +142,19 @@
 </table>
 </div>
 
-@if (@selectedItemId != null)
+@if (@selectedItemID != null)
 {
     <!-- Modal -->
-    <ActionItemDetails actionItemID="@selectedItemId" />
+    <ActionItemDetails actionItemID="@selectedItemID" />
 }
 
 @code {
-
-    ActionItem? selectedItem;
-    public string? selectedItemId;
+    ActionItem selectedItem;
+    int selectedItemID;
     string? CurrentInput;
     DateTime? StartDate;
     DateTime? EndDate;
     public List<string> Filters = new List<string>();
-
-    void SelectItem(string itemId)
-    {
-        selectedItemId = itemId;
-    }
 
     bool CheckFilters(ActionItem actionItem)
     {
@@ -176,6 +171,14 @@
         else
         {
             return false;
+        }
+    }
+
+    void selectItem (ActionItem item)
+    {
+        if (item != null)
+        {
+            selectedItem = item;
         }
     }
 

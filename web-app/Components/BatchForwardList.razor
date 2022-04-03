@@ -33,6 +33,7 @@
         <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto; padding-top: 10px; padding-left: 5px">
             <div class="container-fluid">
                 <div class="d-sm-inline-flex justify-content-between">
+                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filters
@@ -45,8 +46,16 @@
                           <a class="dropdown-item" @onclick="@(e => AddFilter("abandoned-cart"))">Abandoned Cart</a>
                       </div>
                     </div>
-                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" style="margin-right: 10px; width: 300px">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Submit" style="margin-right: 10px;">Search</button>
+                    <!-- Date Picker -->
+                    <div class="input-group" style="width:auto">
+                      <span class="input-group-text btn-dark" id="basic-addon1">Start Date</span>
+                      <input @bind="StartDate" class="form-control" type="datetime-local" id="datepicker">
+                    </div>
+                    <div class="input-group" style="width:auto">
+                      <span class="input-group-text btn-dark" id="basic-addon1">End Date</span>
+                      <input @bind="EndDate" class="form-control" type="datetime-local" id="datepicker">
+                    </div>
+                    <button @onclick="@ResetDate" type="button" class="btn btn-primary" style="margin-right: 10px">Clear Date</button>
                 @foreach (var Filter in Filters)
                 {
                     <div class="alert alert-primary alert-dismissible fade show" role="alert" style="width: auto; padding-right:45px; margin-right: 10px">
@@ -76,11 +85,10 @@
   </tr>
   </thead>
   <tbody>
-  @foreach (var batchForwards in databaseService.GetBatchForwards()) {
-            @if (CurrentInput == "" || CurrentInput == null || batchForwards.ID.ToString().Contains(CurrentInput))
+  @if (StartDate == null && EndDate == null) {
+      @foreach (var batchForwards in databaseService.GetBatchForwards()) {
+            @if (CheckFilters(batchForwards) && (CurrentInput == "" || CurrentInput == null || batchForwards.ID.ToString().Contains(CurrentInput)))
             {
-                @if (CheckFilters(batchForwards))
-                {
                     <tr id="row" @onclick="(e => SelectItem(batchForwards.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                         <th>@batchForwards.ID</th>
                         <th>@batchForwards.batch_size</th>
@@ -92,9 +100,28 @@
                         <th>@batchForwards.total_processed_batches</th>
                         <th>@batchForwards.forward_status</th>
                     </tr>
-                }
             }
         }
+  }
+  else {
+      @foreach (var batchForwards in databaseService.GetBatchForwardInTimeRange(StartDate, EndDate, "started_at")) {
+            @if (CheckFilters(batchForwards) && (CurrentInput == "" || CurrentInput == null || batchForwards.ID.ToString().Contains(CurrentInput)))
+            {
+                    <tr id="row" @onclick="(e => SelectItem(batchForwards.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                        <th>@batchForwards.ID</th>
+                        <th>@batchForwards.batch_size</th>
+                        <th>@batchForwards.delivery_method</th>
+                        <th>@batchForwards.campaign</th>
+                        <th>@batchForwards.started_at</th>
+                        <th>@batchForwards.completed_at</th>
+                        <th>@batchForwards.total_processed_messages</th>
+                        <th>@batchForwards.total_processed_batches</th>
+                        <th>@batchForwards.forward_status</th>
+                    </tr>
+            }
+        }
+  }
+
 </tbody>
 </table>
 </div>
@@ -110,6 +137,8 @@
     public Guid selectedItemId;
     string? CurrentInput;
     public List<string> Filters = new List<string>();
+    DateTime? StartDate;
+    DateTime? EndDate;
 
     void SelectItem(Guid itemId)
     {
@@ -142,6 +171,12 @@
         {
             Filters.Add(Filter);
         }
+    }
+
+    void ResetDate()
+    {
+        StartDate = null;
+        EndDate = null;
     }
 
 }
