@@ -14,6 +14,10 @@
 ### What are we trying to make?
 <p align="justify">Our goal is to build a fully featured web-based UI with supporting APIs on top of the existing database that allows for all analytical as well as management tasks of the action items events data. This will increase visibility as well as productivity of all admin tasks related to the dataset. This project will be developed for running on Windows only.</p>
 
+## Demonstration
+
+https://user-images.githubusercontent.com/34750736/161585987-ab2a164e-ce7e-4256-a40f-2de35f18a885.mp4
+
 ### A few prerequisites to run this project
 <p align=justify>You need a few things before you can run this project.</p>
 
