@@ -1,5 +1,5 @@
 #!/bin/sh
-cd ActionItemsDashboard
+cd web-app
 
 echo  > .env
 
