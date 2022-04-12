@@ -37,11 +37,12 @@ https://user-images.githubusercontent.com/34750736/161585987-ab2a164e-ce7e-4256-
   <p align="center">
   <img width="390" alt="Screenshot 2022-03-31 at 23 39 20" align="centre" src="https://user-images.githubusercontent.com/34750736/161161200-6aa52df7-773e-4c45-a32f-6c34a34ea57b.png"></p>
   
-3. Click on the ActionItemsDashboard.sln file inside the ``ActionItemsDashboard`` directory from this project that you cloned.
+3. Click on the web-app.sln file inside the ``web-app`` directory from this project that you cloned.
  <p align="center">
-<img width="700" alt="Screenshot 2022-03-31 at 23 45 52" src="https://user-images.githubusercontent.com/34750736/161162018-b8310738-360a-47c1-819c-e27e85d15d0f.png"></p>
+<img width="700" alt="Screenshot 2022-04-12 at 12 08 52" src="https://user-images.githubusercontent.com/34750736/162948121-71a49980-61e1-415c-b9f5-6459f0328de8.png"></p>
 
-4. Now that the ActionItemsDashboard C# project is in your Visual Studio 2022 IDE, you need to right click on the project and click `Manage Nuget Packages`.
+
+4. Now that the web-app C# project is in your Visual Studio 2022 IDE, you need to right click on the project and click `Manage Nuget Packages`.
 
 <p align="center">
 <img width="350" alt="Screenshot 2022-03-31 at 23 45 52" src="https://user-images.githubusercontent.com/77547327/159126719-42d533ff-9b88-4c66-9966-900dbf1eee4c.png"></p>
@@ -56,13 +57,20 @@ https://user-images.githubusercontent.com/34750736/161585987-ab2a164e-ce7e-4256-
 <p align="center">
 <img width="668" alt="Screenshot 2022-04-01 at 00 14 03" src="https://user-images.githubusercontent.com/34750736/161164545-6a71ffb4-743f-40bb-9345-5a4b6d9d61b8.png"></p>
 
-
-7. Now you need to setup the environment variables for the C# code to connect to your PostgreSQL server. Go into the main directory of the project, and run the shell script using `sh ./setupEnv.sh` (or just `./setupEnv.sh` in windows powershell). It will ask you a number of questions, and it will make and fill a `.env` file inside of `/ActionItemsDashboard` for you.
+7. Finally, search for ``Microsoft.TypeScript.MSBuild`` and select the first entry as shown below and install. You can learn more about it [here](https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/).
 
 <p align="center">
-<img width="668" alt="Screenshot 2022-04-01 at 00 14 03" src="https://user-images.githubusercontent.com/34750736/161165810-6410bb5d-3a82-4345-a960-3738d68a443f.gif"></p>
+<img width="668" alt="Screenshot 2022-04-12 at 12 13 36" src="https://user-images.githubusercontent.com/34750736/162948425-85a24854-0996-40a6-8736-a7e464d5fdf1.png"></p>
 
-8. Now you can run the program `Program.cs` inside of Visual Studio 2022. You can see the PostgreSQL database being populated using PgAdmin4 which is installed automatically when you install PostgreSQL for Windows. It should be on the left, an example would be under Servers -> PostgreSQL -> Databases -> postgres -> Schemas -> actionitemsdata -> Tables -> actionitems. You can right click this, and press 'View/Edit Data' and finally click 'All Rows', and you can see the sample data loaded into the table.
+
+8. Now you need to setup the environment variables for the C# code to connect to your PostgreSQL server. Go into the main directory of the project, and run the shell script using `sh ./setupEnv.sh` (or just `./setupEnv.sh` in windows powershell). It will ask you a number of questions, and it will make and fill a `.env` file inside of `/web-app` for you.
+
+<p align="center">
+<img width="668" alt="Screenshot 2022-04-01 at 00 14 03" src="https://user-images.githubusercontent.com/34750736/162950183-5ee2cfd9-b5c0-4f98-8a79-95338f3f9360.gif"></p>
+
+9. Now you can run the program `Program.cs` inside of Visual Studio 2022. You can see the PostgreSQL database being populated using PgAdmin4 which is installed automatically when you install PostgreSQL for Windows. It should be on the left, an example would be under Servers -> PostgreSQL -> Databases -> postgres -> Schemas -> actionitemsdata -> Tables -> actionitems. You can right click this, and press 'View/Edit Data' and finally click 'All Rows', and you can see the sample data loaded into the table.
+
+10. You will also see the web-app application being run. The demonstration video above shows how the web application dashboard should look.
   
 ## Authors
 
