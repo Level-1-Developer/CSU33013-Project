@@ -10,7 +10,6 @@
 
     public String GetBatchFileID()
     {
-        //BatchFile batchFile = databaseService.GetBatchFiles().FirstOrDefault(x => x.batch_id == batch.ID);
         BatchFile batchFile = databaseService.GetBatchFileFromBatch(batch.ID.ToString());
         return batchFile.ID.ToString();
     }
