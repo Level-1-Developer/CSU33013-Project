@@ -33,7 +33,7 @@
         <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto; padding-top: 10px; padding-left: 5px">
             <div class="container-fluid">
                 <div class="d-sm-inline-flex justify-content-between">
-                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search by @SearchBy" aria-label="Search" style="margin-right: 10px; width: 300px">
+                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Enter: ID" aria-label="Search" style="margin-right: 10px; width: 300px">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filters
@@ -89,7 +89,7 @@
       @foreach (var batchForwards in databaseService.GetBatchForwards()) {
             @if (CheckFilters(batchForwards) && (CurrentInput == "" || CurrentInput == null || batchForwards.ID.ToString().Contains(CurrentInput)))
             {
-                    <tr id="row" @onclick="(e => SelectItem(batchForwards.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                    <tr id="row" @onclick="(e => SelectItem(batchForwards))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                         <th>@batchForwards.ID</th>
                         <th>@batchForwards.batch_size</th>
                         <th>@batchForwards.delivery_method</th>
@@ -107,7 +107,7 @@
       @foreach (var batchForwards in databaseService.GetBatchForwardInTimeRange(StartDate, EndDate, "started_at")) {
             @if (CheckFilters(batchForwards) && (CurrentInput == "" || CurrentInput == null || batchForwards.ID.ToString().Contains(CurrentInput)))
             {
-                    <tr id="row" @onclick="(e => SelectItem(batchForwards.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                    <tr id="row" @onclick="(e => SelectItem(batchForwards))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                         <th>@batchForwards.ID</th>
                         <th>@batchForwards.batch_size</th>
                         <th>@batchForwards.delivery_method</th>
@@ -126,24 +126,24 @@
 </table>
 </div>
 
-@if (@selectedItemId != null)
+@if (@selectedItem != null)
 {
     <!-- Modal -->
-    <BatchForwardDetails batchForwardID="@selectedItemId" />
+    <BatchForwardDetails item="@selectedItem" />
 }
 
 @code {
 
-    public Guid selectedItemId;
+    public BatchForward selectedItem;
     string? CurrentInput;
     public List<string> Filters = new List<string>();
     DateTime? StartDate;
     DateTime? EndDate;
     string SearchBy = "ID";
 
-    void SelectItem(Guid itemId)
+    void SelectItem(BatchForward item)
     {
-        selectedItemId = itemId;
+        selectedItem = item;
     }
 
     bool CheckFilters(BatchForward batchForward)

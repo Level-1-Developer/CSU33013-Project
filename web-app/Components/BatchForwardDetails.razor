@@ -6,13 +6,8 @@
 
 @code {
     [Parameter]
-    public Guid batchForwardID { get; set; }
-
-    public BatchForward? item { get; set; }
-
+    public BatchForward item { get; set; }
 }
-
-@{item = databaseService.GetBatchForwards().FirstOrDefault(x => x.ID == batchForwardID);}
 
 @if (@item != null )
 {

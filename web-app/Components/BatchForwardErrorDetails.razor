@@ -6,13 +6,8 @@
 
 @code {
     [Parameter]
-    public Guid itemID { get; set; }
-
-    public BatchForwardError? item { get; set; }
-
+    public BatchForwardError item { get; set; }
 }
-
-@{item = databaseService.GetBatchForwardErrors().FirstOrDefault(x => x.ID == itemID);}
 
 @if (@item != null )
 {

@@ -33,7 +33,7 @@
         <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto; padding-top: 10px; padding-left: 5px">
             <div class="container-fluid">
                 <div class="d-sm-inline-flex justify-content-between">
-                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search by @SearchBy" aria-label="Search" style="margin-right: 10px; width: 300px">
+                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Enter: ID" aria-label="Search" style="margin-right: 10px; width: 300px">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filters
@@ -85,7 +85,7 @@
       @foreach (var item in databaseService.GetBatchFiles()) {
             @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput)))
             {
-                <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => SelectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                     <th>@item.ID</th>
                     <th>@item.batch_id</th>
                     <th>@item.file_name</th>
@@ -100,7 +100,7 @@
       @foreach (var item in databaseService.GetBatchFileInTimeRange(StartDate, EndDate, "dispatched_at")) {
             @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput)))
             {
-                <tr id="row" @onclick="(e => SelectItem(item.ID))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => SelectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                     <th>@item.ID</th>
                     <th>@item.batch_id</th>
                     <th>@item.file_name</th>
@@ -115,24 +115,23 @@
 </table>
 </div>
 
-@if (@selectedItemId != null)
+@if (@selectedItem != null)
 {
     <!-- Modal -->
-    <BatchFileDetails batchFileID="@selectedItemId" />
+    <BatchFileDetails item="@selectedItem" />
 }
 
 @code {
 
-    public Guid selectedItemId;
+    BatchFile selectedItem;
     string? CurrentInput;
     public List<string> Filters = new List<string>();
     DateTime? StartDate;
     DateTime? EndDate;
-    string SearchBy = "ID";
 
-    void SelectItem(Guid itemId)
+    void SelectItem(BatchFile item)
     {
-        selectedItemId = itemId;
+        selectedItem = item;
     }
 
     bool CheckFilters(BatchFile batchFile)

@@ -6,13 +6,8 @@
 
 @code {
     [Parameter]
-    public Guid batchFileID { get; set; }
-
-    public BatchFile? item { get; set; }
-
+    public BatchFile item { get; set; }
 }
-
-@{item = databaseService.GetBatchFiles().FirstOrDefault(x => x.ID == batchFileID);}
 
 @if (@item != null )
 {

@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-sm navbar-light mb-1" style="background-color: white; padding: auto; padding-top: 10px; padding-left: 5px">
             <div class="container-fluid">
                 <div class="d-sm-inline-flex justify-content-between">
-                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Search by @SearchBy" aria-label="Search" style="margin-right: 10px; width: 300px">
+                    <input @bind="CurrentInput" @bind:event="oninput" class="form-control mr-sm-2" placeholder="Enter: Target / ID" aria-label="Search" style="margin-right: 10px; width: 300px">
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filters
@@ -101,7 +101,7 @@
       {
           @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput)))
           {
-                <tr id="row" @onclick="(e => selectedItemID = item.ID)" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => selectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                     <th>@item.ID</th>
                     <th>@item.target</th>
                     <th>@item.status</th>
@@ -122,7 +122,7 @@
       {
           @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput)))
           {
-                <tr id="row" @onclick="(e => selectedItemID = item.ID)" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => selectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
                     <th>@item.ID</th>
                     <th>@item.target</th>
                     <th>@item.status</th>
@@ -142,10 +142,10 @@
 </table>
 </div>
 
-@if (@selectedItemID != null)
+@if (@selectedItem != null)
 {
     <!-- Modal -->
-    <ActionItemDetails actionItemID="@selectedItemID" />
+    <ActionItemDetails actionItem="@selectedItem"/>
 }
 
 @code {
@@ -177,10 +177,7 @@
 
     void selectItem (ActionItem item)
     {
-        if (item != null)
-        {
-            selectedItem = item;
-        }
+        selectedItem = item;
     }
 
     void RemoveFilter(string Filter)

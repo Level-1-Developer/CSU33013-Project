@@ -6,13 +6,9 @@
 
 @code {
     [Parameter]
-    public Guid batchID { get; set; }
-
-    public Batch? batch { get; set; }
+    public Batch batch { get; set; }
 
 }
-
-@{batch = databaseService.GetBatches().FirstOrDefault(x => x.ID == batchID);}
 
 @if (@batch != null )
 {
