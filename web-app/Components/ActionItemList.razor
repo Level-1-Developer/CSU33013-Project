@@ -5,6 +5,10 @@
 @using System.Text.Json;
 @inject DatabaseService databaseService
 
+@code {
+    [Parameter]
+    public int? inputItem { get; set; }
+}
 
 <style>
 .container-fluid>.navbar-header {
@@ -101,7 +105,7 @@
       {
           @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.target.Contains(CurrentInput) || item.ID.ToString().Contains(CurrentInput)))
           {
-                <tr id="row" @onclick="(e => selectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => selectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer" class="@Highlight(item.ID)">
                     <th>@item.ID</th>
                     <th>@item.target</th>
                     <th>@item.status</th>
@@ -197,6 +201,15 @@
     {
         StartDate = null;
         EndDate = null;
+    }
+
+    String Highlight(int id)
+    {
+        if (inputItem == id)
+        {
+            return "highlight";
+        }
+        return "no-highlight";
     }
 
 }

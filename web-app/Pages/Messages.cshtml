@@ -4,6 +4,6 @@
 @{
 }
 
-@(await Html.RenderComponentAsync<MessageList>(RenderMode.ServerPrerendered))
+@(await Html.RenderComponentAsync<MessageList>(RenderMode.ServerPrerendered, new { inputItem = Model.inputItem }))
 
 <script src="_framework/blazor.server.js"></script>

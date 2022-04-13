@@ -5,6 +5,10 @@
 @using System.Text.Json;
 @inject DatabaseService databaseService
 
+@code {
+    [Parameter]
+    public Guid? inputItem { get; set; }
+}
 
 <style>
 .container-fluid>.navbar-header {
@@ -91,52 +95,52 @@
 
   @if (StartDate == null && EndDate == null)
   {
-                @foreach (var message in databaseService.GetMessages())
-                {
-                    @if (CheckFilters(message) && (CurrentInput == "" || CurrentInput == null || message.target.Contains(CurrentInput) || message.ID.ToString().Contains(CurrentInput) || message.action_item_id.ToString().Contains(CurrentInput)))
-                    {
-                        <tr id="row" @onclick="(e => SelectItem(message))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                            <th>@message.ID</th>
-                            <th>@message.batch_id</th>
-                            <th>@message.subject</th>
-                            <th>@message.body</th>
-                            <th>@message.campaign</th>
-                            <th>@message.delivery_method</th>
-                            <th>@message.created_at</th>
-                            <th>@message.sent_at</th>
-                            <th>@message.status</th>
-                            <th>@message.action_item_id</th>
-                            <th>@message.target</th>
-                        </tr>
-                    }
-
-                }
-
-            }
-            else
-            {
-                @foreach (var message in databaseService.GetMessagesInTimeRange(StartDate, EndDate, "sent_at"))
-                {
-                    @if (CheckFilters(message) && (CurrentInput == "" || CurrentInput == null || message.target.Contains(CurrentInput) || message.ID.ToString().Contains(CurrentInput) || message.action_item_id.ToString().Contains(CurrentInput)))
-                    {
-                        <tr id="row" @onclick="(e => SelectItem(message))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
-                            <th>@message.ID</th>
-                            <th>@message.batch_id</th>
-                            <th>@message.subject</th>
-                            <th>@message.body</th>
-                            <th>@message.campaign</th>
-                            <th>@message.delivery_method</th>
-                            <th>@message.created_at</th>
-                            <th>@message.sent_at</th>
-                            <th>@message.status</th>
-                            <th>@message.action_item_id</th>
-                            <th>@message.target</th>
-                        </tr>
-                    }
-
-                }
-            }
-        </tbody>
+      @foreach (var message in databaseService.GetMessages())
+      {
+          @if (CheckFilters(message) && (CurrentInput == "" || CurrentInput == null || message.target.Contains(CurrentInput) || message.ID.ToString().Contains(CurrentInput) || message.action_item_id.ToString().Contains(CurrentInput)))
+          {
+              <tr id="row" @onclick="(e => SelectItem(message))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;" class="@Highlight(message.ID)">
+                  <th>@message.ID</th>
+                  <th>@message.batch_id</th>
+                  <th>@message.subject</th>
+                  <th>@message.body</th>
+                  <th>@message.campaign</th>
+                  <th>@message.delivery_method</th>
+                  <th>@message.created_at</th>
+                  <th>@message.sent_at</th>
+                  <th>@message.status</th>
+                  <th>@message.action_item_id</th>
+                  <th>@message.target</th>
+              </tr>
+          }
+  
+      }
+  
+  }
+  else
+  {
+      @foreach (var message in databaseService.GetMessagesInTimeRange(StartDate, EndDate, "sent_at"))
+      {
+          @if (CheckFilters(message) && (CurrentInput == "" || CurrentInput == null || message.target.Contains(CurrentInput) || message.ID.ToString().Contains(CurrentInput) || message.action_item_id.ToString().Contains(CurrentInput)))
+          {
+              <tr id="row" @onclick="(e => SelectItem(message))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                  <th>@message.ID</th>
+                  <th>@message.batch_id</th>
+                  <th>@message.subject</th>
+                  <th>@message.body</th>
+                  <th>@message.campaign</th>
+                  <th>@message.delivery_method</th>
+                  <th>@message.created_at</th>
+                  <th>@message.sent_at</th>
+                  <th>@message.status</th>
+                  <th>@message.action_item_id</th>
+                  <th>@message.target</th>
+              </tr>
+          }
+  
+      }
+  }
+  </tbody>
 </table>
 </div>
 
@@ -192,6 +196,15 @@
     {
         StartDate = null;
         EndDate = null;
+    }
+
+    String Highlight(Guid id)
+    {
+        if (inputItem == id)
+        {
+            return "highlight";
+        }
+        return "no-highlight";
     }
 
 }

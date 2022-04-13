@@ -6,13 +6,10 @@ namespace web_app.Pages
 {
     public class ActionItemsModel : PageModel
     {
-        public string itemId { get; set; }
-        public void OnGet(string ID)
+        public int inputItem { get; set; }
+        public void OnGet(int ID)
         {
-            if (ID != null)
-            {
-                itemId = "17981491";
-            }
+            inputItem = ID;
         }
     }
 }

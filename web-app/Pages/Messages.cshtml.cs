@@ -5,8 +5,10 @@ namespace web_app.Pages
 {
     public class MessagesModel : PageModel
     {
-        public void OnGet()
+        public Guid inputItem { get; set; }
+        public void OnGet(Guid ID)
         {
+            inputItem = ID;
         }
     }
 }

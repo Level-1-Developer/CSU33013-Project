@@ -5,6 +5,10 @@
 @using System.Text.Json;
 @inject DatabaseService databaseService
 
+@code {
+    [Parameter]
+    public Guid? inputItem { get; set; }
+}
 
 <style>
 .container-fluid>.navbar-header {
@@ -88,7 +92,7 @@
       @foreach (var batch in databaseService.GetBatches()) {
           @if (CheckFilters(batch) && (CurrentInput == "" || CurrentInput == null || batch.ID.ToString().Contains(CurrentInput)))
           {
-                  <tr id="row" @onclick="(e => SelectItem(batch))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                  <tr id="row" @onclick="(e => SelectItem(batch))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer" class="@Highlight(batch.ID)">
                       <th>@batch.ID</th>
                       <th>@batch.batch_forward_id</th>
                       <th>@batch.size</th>
@@ -170,6 +174,15 @@
     {
         StartDate = null;
         EndDate = null;
+    }
+
+    String Highlight(Guid id)
+    {
+        if (inputItem == id)
+        {
+            return "highlight";
+        }
+        return "no-highlight";
     }
 
 }

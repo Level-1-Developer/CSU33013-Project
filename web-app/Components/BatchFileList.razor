@@ -5,6 +5,10 @@
 @using System.Text.Json;
 @inject DatabaseService databaseService
 
+@code {
+    [Parameter]
+    public Guid? inputItem { get; set; }
+}
 
 <style>
 .container-fluid>.navbar-header {
@@ -85,7 +89,7 @@
       @foreach (var item in databaseService.GetBatchFiles()) {
             @if (CheckFilters(item) && (CurrentInput == "" || CurrentInput == null || item.ID.ToString().Contains(CurrentInput)))
             {
-                <tr id="row" @onclick="(e => SelectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">
+                <tr id="row" @onclick="(e => SelectItem(item))" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer" class="@Highlight(item.ID)">
                     <th>@item.ID</th>
                     <th>@item.batch_id</th>
                     <th>@item.file_name</th>
@@ -178,6 +182,15 @@
         {
             return false;
         }
+    }
+
+    String Highlight(Guid id)
+    {
+        if (inputItem == id)
+        {
+            return "highlight";
+        }
+        return "no-highlight";
     }
 
 }

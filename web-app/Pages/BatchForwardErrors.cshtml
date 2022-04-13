@@ -4,6 +4,6 @@
 @{
 }
 
-@(await Html.RenderComponentAsync<BatchForwardErrorList>(RenderMode.ServerPrerendered))
+@(await Html.RenderComponentAsync<BatchForwardErrorList>(RenderMode.ServerPrerendered, new { inputItem = Model.inputItem }))
 
 <script src="_framework/blazor.server.js"></script>

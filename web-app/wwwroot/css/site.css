@@ -1,17 +1,4 @@
 /*============== Action Items ==============*/
-/**
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 0.2rem;
-    height: 2.2rem;
-    padding: 0;
-    border: 0.1rem solid #ddd;
-    font-weight: 100;
-    color: black;
-    justify-content: center;
-}
-*/
 
 * {
     font-family: 'Nunito', sans-serif;
@@ -69,4 +56,12 @@ table {
     padding-bottom: 0.3rem;
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.highlight {
+    background-color: #fffdd0;
+}
+
+.no-highlight {
+    background-color: white;
 }
